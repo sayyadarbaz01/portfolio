@@ -7,9 +7,17 @@ export function cn(...inputs: ClassValue[]) {
 
 
 export function downloadResume() {
+  // 1. Get the shareable link of your PDF file from Google Drive (Make sure it's "Anyone with the link can view")
+  // 2. The link will look like: https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing
+  // 3. Copy just the YOUR_FILE_ID part and paste it below:
+  const fileId = "16AQ_W8yf3EAH9LZKTcVyY-Cx7YIQoZiX";
+
+  // This special Google Drive URL forces a direct download of a FILE (Not a folder)
+  const directDownloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+
   const link = document.createElement("a");
-  link.href = "/resume.pdf";
-  link.setAttribute("download", "Mohammed_Rizwan_Resume.pdf");
+  link.href = directDownloadUrl;
+  link.setAttribute("download", "MRizwan_Resume.pdf");
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
