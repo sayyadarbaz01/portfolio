@@ -12,12 +12,7 @@ export const skills: Skill[] = [
   { name: "Next.js", level: 85, category: "frontend", icon: "Next" },
   { name: "TypeScript", level: 88, category: "frontend", icon: "TypeScript" },
   { name: "Tailwind CSS", level: 90, category: "frontend", icon: "Tailwind" },
-  {
-    name: "Redux & Redux Toolkit",
-    level: 85,
-    category: "frontend",
-    icon: "Redux",
-  },
+  { name: "Redux & Redux Toolkit", level: 85, category: "frontend", icon: "Redux" },
   { name: "Framer Motion", level: 80, category: "frontend", icon: "Framer" },
   { name: "Material UI", level: 82, category: "frontend", icon: "MUI" },
   { name: "CSS3 & HTML5", level: 92, category: "frontend", icon: "HTML" },
@@ -138,7 +133,7 @@ export const projects: Project[] = [
     title: "Radian Title Genius",
     website_link: "https://orders.mytitlegenius.com/",
     description:
-      "Enterprise web application focused on web accessibility and property management with complex endorsement templates",
+      "A cutting-edge enterprise web platform designed for seamless property management and full web accessibility, featuring advanced endorsement templates and robust compliance.",
     tags: ["Next.js", "React", "Redux", "TypeScript", "Accessibility"],
     category: "enterprise",
     highlights: [
@@ -153,7 +148,7 @@ export const projects: Project[] = [
     title: "TruScholar Learner Module",
     website_link: "https://www.truscholar.io/en-gb/",
     description:
-      "Secure credential management platform enabling users to request transcripts with real-time university communication",
+      "A secure, modern credential management solution enabling users to request and receive transcripts with real-time communication between users and universities.",
     tags: ["React", "Node.js", "MongoDB", "Express", "Real-time API"],
     category: "fintech",
     highlights: [
@@ -168,7 +163,7 @@ export const projects: Project[] = [
     title: "JD Store",
     website_link: "https://jd-store-frontend.vercel.app/",
     description:
-      "Complete e-commerce platform with product management, shopping cart, and secure payment integration",
+      "A full-featured e-commerce platform offering seamless product management, intuitive shopping cart, and secure payment integration for a modern online shopping experience.",
     tags: ["MERN Stack", "Stripe API", "Redux", "Responsive Design"],
     category: "ecommerce",
     highlights: [
@@ -183,7 +178,7 @@ export const projects: Project[] = [
     title: "Project Management Dashboard",
     website_link: "https://www.prodapt.com/",
     description:
-      "Collaborative project management tool with real-time updates, task tracking, and team communication features",
+      "A collaborative project management solution featuring real-time updates, advanced task tracking, and seamless team communication for enhanced productivity.",
     tags: ["Next.js", "Node.js", "PostgreSQL", "Real-time"],
     category: "productivity",
     highlights: [
@@ -212,7 +207,7 @@ export const education: Education[] = [
     duration: "2021 – 2022",
     location: "Online",
     description:
-      "Comprehensive training covering MERN stack and modern web development practices",
+      "Completed an intensive program in MERN stack and modern web development, mastering industry best practices and hands-on project delivery.",
   },
 ];
 
