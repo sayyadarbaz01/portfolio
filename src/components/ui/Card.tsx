@@ -19,7 +19,7 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-2xl transition-all duration-300",
+        "rounded-xl sm:rounded-2xl transition-all duration-300",
         glassmorphism &&
           "bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10",
         !glassmorphism &&

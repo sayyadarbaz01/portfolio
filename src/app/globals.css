@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -12,11 +14,9 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 html {
@@ -59,7 +59,7 @@ html.light {
 
 /* Gradient text utility */
 .gradient-text {
-  @apply bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent;
 }
 
 /* Glass morphism */
@@ -69,18 +69,24 @@ html.light {
 
 /* Animations */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-20px);
   }
 }
 
 @keyframes glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
   }
+
   50% {
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
   }
@@ -120,3 +126,38 @@ button {
   @apply opacity-60;
 }
 
+/* Mobile-specific optimizations */
+@media (max-width: 639px) {
+
+  /* Hide scrollbar on mobile for cleaner look */
+  ::-webkit-scrollbar {
+    @apply w-0 h-0;
+  }
+
+  /* Ensure touch targets are at least 44px for CTA buttons */
+  button:not([class*="rounded-full"]),
+  a:not([class*="inline-flex"]) {
+    min-height: 44px;
+  }
+
+  /* Prevent text overflow on mobile */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+}
+
+/* Improve tap feedback on mobile */
+@media (hover: none) {
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}

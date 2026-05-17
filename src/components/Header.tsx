@@ -132,7 +132,7 @@ export function Header() {
       </nav>
 
       {/* Scroll Progress Bar */}
-      <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 transition-all duration-100" style={{ width: `${scrollProgress}%` }} />
+      <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-100" style={{ width: `${scrollProgress}%` }} />
     </header>
   );
 }

@@ -80,7 +80,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center pt-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative min-h-screen flex items-center pt-16 sm:pt-20 px-3 sm:px-6 lg:px-8 overflow-hidden"
     >
       {/* Animated Background Blobs */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -90,12 +90,12 @@ export function HeroSection() {
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute top-1/2 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-multiply filter blur-3xl"
+          className="absolute top-1/2 right-1/4 w-96 h-96 bg-cyan-500/20 rounded-full mix-blend-multiply filter blur-3xl"
           animate={{ y: [0, -100, 0], x: [0, -50, 0] }}
           transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-0 right-1/3 w-96 h-96 bg-cyan-500/20 rounded-full mix-blend-multiply filter blur-3xl"
+          className="absolute bottom-0 right-1/3 w-96 h-96 bg-blue-400/20 rounded-full mix-blend-multiply filter blur-3xl"
           animate={{ y: [0, 50, 0], x: [0, 100, 0] }}
           transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -104,7 +104,7 @@ export function HeroSection() {
       {/* Two-column layout */}
       <div className="relative z-10 w-full max-w-7xl mx-auto">
         <motion.div
-          className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-16"
+          className="flex flex-col-reverse lg:flex-row items-center justify-between gap-6 sm:gap-12 lg:gap-16"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -121,24 +121,24 @@ export function HeroSection() {
 
             {/* Heading */}
             <motion.div variants={itemVariants} className="mb-5">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-3">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-2 sm:mb-3">
                 Hi, I&apos;m{" "}
-                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
                   Mohammed
                 </span>
                 <br />
-                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
                   Rizwan
                 </span>
               </h1>
 
               {/* Typewriter */}
-              <div className="h-12 flex items-center justify-center lg:justify-start">
-                <p className="text-xl sm:text-2xl lg:text-3xl font-semibold">
+              <div className="h-10 sm:h-12 flex items-center justify-center lg:justify-start">
+                <p className="text-lg sm:text-2xl lg:text-3xl font-semibold">
                   <span className="text-gray-600 dark:text-gray-400">I build </span>
-                  <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent min-h-[1.2em] inline-block">
+                  <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent min-h-[1.2em] inline-block">
                     {displayedText}
-                    <span className="animate-pulse text-blue-400">|</span>
+                    <span className="animate-pulse text-blue-500">|</span>
                   </span>
                 </p>
               </div>
@@ -147,7 +147,7 @@ export function HeroSection() {
             {/* Subtitle */}
             <motion.p
               variants={itemVariants}
-              className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              className="text-sm sm:text-lg text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
               Senior Software Engineer crafting scalable, accessible, and modern
               web applications. Specialized in React, Next.js, Node.js, and
@@ -157,7 +157,7 @@ export function HeroSection() {
             {/* Location + Role chips */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap gap-3 justify-center lg:justify-start mb-8"
+              className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start mb-5 sm:mb-8"
             >
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-900/60 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-800">
                 <MapPin className="w-3.5 h-3.5 text-blue-500" />
@@ -176,12 +176,12 @@ export function HeroSection() {
             {/* CTA Buttons */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center mb-10"
+              className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center lg:justify-start items-center mb-6 sm:mb-10"
             >
               <Button
                 size="lg"
                 onClick={() => scrollToSection("contact")}
-                className="cursor-pointer w-full sm:w-auto"
+                className="cursor-pointer w-full sm:w-auto !px-5 !py-2.5 sm:!px-8 sm:!py-3 !text-base sm:!text-lg"
               >
                 Hire Me
               </Button>
@@ -189,18 +189,18 @@ export function HeroSection() {
                 variant="secondary"
                 size="lg"
                 onClick={downloadResume}
-                className="cursor-pointer w-full sm:w-auto"
+                className="cursor-pointer w-full sm:w-auto !px-5 !py-2.5 sm:!px-8 sm:!py-3 !text-base sm:!text-lg"
               >
-                <FileDown className="w-5 h-5 mr-2" />
+                <FileDown className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 Download Resume
               </Button>
               <Button
                 variant="outline"
                 size="lg"
                 onClick={() => scrollToSection("projects")}
-                className="cursor-pointer w-full sm:w-auto"
+                className="cursor-pointer w-full sm:w-auto !px-5 !py-2.5 sm:!px-8 sm:!py-3 !text-base sm:!text-lg"
               >
-                <ExternalLink className="w-5 h-5 mr-2" />
+                <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 View Projects
               </Button>
             </motion.div>
@@ -208,11 +208,11 @@ export function HeroSection() {
             {/* Mini Stats Row */}
             <motion.div
               variants={itemVariants}
-              className="flex gap-6 justify-center lg:justify-start"
+              className="flex gap-4 sm:gap-6 justify-center lg:justify-start"
             >
               {stats.map((s) => (
                 <div key={s.label} className="text-center lg:text-left">
-                  <p className="text-2xl font-extrabold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                  <p className="text-xl sm:text-2xl font-extrabold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                     {s.value}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wider mt-0.5">
@@ -228,24 +228,24 @@ export function HeroSection() {
             variants={photoVariants}
             className="flex-shrink-0 flex justify-center lg:justify-end"
           >
-            <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+            <div className="relative w-56 h-56 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
 
               {/* Outer slow-rotating gradient ring */}
               <motion.div
-                className="absolute -inset-4 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 opacity-20 blur-2xl"
+                className="absolute -inset-2 sm:-inset-4 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 opacity-20 blur-2xl"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               />
 
               {/* Mid decorative dashed ring */}
               <motion.div
-                className="absolute -inset-3 rounded-full border-2 border-dashed border-blue-400/30 dark:border-blue-400/20"
+                className="absolute -inset-2 sm:-inset-3 rounded-full border-2 border-dashed border-blue-500/40 dark:border-blue-400/40"
                 animate={{ rotate: -360 }}
                 transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
               />
 
               {/* Gradient border ring */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500 p-[4px]">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 p-[4px]">
                 {/* Inner dark ring for contrast */}
                 <div className="w-full h-full rounded-full bg-white dark:bg-gray-950 p-[4px]">
                   {/* Photo */}
@@ -261,47 +261,47 @@ export function HeroSection() {
 
               {/* Online status dot */}
               <motion.span
-                className="absolute bottom-4 right-4 w-5 h-5 bg-emerald-400 border-[3px] border-white dark:border-gray-950 rounded-full shadow-lg shadow-emerald-400/60"
+                className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 w-4 h-4 sm:w-5 sm:h-5 bg-emerald-400 border-2 sm:border-[3px] border-white dark:border-gray-950 rounded-full shadow-lg shadow-emerald-400/60"
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               />
 
               {/* Floating badge — top left */}
               <motion.div
-                className="absolute -top-4 -left-4 sm:-top-6 sm:-left-6 bg-white dark:bg-gray-900 rounded-xl px-3 py-2 shadow-xl border border-gray-100 dark:border-gray-800 flex items-center gap-2"
+                className="absolute -top-2 -left-2 sm:-top-6 sm:-left-6 bg-white dark:bg-gray-900 rounded-lg sm:rounded-xl px-2 py-1.5 sm:px-3 sm:py-2 shadow-xl border border-gray-100 dark:border-gray-800 flex items-center gap-1.5 sm:gap-2"
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               >
-                <span className="text-lg">⚡</span>
+                <span className="text-sm sm:text-lg">⚡</span>
                 <div>
-                  <p className="text-xs font-bold text-gray-900 dark:text-white leading-none">Open to Work</p>
-                  <p className="text-[10px] text-gray-500 dark:text-gray-400 leading-none mt-0.5">Full-time / Remote / Office</p>
+                  <p className="text-[10px] sm:text-xs font-bold text-gray-900 dark:text-white leading-none">Open to Work</p>
+                  <p className="text-[8px] sm:text-[10px] text-gray-500 dark:text-gray-400 leading-none mt-0.5">Full-time / Remote</p>
                 </div>
               </motion.div>
 
               {/* Floating badge — bottom left */}
               <motion.div
-                className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 bg-white dark:bg-gray-900 rounded-xl px-3 py-2 shadow-xl border border-gray-100 dark:border-gray-800 flex items-center gap-2"
+                className="absolute -bottom-2 -left-2 sm:-bottom-6 sm:-left-6 bg-white dark:bg-gray-900 rounded-lg sm:rounded-xl px-2 py-1.5 sm:px-3 sm:py-2 shadow-xl border border-gray-100 dark:border-gray-800 flex items-center gap-1.5 sm:gap-2"
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
               >
-                <span className="text-lg">🚀</span>
+                <span className="text-sm sm:text-lg">🚀</span>
                 <div>
-                  <p className="text-xs font-bold text-gray-900 dark:text-white leading-none">MERN Stack</p>
-                  <p className="text-[10px] text-gray-500 dark:text-gray-400 leading-none mt-0.5">Next.js · React · Node</p>
+                  <p className="text-[10px] sm:text-xs font-bold text-gray-900 dark:text-white leading-none">MERN Stack</p>
+                  <p className="text-[8px] sm:text-[10px] text-gray-500 dark:text-gray-400 leading-none mt-0.5">Next.js · React · Node</p>
                 </div>
               </motion.div>
 
               {/* Floating badge — top right */}
               <motion.div
-                className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-xl px-3 py-2 shadow-xl shadow-blue-500/30 flex items-center gap-1.5"
+                className="absolute -top-2 -right-2 sm:-top-6 sm:-right-6 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg sm:rounded-xl px-2 py-1.5 sm:px-3 sm:py-2 shadow-xl shadow-blue-500/30 flex items-center gap-1 sm:gap-1.5"
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
               >
-                <span className="text-lg">🏆</span>
+                <span className="text-sm sm:text-lg">🏆</span>
                 <div>
-                  <p className="text-xs font-bold text-white leading-none">Always</p>
-                  <p className="text-[10px] text-blue-100 leading-none mt-0.5">Exploring New</p>
+                  <p className="text-[10px] sm:text-xs font-bold text-white leading-none">Always</p>
+                  <p className="text-[8px] sm:text-[10px] text-blue-100 leading-none mt-0.5">Exploring New</p>
                 </div>
               </motion.div>
 
@@ -313,7 +313,7 @@ export function HeroSection() {
               ].map((dot, i) => (
                 <motion.div
                   key={dot.label}
-                  className={`absolute w-3 h-3 ${dot.color} rounded-full shadow-lg`}
+                  className={`absolute w-2 h-2 sm:w-3 sm:h-3 ${dot.color} rounded-full shadow-lg hidden sm:block`}
                   style={{
                     top: "50%",
                     left: "50%",
@@ -345,7 +345,7 @@ export function HeroSection() {
 
       {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 hidden sm:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}

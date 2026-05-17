@@ -45,8 +45,8 @@ export function SkillsSection() {
   }) => (
     <motion.div variants={itemVariants} key={index} className="h-full">
       <Card hover glassmorphism className="h-full">
-        <CardBody className="p-4 flex flex-col justify-center h-full">
-          <div className="flex items-center justify-between mb-3">
+        <CardBody className="!p-3 sm:p-4 flex flex-col justify-center h-full">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
             <h4 className="font-medium text-gray-900 dark:text-white text-sm sm:text-base">
               {skill.name}
             </h4>
@@ -56,7 +56,7 @@ export function SkillsSection() {
           </div>
 
           {/* Progress Bar */}
-          <div className="h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+          <div className="h-1 sm:h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
             <motion.div
               className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500"
               initial={{ width: 0 }}
@@ -72,19 +72,19 @@ export function SkillsSection() {
   return (
     <Section id="skills" title="Skills & Expertise" ref={ref}>
       <motion.div
-        className="space-y-12"
+        className="space-y-8 sm:space-y-12"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
         {/* Frontend Skills */}
         <motion.div variants={itemVariants}>
-          <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-2">
+          <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-white flex items-center gap-2">
             <span className="w-2 h-6 bg-blue-500 rounded-full inline-block" />
             Frontend
           </h3>
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4"
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
@@ -97,12 +97,12 @@ export function SkillsSection() {
 
         {/* Backend Skills */}
         <motion.div variants={itemVariants}>
-          <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-2">
+          <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-white flex items-center gap-2">
             <span className="w-2 h-6 bg-purple-500 rounded-full inline-block" />
             Backend
           </h3>
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4"
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
@@ -119,12 +119,12 @@ export function SkillsSection() {
 
         {/* Tools & Workflow */}
         <motion.div variants={itemVariants}>
-          <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-2">
+          <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-white flex items-center gap-2">
             <span className="w-2 h-6 bg-cyan-500 rounded-full inline-block" />
             Tools & Workflow
           </h3>
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4"
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}

@@ -66,7 +66,7 @@ export function AboutSection() {
   return (
     <Section id="about" title="About Me" ref={ref}>
       <motion.div
-        className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+        className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 items-center"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
@@ -74,10 +74,10 @@ export function AboutSection() {
         {/* Text Content */}
         <motion.div variants={itemVariants} className="space-y-6">
           <div>
-            <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+            <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-gray-900 dark:text-white">
               Senior Software Engineer
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
+            <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base sm:text-lg">
               I'm a passionate developer with a proven track record of building
               scalable, accessible, and user-centric web applications. With 3+
               years of professional experience, I've successfully delivered
@@ -86,10 +86,10 @@ export function AboutSection() {
           </div>
 
           <div>
-            <h4 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
+            <h4 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-900 dark:text-white">
               What I'm Passionate About
             </h4>
-            <ul className="space-y-3 text-gray-600 dark:text-gray-400">
+            <ul className="space-y-2 sm:space-y-3 text-gray-600 dark:text-gray-400 text-sm sm:text-base">
               <li className="flex items-start space-x-3">
                 <span className="text-blue-500 mt-1">→</span>
                 <span>
@@ -115,28 +115,28 @@ export function AboutSection() {
             </ul>
           </div>
 
-          <div className="pt-6 flex gap-4 flex-wrap">
-            <div className="px-6 py-3 rounded-lg bg-blue-500/10 dark:bg-blue-500/5 border border-blue-500/20">
-              <p className="font-semibold text-blue-600 dark:text-blue-400">
+          <div className="pt-4 sm:pt-6 flex gap-3 sm:gap-4 flex-wrap">
+            <div className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-blue-500/10 dark:bg-blue-500/5 border border-blue-500/20">
+              <p className="font-semibold text-blue-600 dark:text-blue-400 text-sm sm:text-base">
                 3+ Years
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 of Experience
               </p>
             </div>
-            <div className="px-6 py-3 rounded-lg bg-purple-500/10 dark:bg-purple-500/5 border border-purple-500/20">
-              <p className="font-semibold text-purple-600 dark:text-purple-400">
+            <div className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-purple-500/10 dark:bg-purple-500/5 border border-purple-500/20">
+              <p className="font-semibold text-purple-600 dark:text-purple-400 text-sm sm:text-base">
                 7+
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 Projects Delivered
               </p>
             </div>
-            <div className="px-6 py-3 rounded-lg bg-cyan-500/10 dark:bg-cyan-500/5 border border-cyan-500/20">
-              <p className="font-semibold text-cyan-600 dark:text-cyan-400">
+            <div className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-cyan-500/10 dark:bg-cyan-500/5 border border-cyan-500/20">
+              <p className="font-semibold text-cyan-600 dark:text-cyan-400 text-sm sm:text-base">
                 15+
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 Technologies
               </p>
             </div>
@@ -145,7 +145,7 @@ export function AboutSection() {
 
         {/* Highlights Grid */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -155,14 +155,14 @@ export function AboutSection() {
             return (
               <motion.div key={index} variants={itemVariants}>
                 <Card hover>
-                  <CardBody className="space-y-3">
-                    <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500">
-                      <Icon className="w-6 h-6 text-white" />
+                <CardBody className="space-y-2 sm:space-y-3 !p-4 sm:!p-6">
+                    <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">
+                    <h4 className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">
                       {highlight.title}
                     </h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                       {highlight.description}
                     </p>
                   </CardBody>

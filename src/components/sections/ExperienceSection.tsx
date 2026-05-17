@@ -42,29 +42,29 @@ export function ExperienceSection() {
         {experiences.map((exp, index) => (
           <motion.div key={exp.id} variants={itemVariants}>
             <Card hover glassmorphism>
-              <CardBody className="space-y-4">
+              <CardBody className="space-y-3 sm:space-y-4 !p-4 sm:!p-6">
                 {/* Header */}
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4">
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500">
-                        <Briefcase className="w-5 h-5 text-white" />
+                    <div className="flex items-center gap-2 sm:gap-3 mb-1.5 sm:mb-2">
+                      <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500">
+                        <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                        <h3 className="text-base sm:text-xl font-bold text-gray-900 dark:text-white">
                           {exp.position}
                         </h3>
-                        <p className="text-sm text-blue-600 dark:text-blue-400 font-semibold">
+                        <p className="text-xs sm:text-sm text-blue-600 dark:text-blue-400 font-semibold">
                           {exp.company}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="text-sm font-semibold text-gray-600 dark:text-gray-400">
+                  <div className="text-left sm:text-right ml-10 sm:ml-0">
+                    <p className="text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-400">
                       {exp.duration}
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-500">
+                    <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-500">
                       {exp.location}
                     </p>
                   </div>
@@ -82,22 +82,22 @@ export function ExperienceSection() {
                   {exp.description.map((desc, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-3 text-gray-600 dark:text-gray-400"
+                      className="flex items-start gap-2 sm:gap-3 text-gray-600 dark:text-gray-400"
                     >
                       <span className="text-blue-500 mt-1 flex-shrink-0">
                         ▸
                       </span>
-                      <p className="text-sm leading-relaxed">{desc}</p>
+                      <p className="text-xs sm:text-sm leading-relaxed">{desc}</p>
                     </div>
                   ))}
                 </div>
 
                 {/* Skills */}
-                <div className="pt-4 border-t border-white/10">
-                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-600 mb-3 uppercase tracking-wider">
+                <div className="pt-3 sm:pt-4 border-t border-white/10">
+                  <p className="text-[10px] sm:text-xs font-semibold text-gray-500 dark:text-gray-600 mb-2 sm:mb-3 uppercase tracking-wider">
                     Technologies Used
                   </p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {exp.skills.map((skill, idx) => (
                       <Badge key={idx} variant="secondary">
                         {skill}

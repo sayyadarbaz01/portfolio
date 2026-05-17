@@ -16,12 +16,12 @@ export const Section = React.forwardRef<HTMLElement, SectionProps>(
       <section
         ref={ref}
         id={id}
-        className={cn("relative py-20 px-4 sm:px-6 lg:px-8", className)}
+        className={cn("relative py-12 sm:py-20 px-3 sm:px-6 lg:px-8", className)}
         {...props}
       >
         <div className="max-w-7xl mx-auto">
           {(title || subtitle) && (
-            <div className="mb-12 text-center">
+            <div className="mb-8 sm:mb-12 text-center">
               {title && (
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
                   <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
