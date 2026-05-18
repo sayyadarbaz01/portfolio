@@ -12,7 +12,7 @@ export function downloadResume() {
   // 2. The link will look like: https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing
   // 3. Copy just the YOUR_FILE_ID part and paste it below:
   // This special Google Drive URL forces a direct download of a FILE (Not a folder)
-  const directDownloadUrl = `https://drive.google.com/uc?export=download&id=${process.env.RESUME_ID}`;
+  const directDownloadUrl = `https://drive.google.com/uc?export=download&id=${process.env.NEXT_PUBLIC_RESUME_ID}`;
 
   const link = document.createElement("a");
   link.href = directDownloadUrl;
