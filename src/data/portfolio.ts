@@ -249,5 +249,7 @@ export const navigation = [
   { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
+  { label: "GitHub", href: "#github-activity" },
+  { label: "Connect", href: "#connect" },
   { label: "Contact", href: "#contact" },
 ];

@@ -276,30 +276,6 @@ export function ContactSection() {
               </div>
             </motion.div>
           </motion.div>
-
-          {/* Social Links */}
-          <motion.div variants={itemVariants}>
-            <p className="text-sm font-semibold text-gray-500 dark:text-gray-600 uppercase mb-4">
-              Connect With Me
-            </p>
-            <div className="flex gap-3">
-              {socialIcons.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`p-3 rounded-lg bg-gray-100 dark:bg-gray-900/50 text-gray-600 dark:text-gray-400 ${social.color} transition-all duration-300 hover:scale-110`}
-                    aria-label={social.label}
-                  >
-                    <Icon className="w-5 h-5" />
-                  </a>
-                );
-              })}
-            </div>
-          </motion.div>
         </motion.div>
 
         {/* Contact Form */}

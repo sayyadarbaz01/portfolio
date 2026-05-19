@@ -16,7 +16,8 @@
 - [Environment Variables](#environment-variables)
 - [Available Scripts](#available-scripts)
 - [Sections](#sections)
-- [Contact Form (EmailJS)](#contact-form-emailjs)
+- [Contact Form & Feedback](#contact-form--feedback)
+- [Database Setup](#database-setup)
 - [Deployment](#deployment)
 
 ---
@@ -30,7 +31,9 @@ Key highlights:
 - Smooth scroll-based animations using **Framer Motion**
 - Fully accessible — keyboard navigable, semantic HTML, WCAG-compliant focus management
 - Scroll progress indicator in the header
-- Animated typewriter effect in the hero section
+- Live GitHub Contribution Graph via `react-github-calendar`
+- Interactive Terminal Widget bridging UI with personal context
+- Full-stack capability with Prisma ORM and SQLite for a Live Feedback Hub
 - EmailJS-powered contact form with client-side validation and toast notifications
 
 ---
@@ -49,6 +52,9 @@ Key highlights:
 | 📊 Scroll Progress Bar | Gradient progress bar in the sticky header |
 | 🗂️ Project Filtering | Filter projects by category with animated transitions |
 | 🖼️ Profile Photo | Spinning gradient ring avatar in the hero section |
+| 📈 Live GitHub Graph | Real-time contribution graph matching native GitHub styling |
+| 💬 Live Feedback Hub | Server Actions & Prisma-powered database for visitor testimonials |
+| 👨‍💻 Terminal Widget | Interactive, draggable floating terminal providing developer insights |
 
 ---
 
@@ -68,6 +74,13 @@ Key highlights:
 | `tailwindcss` | ^4 | Utility-first CSS |
 | `framer-motion` | ^12 | Animations & transitions |
 | `lucide-react` | ^1.14 | Icon library |
+| `react-github-calendar`| ^5.0.6 | Live GitHub contributions |
+
+### Backend & Database
+| Package | Version | Purpose |
+|---|---|---|
+| `prisma` / `@prisma/client` | ^5.22.0 | Next.js Server Actions & ORM |
+| `sqlite` | Native | Local database for live feedback |
 
 ### Forms & Notifications
 | Package | Version | Purpose |
@@ -272,6 +285,21 @@ Filterable by category (All / Enterprise / Fintech / Ecommerce / Productivity):
 | Full Stack E-Commerce Application | Ecommerce | MERN Stack, Stripe API, Redux, Responsive Design |
 | Project Management Dashboard | Productivity | Next.js, Socket.io, PostgreSQL, Real-time |
 
+### 📈 Live GitHub Activity
+- Real-time fetch of GitHub contributions using `react-github-calendar`
+- Interactive sidebar to filter activity by specific years (matches native GitHub profile UI)
+- Fully customized themes to blend seamlessly into light/dark mode
+
+### 💬 Live Feedback Hub
+- Replaced static testimonials with an interactive, database-driven review feed
+- Powered by **Prisma ORM** & **Next.js Server Actions**
+- Visitors can leave their name, role, and message, and it instantly renders via Framer Motion
+
+### 📋 Recruiter Summary
+- A scannable quick-facts card optimized for hiring managers
+- Interactive **Notice Period** dropdown that updates visually
+- Checkmarks indicating immediate availability, roles, and remote work preferences
+
 ### 🎓 Education & Certifications
 **Education:**
 - Bachelor of Commerce (B.Com) — Swami Ramanand Teerth Marathwada University, Nanded (2016–2019)
@@ -291,8 +319,9 @@ Filterable by category (All / Enterprise / Fintech / Ecommerce / Productivity):
 
 ---
 
-## Contact Form (EmailJS)
+## Contact Form & Feedback
 
+### Contact Form (EmailJS)
 The form collects: **Name**, **Email**, **Subject**, **Message**.
 
 Client-side validation rules:
@@ -302,6 +331,18 @@ Client-side validation rules:
 - Message: required, max 2000 characters
 
 On success or failure, a toast notification appears at the top of the page.
+
+---
+
+## Database Setup
+
+The **Live Feedback Hub** is powered by a local **SQLite** database via **Prisma ORM**. It handles data persistence across reloads.
+
+To manage or modify the database:
+1. Define models in `prisma/schema.prisma`
+2. Run `npx prisma db push` to synchronize your schema with `dev.db`
+3. Run `npx prisma generate` to update the TypeScript client
+4. *Note: If deploying to Vercel/production, swap the SQLite provider to PostgreSQL (like Supabase or Vercel Postgres).*
 
 ---
 
