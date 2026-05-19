@@ -200,15 +200,6 @@ export const education: Education[] = [
     description:
       "Focused on commerce fundamentals with strong analytical skills development",
   },
-  {
-    id: "2",
-    institution: "Pickupbiz Training Center",
-    degree: "Full Stack Web Development Certification",
-    duration: "2021 – 2022",
-    location: "Online",
-    description:
-      "Completed an intensive program in MERN stack and modern web development, mastering industry best practices and hands-on project delivery.",
-  },
 ];
 
 export const certifications: Certification[] = [

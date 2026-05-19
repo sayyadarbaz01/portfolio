@@ -8,6 +8,7 @@ export { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 // Layout Components
 export { Header } from "@/components/Header";
 export { Footer } from "@/components/Footer";
+export { LazySection } from "@/components/LazySection";
 
 // Section Components
 export { HeroSection } from "@/components/sections/HeroSection";

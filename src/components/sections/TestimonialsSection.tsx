@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "@/hooks";
 import { Section, Card, CardBody, Button } from "@/components/ui";
+import { TestimonialSkeleton } from "@/components/ui/SkeletonLoaders";
 import { MessageSquare, Send, User, Briefcase, Clock } from "lucide-react";
 import toast from "react-hot-toast";
 import { getFeedbacks, addFeedback } from "@/actions/feedback";
@@ -30,19 +31,48 @@ export function TestimonialsSection() {
   const isInView = useInView(ref);
 
   const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
   const [formData, setFormData] = useState({ name: "", role: "", content: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Load from database
   useEffect(() => {
     async function loadFeedbacks() {
-      const res = await getFeedbacks();
-      if (res.success && res.data) {
-        setFeedbacks(res.data as unknown as Feedback[]);
+      try {
+        setIsLoading(true);
+        const res = await getFeedbacks();
+        if (res.success && res.data) {
+          setFeedbacks(res.data as unknown as Feedback[]);
+        }
+      } catch (error) {
+        console.error("Failed to load feedbacks:", error);
+      } finally {
+        setIsLoading(false);
       }
     }
     loadFeedbacks();
   }, []);
+
+  const toggleExpanded = (id: string) => {
+    setExpandedIds((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  };
+
+  const truncateText = (text: string, wordLimit: number = 20): { truncated: string; isTruncated: boolean } => {
+    const words = text.split(" ");
+    if (words.length <= wordLimit) {
+      return { truncated: text, isTruncated: false };
+    }
+    return { truncated: words.slice(0, wordLimit).join(" "), isTruncated: true };
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -191,7 +221,10 @@ export function TestimonialsSection() {
 
             <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 pb-2">
               <AnimatePresence mode="popLayout">
-                {feedbacks.length === 0 ? (
+                {isLoading ? (
+                  // Show skeleton loaders while loading
+                  [1, 2, 3].map((i) => <TestimonialSkeleton key={`skeleton-${i}`} />)
+                ) : feedbacks.length === 0 ? (
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -236,8 +269,21 @@ export function TestimonialsSection() {
                                 </div>
                               </div>
                               <p className="text-sm text-gray-700 dark:text-gray-300 mt-3 leading-relaxed italic">
-                                &ldquo;{item.content}&rdquo;
+                                &ldquo;
+                                {expandedIds.has(item.id)
+                                  ? item.content
+                                  : truncateText(item.content).truncated}
+                                {truncateText(item.content).isTruncated && !expandedIds.has(item.id) && "..."}
+                                &rdquo;
                               </p>
+                              {truncateText(item.content).isTruncated && (
+                                <button
+                                  onClick={() => toggleExpanded(item.id)}
+                                  className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 mt-2 transition-colors"
+                                >
+                                  {expandedIds.has(item.id) ? "Show Less ↑" : "Show More ↓"}
+                                </button>
+                              )}
                             </div>
                           </div>
                         </CardBody>

@@ -217,7 +217,7 @@ export function TerminalWidget({ isOpen, onClose }: TerminalWidgetProps) {
               </div>
               <div className="flex-1 text-center">
                 <span className="text-xs text-gray-400 font-mono">
-                  rizwan@portfolio:~
+                  mrizwan@portfolio:~
                 </span>
               </div>
             </div>

@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { useInView } from "@/hooks";
 import { Section, Card, CardBody, Button } from "@/components/ui";
 import { socialLinks } from "@/data/portfolio";
+import { saveContact } from "@/actions/feedback";
 import {
   Mail,
   Phone,
@@ -96,6 +97,7 @@ export function ContactSection() {
     }
     setIsSubmitting(true);
     try {
+      // Send email
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
@@ -107,8 +109,21 @@ export function ContactSection() {
         },
         EMAILJS_USER_ID
       );
-      toast.success("Message sent successfully! I'll get back to you soon.");
-      setFormData({ name: "", email: "", subject: "", message: "" });
+
+      // Save to database
+      const result = await saveContact({
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      });
+
+      if (result.success) {
+        toast.success("Message sent successfully! I'll get back to you soon.");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        toast.error("Message sent but failed to save to database.");
+      }
     } catch (err) {
       toast.error("Failed to send message. Please try again.");
     } finally {

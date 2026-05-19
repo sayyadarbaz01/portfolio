@@ -39,3 +39,25 @@ export async function addFeedback(data: {
     return { success: false, error: "Failed to add feedback" };
   }
 }
+
+export async function saveContact(data: {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}) {
+  try {
+    const newContact = await prisma.contact.create({
+      data: {
+        name: data.name,
+        email: data.email,
+        subject: data.subject,
+        message: data.message,
+      },
+    });
+    return { success: true, data: newContact };
+  } catch (error) {
+    console.error("Failed to save contact message:", error);
+    return { success: false, error: "Failed to save contact message" };
+  }
+}

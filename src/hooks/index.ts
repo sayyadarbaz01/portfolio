@@ -71,3 +71,48 @@ export function useInView(ref: React.RefObject<HTMLElement | null>, threshold = 
 
   return isInView;
 }
+
+/**
+ * Custom hook for loading data with loading and error states
+ * @param asyncFn - Async function to fetch data
+ * @param deps - Dependency array for useEffect
+ */
+export function useAsyncData<T>(
+  asyncFn: () => Promise<T>,
+  deps: React.DependencyList = []
+) {
+  const [data, setData] = useState<T | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadData = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const result = await asyncFn();
+        if (isMounted) {
+          setData(result);
+        }
+      } catch (err) {
+        if (isMounted) {
+          setError(err instanceof Error ? err : new Error(String(err)));
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    loadData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, deps);
+
+  return { data, isLoading, error };
+}
