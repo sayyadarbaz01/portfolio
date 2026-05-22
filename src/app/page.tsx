@@ -6,6 +6,7 @@ import {
   HeroSection,
   TerminalButton,
   TerminalWidget,
+  ScheduleMeetingModal,
 } from "@/components";
 
 // Lazy load sections for better performance
@@ -72,6 +73,7 @@ const ContactSection = lazy(() =>
 
 export default function Home() {
   const [terminalOpen, setTerminalOpen] = useState(false);
+  const [meetingModalOpen, setMeetingModalOpen] = useState(false);
 
   return (
     <>
@@ -122,8 +124,11 @@ export default function Home() {
         <EducationSection />
       </LazySection>
 
+      {/* Connect anchor — nav "Connect" scrolls here */}
+      <div id="connect" />
+
       <LazySection>
-        <ContactSection />
+        <ContactSection onScheduleMeeting={() => setMeetingModalOpen(true)} />
       </LazySection>
 
       {/* Floating Terminal Button */}
@@ -131,6 +136,13 @@ export default function Home() {
 
       {/* Terminal Modal */}
       <TerminalWidget isOpen={terminalOpen} onClose={() => setTerminalOpen(false)} />
+
+      {/* Schedule Meeting Modal */}
+      <ScheduleMeetingModal
+        isOpen={meetingModalOpen}
+        onClose={() => setMeetingModalOpen(false)}
+      />
     </>
   );
 }
+

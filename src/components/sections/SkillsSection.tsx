@@ -2,9 +2,134 @@
 
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiRedux,
+  SiFramer,
+  SiNodedotjs,
+  SiExpress,
+  SiNestjs,
+  SiMongodb,
+  SiPostgresql,
+  SiGraphql,
+  SiPrisma,
+  SiGit,
+  SiGithub,
+  SiGitlab,
+  SiPostman,
+  SiDocker,
+  SiJira,
+} from "react-icons/si";
+import * as Icons from "lucide-react";
 import { useInView } from "@/hooks";
-import { Section, Card, CardBody, Badge } from "@/components/ui";
+import { Section, Card, CardBody } from "@/components/ui";
 import { skills } from "@/data/portfolio";
+
+// Icon mapping with real brand logos
+const iconMap: Record<string, React.ComponentType<{ size: number; className: string }>> = {
+  // Frontend
+  React: SiReact,
+  Next: SiNextdotjs,
+  TypeScript: SiTypescript,
+  Tailwind: SiTailwindcss,
+  Redux: SiRedux,
+  FramerMotion: SiFramer,
+  Palette: Icons.Palette,
+  Code: Icons.Code,
+  Smartphone: Icons.Smartphone,
+  Lightbulb: Icons.Lightbulb,
+
+  // Backend
+  Node: SiNodedotjs,
+  Express: SiExpress,
+  Layers: SiNestjs,
+  MongoDB: SiMongodb,
+  PostgreSQL: SiPostgresql,
+  GraphQL: SiGraphql,
+  Database: SiPrisma,
+  Share2: Icons.Share2,
+  Lock: Icons.Lock,
+
+  // Tools & Workflow
+  GitBranch: SiGit,
+  Send: Icons.Send,
+  Container: SiDocker,
+  CheckSquare: SiJira,
+  FileCode: Icons.FileCode,
+  Eye: Icons.Eye,
+  Wand2: Icons.Wand2,
+  Brain: Icons.Brain,
+  Users: Icons.Users,
+  CheckCircle: Icons.CheckCircle,
+  Sparkles: Icons.Sparkles,
+  Zap: Icons.Zap,
+};
+
+const getCategoryColor = (category: string) => {
+  const colors = {
+    frontend: "from-blue-500 to-cyan-500",
+    backend: "from-purple-500 to-pink-500",
+    tools: "from-amber-500 to-orange-500",
+    other: "from-green-500 to-emerald-500",
+  };
+  return colors[category as keyof typeof colors] || colors.frontend;
+};
+
+// Official brand colors for each technology
+const getBrandColor = (skillIcon?: string): string => {
+  const colorMap: Record<string, string> = {
+    // Frontend
+    React: "#61DAFB", // Cyan Blue
+    Next: "#000000", // Black
+    TypeScript: "#3178C6", // Blue
+    Tailwind: "#06B6D4", // Cyan
+    Redux: "#764ABC", // Purple
+    FramerMotion: "#0055FF", // Blue
+    Palette: "#007FFF", // Material UI Blue
+    Code: "#6B7280", // Gray (generic)
+    Smartphone: "#6B7280", // Gray (generic)
+    Lightbulb: "#FFD700", // Gold
+
+    // Backend
+    Node: "#339933", // Green
+    Express: "#000000", // Black
+    Layers: "#E0234E", // NestJS Red
+    MongoDB: "#13AA52", // Green
+    PostgreSQL: "#336791", // Blue
+    GraphQL: "#E10098", // Pink
+    Database: "#0C344B", // Prisma Navy
+    Share2: "#6B7280", // Gray (generic)
+    Lock: "#6B7280", // Gray (generic)
+
+    // Tools & Workflow
+    GitBranch: "#F1502F", // Git Orange-Red
+    Send: "#6B7280", // Gray (generic)
+    Container: "#2496ED", // Docker Blue
+    CheckSquare: "#0052CC", // JIRA Blue
+    FileCode: "#007ACC", // VS Code Blue
+    Eye: "#4A90E2", // Accessibility Blue
+    Wand2: "#00A67E", // GitHub Copilot Teal
+    Brain: "#5A67D8", // Claude Indigo
+    Users: "#00BCD4", // Collaboration Cyan
+    CheckCircle: "#4CAF50", // Code Review Green
+    Sparkles: "#FF6B35", // AI Orange
+    Zap: "#FFD700", // Energy Yellow
+  };
+  return colorMap[skillIcon || "Code"] || "#6B7280";
+};
+
+const getCategoryAccent = (category: string) => {
+  const accents = {
+    frontend: "bg-blue-500/20 text-blue-600 dark:text-blue-400",
+    backend: "bg-purple-500/20 text-purple-600 dark:text-purple-400",
+    tools: "bg-amber-500/20 text-amber-600 dark:text-amber-400",
+    other: "bg-green-500/20 text-green-600 dark:text-green-400",
+  };
+  return accents[category as keyof typeof accents] || accents.frontend;
+};
 
 export function SkillsSection() {
   const ref = useRef<HTMLElement>(null);
@@ -14,6 +139,7 @@ export function SkillsSection() {
     frontend: skills.filter((s) => s.category === "frontend"),
     backend: skills.filter((s) => s.category === "backend"),
     tools: skills.filter((s) => s.category === "tools"),
+    other: skills.filter((s) => s.category === "other"),
   };
 
   const containerVariants = {
@@ -21,7 +147,7 @@ export function SkillsSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05,
+        staggerChildren: 0.04,
         delayChildren: 0.1,
       },
     },
@@ -42,106 +168,135 @@ export function SkillsSection() {
   }: {
     skill: (typeof skills)[0];
     index: number;
-  }) => (
-    <motion.div variants={itemVariants} key={index} className="h-full">
-      <Card hover glassmorphism className="h-full">
-        <CardBody className="!p-3 sm:p-4 flex flex-col justify-center h-full">
-          <div className="flex items-center justify-between mb-2 sm:mb-3">
-            <h4 className="font-medium text-gray-900 dark:text-white text-sm sm:text-base">
+  }) => {
+    const IconComponent = skill.icon ? iconMap[skill.icon] : Icons.Code;
+    const brandColor = getBrandColor(skill.icon);
+
+    return (
+      <motion.div variants={itemVariants} key={index} className="h-full">
+        <Card hover glassmorphism className="h-full group">
+          <CardBody className="!p-2 sm:!p-3 flex flex-col items-center justify-center h-full text-center">
+            {/* Icon Container - showing brand colors */}
+            <div
+              className={`mb-2 sm:mb-2.5 p-2 sm:p-2.5 rounded-md bg-white/5 dark:bg-white/10 group-hover:bg-white/10 dark:group-hover:bg-white/15 group-hover:shadow-lg transition-all duration-300`}
+              style={{
+                boxShadow: `0 0 12px ${brandColor}20`,
+              }}
+            >
+              <IconComponent size={20} style={{ color: brandColor }} className="" />
+            </div>
+
+            {/* Skill Name */}
+            <h4 className="font-semibold text-gray-900 dark:text-white text-xs sm:text-sm leading-tight line-clamp-2">
               {skill.name}
             </h4>
-            <span className="text-xs font-bold text-blue-500 dark:text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded">
-              {skill.level}%
-            </span>
-          </div>
+          </CardBody>
+        </Card>
+      </motion.div>
+    );
+  };
 
-          {/* Progress Bar */}
-          <div className="h-1 sm:h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500"
-              initial={{ width: 0 }}
-              animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-              transition={{ duration: 1.2, delay: index * 0.05 }}
+  const SkillCategorySection = ({
+    title,
+    skillsData,
+    category,
+    startIndex,
+  }: {
+    title: string;
+    skillsData: (typeof skills)[0][];
+    category: string;
+    startIndex: number;
+  }) => {
+    const accentColor = getCategoryAccent(category);
+    const bgGradient = getCategoryColor(category);
+
+    return (
+      <motion.div variants={itemVariants}>
+        <div className="flex items-center gap-3 mb-3 sm:mb-4">
+          <div
+            className={`w-1 h-7 sm:h-8 rounded-full bg-gradient-to-b ${bgGradient}`}
+          />
+          <h3 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white">
+            {title}
+          </h3>
+          <span
+            className={`ml-auto text-xs sm:text-sm font-semibold px-2 sm:px-3 py-1 rounded-full ${accentColor}`}
+          >
+            {skillsData.length} skills
+          </span>
+        </div>
+
+        <motion.div
+          className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-1.5 sm:gap-2 md:gap-3"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          {skillsData.map((skill, index) => (
+            <SkillCard
+              key={index}
+              skill={skill}
+              index={startIndex + index}
             />
-          </div>
-        </CardBody>
-      </Card>
-    </motion.div>
-  );
+          ))}
+        </motion.div>
+      </motion.div>
+    );
+  };
 
   return (
     <Section id="skills" title="Skills & Expertise" ref={ref}>
       <motion.div
-        className="space-y-8 sm:space-y-12"
+        className="space-y-6 sm:space-y-7 md:space-y-8"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
         {/* Frontend Skills */}
-        <motion.div variants={itemVariants}>
-          <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-white flex items-center gap-2">
-            <span className="w-2 h-6 bg-blue-500 rounded-full inline-block" />
-            Frontend
-          </h3>
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4"
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-          >
-            {skillsByCategory.frontend.map((skill, index) => (
-              <SkillCard key={index} skill={skill} index={index} />
-            ))}
-          </motion.div>
-        </motion.div>
+        {skillsByCategory.frontend.length > 0 && (
+          <SkillCategorySection
+            title="Frontend"
+            skillsData={skillsByCategory.frontend}
+            category="frontend"
+            startIndex={0}
+          />
+        )}
 
         {/* Backend Skills */}
-        <motion.div variants={itemVariants}>
-          <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-white flex items-center gap-2">
-            <span className="w-2 h-6 bg-purple-500 rounded-full inline-block" />
-            Backend
-          </h3>
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4"
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-          >
-            {skillsByCategory.backend.map((skill, index) => (
-              <SkillCard
-                key={index}
-                skill={skill}
-                index={index + skillsByCategory.frontend.length}
-              />
-            ))}
-          </motion.div>
-        </motion.div>
+        {skillsByCategory.backend.length > 0 && (
+          <SkillCategorySection
+            title="Backend"
+            skillsData={skillsByCategory.backend}
+            category="backend"
+            startIndex={skillsByCategory.frontend.length}
+          />
+        )}
 
         {/* Tools & Workflow */}
-        <motion.div variants={itemVariants}>
-          <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-white flex items-center gap-2">
-            <span className="w-2 h-6 bg-cyan-500 rounded-full inline-block" />
-            Tools & Workflow
-          </h3>
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4"
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-          >
-            {skillsByCategory.tools.map((skill, index) => (
-              <SkillCard
-                key={index}
-                skill={skill}
-                index={
-                  index +
-                  skillsByCategory.frontend.length +
-                  skillsByCategory.backend.length
-                }
-              />
-            ))}
-          </motion.div>
-        </motion.div>
+        {skillsByCategory.tools.length > 0 && (
+          <SkillCategorySection
+            title="Tools & Workflow"
+            skillsData={skillsByCategory.tools}
+            category="tools"
+            startIndex={
+              skillsByCategory.frontend.length + skillsByCategory.backend.length
+            }
+          />
+        )}
+
+        {/* Other Skills */}
+        {skillsByCategory.other.length > 0 && (
+          <SkillCategorySection
+            title="Soft Skills"
+            skillsData={skillsByCategory.other}
+            category="other"
+            startIndex={
+              skillsByCategory.frontend.length +
+              skillsByCategory.backend.length +
+              skillsByCategory.tools.length
+            }
+          />
+        )}
       </motion.div>
     </Section>
   );
