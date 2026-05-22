@@ -13,7 +13,6 @@ import {
   Phone,
   MapPin,
   Send,
-  Calendar,
 } from "lucide-react";
 
 // lucide-react doesn't ship Github or LinkedIn icons in this version
@@ -54,11 +53,7 @@ interface FormData {
   message: string;
 }
 
-interface ContactSectionProps {
-  onScheduleMeeting?: () => void;
-}
-
-export function ContactSection({ onScheduleMeeting }: ContactSectionProps) {
+export function ContactSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref);
   const [formData, setFormData] = useState<FormData>({
@@ -298,30 +293,6 @@ export function ContactSection({ onScheduleMeeting }: ContactSectionProps) {
 
           </motion.div>
 
-          {/* Schedule a Meeting CTA */}
-          {onScheduleMeeting && (
-            <motion.div variants={itemVariants}>
-              <button
-                onClick={onScheduleMeeting}
-                className="group w-full flex items-center gap-4 p-4 rounded-lg border border-blue-500/20 bg-blue-500/5 hover:bg-blue-500/10 hover:border-blue-500/40 transition-all duration-300"
-              >
-                <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 transition-all">
-                  <Calendar className="w-6 h-6 text-white" />
-                </div>
-                <div className="text-left">
-                  <p className="font-semibold text-gray-900 dark:text-white">
-                    Schedule a Meeting
-                  </p>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">
-                    Book a free 1-on-1 call with me
-                  </p>
-                </div>
-                <span className="ml-auto text-blue-500 text-lg group-hover:translate-x-1 transition-transform">
-                  →
-                </span>
-              </button>
-            </motion.div>
-          )}
         </motion.div>
 
         {/* Contact Form */}

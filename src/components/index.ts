@@ -28,5 +28,3 @@ export { RecruiterSummarySection } from "@/components/sections/RecruiterSummaryS
 
 // Interactive Components
 export { TerminalWidget, TerminalButton } from "@/components/TerminalWidget";
-export { ScheduleMeetingModal } from "@/components/ScheduleMeetingModal";
-// Removed CommandMenu since it's unused
