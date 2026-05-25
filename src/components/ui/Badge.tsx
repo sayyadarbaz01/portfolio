@@ -14,7 +14,7 @@ export function Badge({ variant = "primary", className, children }: BadgeProps) 
     secondary:
       "bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400",
     outline:
-      "border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400",
+      "border text-[var(--text-muted)]",
     success:
       "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400",
     warning:
@@ -28,6 +28,7 @@ export function Badge({ variant = "primary", className, children }: BadgeProps) 
         variants[variant],
         className
       )}
+      style={variant === 'outline' ? { borderColor: 'var(--border-base)' } : undefined}
     >
       {children}
     </div>

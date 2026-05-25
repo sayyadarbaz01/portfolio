@@ -30,7 +30,7 @@ export const Section = React.forwardRef<HTMLElement, SectionProps>(
                 </h2>
               )}
               {subtitle && (
-                <p className="text-gray-600 dark:text-gray-400 text-lg">
+                <p className="text-lg" style={{ color: 'var(--text-muted)' }}>
                   {subtitle}
                 </p>
               )}

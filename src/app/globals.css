@@ -2,11 +2,102 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================================
+   DESIGN TOKENS — Light Mode (default)
+   ============================================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core surfaces */
+  --bg-base:         #f8faff;
+  --bg-surface:      #ffffff;
+  --bg-elevated:     #f0f4ff;
+  --bg-muted:        #e8edf8;
+
+  /* Text */
+  --text-primary:    #0f172a;
+  --text-secondary:  #374151;
+  --text-muted:      #6b7280;
+  --text-faint:      #9ca3af;
+
+  /* Borders */
+  --border-base:     rgba(15, 23, 42, 0.10);
+  --border-subtle:   rgba(15, 23, 42, 0.06);
+
+  /* Accent colours (shared) */
+  --accent-blue:     #3b82f6;
+  --accent-cyan:     #06b6d4;
+  --accent-purple:   #8b5cf6;
+  --accent-indigo:   #6366f1;
+
+  /* Card / panel */
+  --card-bg:         #ffffff;
+  --card-border:     rgba(15, 23, 42, 0.08);
+  --card-shadow:     0 2px 20px rgba(59,130,246,0.06), 0 1px 4px rgba(0,0,0,0.06);
+  --card-hover-shadow: 0 8px 40px rgba(59,130,246,0.18), 0 2px 8px rgba(0,0,0,0.08);
+
+  /* Input */
+  --input-bg:        #ffffff;
+  --input-border:    rgba(15, 23, 42, 0.15);
+  --input-focus:     #3b82f6;
+
+  /* Button */
+  --btn-ghost-hover: rgba(59,130,246,0.08);
+
+  /* Scrollbar */
+  --scrollbar-track: #e8edf8;
+  --scrollbar-thumb: #94a3b8;
+
+  /* Tailwind compat */
+  --background: #f8faff;
+  --foreground: #0f172a;
 }
 
+/* ============================================================
+   DESIGN TOKENS — Dark Mode
+   Black with blue-cyan gradient atmosphere
+   ============================================================ */
+.dark {
+  /* Core surfaces — true black base with slight blue tint */
+  --bg-base:         #000000;
+  --bg-surface:      #080d1a;
+  --bg-elevated:     #0d1526;
+  --bg-muted:        #111827;
+
+  /* Text */
+  --text-primary:    #f0f6ff;
+  --text-secondary:  #c7d8f0;
+  --text-muted:      #8ba4c8;
+  --text-faint:      #4f6890;
+
+  /* Borders — subtle blue-tinted */
+  --border-base:     rgba(99,179,237,0.12);
+  --border-subtle:   rgba(99,179,237,0.06);
+
+  /* Card / panel */
+  --card-bg:         rgba(8,13,26,0.85);
+  --card-border:     rgba(56,189,248,0.10);
+  --card-shadow:     0 2px 20px rgba(59,130,246,0.08), 0 1px 4px rgba(0,0,0,0.5);
+  --card-hover-shadow: 0 8px 40px rgba(56,189,248,0.20), 0 2px 8px rgba(0,0,0,0.6);
+
+  /* Input */
+  --input-bg:        rgba(8,13,26,0.70);
+  --input-border:    rgba(99,179,237,0.15);
+  --input-focus:     #38bdf8;
+
+  /* Button */
+  --btn-ghost-hover: rgba(56,189,248,0.10);
+
+  /* Scrollbar */
+  --scrollbar-track: #0d1526;
+  --scrollbar-thumb: #1e3a5f;
+
+  /* Tailwind compat */
+  --background: #000000;
+  --foreground: #f0f6ff;
+}
+
+/* ============================================================
+   THEME STYLES
+   ============================================================ */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -14,28 +105,39 @@
   --font-mono: var(--font-geist-mono);
 }
 
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
 html {
   @apply scroll-smooth;
 }
 
+/* ── Body background ── */
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--bg-base);
+  color: var(--text-primary);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-  @apply transition-colors duration-300;
+  transition: background-color 0.35s ease, color 0.35s ease;
+  position: relative;
 }
 
-/* Dark mode styles */
-.dark {
-  @apply bg-gray-950 text-white;
+/* DARK MODE: Atmospheric black-with-gradient overlay */
+.dark body {
+  background-color: #000000;
+  /* Subtle radial blue-cyan gradient emanating from top-left and bottom-right */
+  background-image:
+    radial-gradient(ellipse 80% 50% at 0% 0%,   rgba(59,130,246,0.12)  0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(6,182,212,0.10)  0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 50% 50%,  rgba(139,92,246,0.05) 0%, transparent 70%);
+  background-attachment: fixed;
 }
 
-/* Smooth scrolling */
+/* LIGHT MODE: Subtle cool-white gradient */
+body:not(.dark body) {
+  background-color: #f8faff;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 0% 0%,   rgba(59,130,246,0.07)  0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(6,182,212,0.06)  0%, transparent 60%);
+  background-attachment: fixed;
+}
+
 html.dark {
   color-scheme: dark;
 }
@@ -44,153 +146,256 @@ html.light {
   color-scheme: light;
 }
 
-/* Custom scrollbar */
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
 ::-webkit-scrollbar {
-  @apply w-3;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-900;
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 dark:bg-gray-600 rounded-full hover:bg-gray-500 dark:hover:bg-gray-500;
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
 }
 
-/* Gradient text utility */
-.gradient-text {
-  @apply bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-blue);
 }
 
-/* Glass morphism */
+/* ============================================================
+   CARD SYSTEM — covers all card/panel elements
+   ============================================================ */
+
+/* Default card (glassmorphism off) */
+.theme-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  border-radius: 1rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-card:hover {
+  box-shadow: var(--card-hover-shadow);
+  border-color: rgba(56,189,248,0.25);
+}
+
+/* Glassmorphism card — used in dark mode */
+.dark .glass,
+.dark [class*="bg-white/"] {
+  background: rgba(8,13,26,0.6) !important;
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border-color: rgba(56,189,248,0.10) !important;
+}
+
+/* Light mode glass */
 .glass {
-  @apply bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(59,130,246,0.15);
 }
 
-/* Animations */
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-20px);
-  }
+/* ============================================================
+   INPUT / TEXTAREA / SELECT
+   ============================================================ */
+input,
+textarea,
+select {
+  background: var(--input-bg) !important;
+  border-color: var(--input-border) !important;
+  color: var(--text-primary) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-@keyframes glow {
-
-  0%,
-  100% {
-    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
-  }
-
-  50% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
-  }
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--input-focus) !important;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.15) !important;
+  outline: none;
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: var(--text-faint);
+  opacity: 1;
 }
 
-.animate-glow {
-  animation: glow 2s ease-in-out infinite;
+/* ============================================================
+   SECTION BACKGROUNDS — alternating for visual rhythm
+   ============================================================ */
+section:nth-child(even) {
+  background: transparent;
 }
 
-/* Selection styles */
+.dark section {
+  /* Every section gets a very subtle blue-tinted overlay so dark sections
+     feel richly dark instead of flat black */
+  background: transparent;
+}
+
+/* ============================================================
+   BUTTON SYSTEM
+   ============================================================ */
+
+/* Ghost / outline hover feedback */
+.dark button.ghost-btn,
+.dark a.ghost-btn {
+  color: var(--text-secondary);
+}
+
+.dark button.ghost-btn:hover,
+.dark a.ghost-btn:hover {
+  background: var(--btn-ghost-hover);
+  color: var(--accent-cyan);
+}
+
+/* Dark mode: outline buttons */
+.dark [class*="border-gray-700"] {
+  border-color: var(--border-base) !important;
+}
+
+.dark [class*="hover:bg-gray-900"] {
+  --tw-bg-opacity: 1;
+}
+
+/* ============================================================
+   GRADIENT TEXT UTILITY
+   ============================================================ */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================================================
+   SELECTION STYLES
+   ============================================================ */
 ::selection {
-  @apply bg-blue-500/30 text-white;
+  background: rgba(59,130,246,0.35);
+  color: #fff;
 }
 
-/* Focus visible */
+.dark ::selection {
+  background: rgba(56,189,248,0.30);
+  color: #f0f6ff;
+}
+
+/* ============================================================
+   FOCUS VISIBLE
+   ============================================================ */
 :focus-visible {
-  @apply outline-none ring-2 ring-blue-500 ring-offset-2 dark:ring-offset-gray-950;
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-blue), 0 0 0 5px rgba(59,130,246,0.20);
 }
 
-/* Smooth transitions */
+.dark :focus-visible {
+  box-shadow: 0 0 0 3px var(--accent-cyan), 0 0 0 5px rgba(56,189,248,0.20);
+}
+
+/* ============================================================
+   LINK & BUTTON TRANSITIONS
+   ============================================================ */
 button,
 a {
-  @apply transition-all duration-200 ease-out;
+  transition: all 0.2s ease-out;
 }
 
-/* Remove default button style */
 button {
   font: inherit;
 }
 
-/* Placeholder styles */
+/* ============================================================
+   PLACEHOLDER
+   ============================================================ */
 ::placeholder {
-  @apply opacity-60;
+  opacity: 0.55;
 }
 
-/* Mobile-specific optimizations */
+/* ============================================================
+   MOBILE OPTIMISATIONS
+   ============================================================ */
 @media (max-width: 639px) {
-
-  /* Hide scrollbar on mobile for cleaner look */
   ::-webkit-scrollbar {
-    @apply w-0 h-0;
+    width: 0;
+    height: 0;
   }
 
-  /* Ensure touch targets are at least 44px for CTA buttons */
   button:not([class*="rounded-full"]),
   a:not([class*="inline-flex"]) {
     min-height: 44px;
   }
 
-  /* Prevent text overflow on mobile */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p {
+  h1, h2, h3, h4, h5, h6, p {
     overflow-wrap: break-word;
     word-break: break-word;
   }
 }
 
-/* Improve tap feedback on mobile */
 @media (hover: none) {
-
-  button,
-  a {
+  button, a {
     -webkit-tap-highlight-color: transparent;
   }
 }
 
-/* Shimmer animation for cards */
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px  rgba(59,130,246,0.5); }
+  50%       { box-shadow: 0 0 20px rgba(59,130,246,0.8); }
+}
+
 @keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
 }
 
-.animate-shimmer {
-  animation: shimmer 2s linear infinite;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  background-size: 200% 100%;
-}
-
-/* Pulse ring */
 @keyframes pulse-ring {
-  0% { transform: scale(1); opacity: 0.8; }
+  0%   { transform: scale(1); opacity: 0.8; }
   100% { transform: scale(2); opacity: 0; }
 }
 
-/* Terminal cursor blink */
 @keyframes blink {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  50%       { opacity: 0; }
 }
 
-.terminal-cursor {
-  animation: blink 1s step-end infinite;
+@keyframes section-reveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Gradient border */
+/* Dark-mode ambient glow pulse on the page */
+@keyframes ambient-glow {
+  0%, 100% {
+    opacity: 0.06;
+  }
+  50% {
+    opacity: 0.12;
+  }
+}
+
+.animate-float    { animation: float    3s ease-in-out infinite; }
+.animate-glow     { animation: glow     2s ease-in-out infinite; }
+.animate-shimmer  { animation: shimmer  2s linear     infinite; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); background-size: 200% 100%; }
+.terminal-cursor  { animation: blink    1s step-end   infinite; }
+
+/* ============================================================
+   GRADIENT BORDER
+   ============================================================ */
 .gradient-border {
   position: relative;
   border-radius: 1rem;
@@ -208,18 +413,137 @@ button {
   padding: 1px;
 }
 
-/* Noise texture overlay */
+/* ============================================================
+   NOISE TEXTURE
+   ============================================================ */
 .noise-texture {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
-/* Glow text */
+/* ============================================================
+   GLOW TEXT
+   ============================================================ */
 .glow-text {
-  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  text-shadow: 0 0 20px rgba(59,130,246,0.5);
+}
+.dark .glow-text {
+  text-shadow: 0 0 24px rgba(56,189,248,0.55);
 }
 
-/* Section reveal */
-@keyframes section-reveal {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* ============================================================
+   DARK MODE — AMBIENT ORBS (global decorative background)
+   These are fixed orbs that add the "gradient matching" feel
+   to every page section automatically.
+   ============================================================ */
+.dark body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 55% 35% at 15%  8%,  rgba(59,130,246,0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 30% at 85% 92%,  rgba(6,182,212,0.09)  0%, transparent 65%),
+    radial-gradient(ellipse 35% 25% at 80%  15%, rgba(139,92,246,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 20% at 20%  85%, rgba(56,189,248,0.06) 0%, transparent 60%);
+  animation: ambient-glow 8s ease-in-out infinite;
+}
+
+/* Light mode subtle orbs */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 10%  5%,  rgba(59,130,246,0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 35% at 90% 95%,  rgba(6,182,212,0.05)  0%, transparent 65%);
+  animation: ambient-glow 10s ease-in-out infinite;
+}
+
+/* ============================================================
+   DARK MODE — SECTION / CARD SURFACE OVERRIDES
+   Ensures every gray-* surface looks properly dark with a
+   blue-tinted feel rather than pure gray.
+   ============================================================ */
+
+/* Gray-900 / Gray-950 surfaces → near-black with blue tint */
+.dark .bg-gray-900,
+.dark [class*="bg-gray-900"] {
+  background-color: #080d1a !important;
+}
+
+.dark .bg-gray-950,
+.dark [class*="bg-gray-950"] {
+  background-color: #000000 !important;
+}
+
+.dark .bg-gray-800,
+.dark [class*="bg-gray-800"] {
+  background-color: #0d1526 !important;
+}
+
+/* Borders in dark mode → blue-tinted */
+.dark .border-gray-800,
+.dark [class*="border-gray-800"] {
+  border-color: rgba(56,189,248,0.10) !important;
+}
+
+.dark .border-gray-700,
+.dark [class*="border-gray-700"] {
+  border-color: rgba(56,189,248,0.15) !important;
+}
+
+/* Text hierarchy in dark mode */
+.dark .text-gray-900,
+.dark [class*="text-gray-900"] {
+  color: #f0f6ff !important;
+}
+
+.dark .text-gray-700,
+.dark [class*="text-gray-700"] {
+  color: #c7d8f0 !important;
+}
+
+.dark .text-gray-600,
+.dark [class*="text-gray-600"] {
+  color: #8ba4c8 !important;
+}
+
+.dark .text-gray-500,
+.dark [class*="text-gray-500"] {
+  color: #6b87ae !important;
+}
+
+.dark .text-gray-400,
+.dark [class*="text-gray-400"] {
+  color: #8ba4c8 !important;
+}
+
+/* Hover backgrounds in dark mode */
+.dark .hover\:bg-gray-100:hover,
+.dark [class*="hover:bg-gray-100"]:hover {
+  background-color: rgba(56,189,248,0.06) !important;
+}
+
+.dark .hover\:bg-gray-900\/50:hover,
+.dark [class*="hover:bg-gray-900/50"]:hover {
+  background-color: rgba(8,13,26,0.7) !important;
+}
+
+/* ============================================================
+   LIGHT MODE — SURFACE OVERRIDES
+   Ensures every card/surface in light mode feels clean but
+   not flat-white — subtle blue-tinted cool-white.
+   ============================================================ */
+.bg-white {
+  background-color: #ffffff;
+}
+
+/* Light-mode cards/sections feel airy with a soft shadow */
+.light-card {
+  background: #ffffff;
+  box-shadow: 0 1px 16px rgba(59,130,246,0.07), 0 1px 3px rgba(0,0,0,0.05);
+  border: 1px solid rgba(59,130,246,0.10);
 }

@@ -21,13 +21,29 @@ export function Card({
       className={cn(
         "rounded-xl sm:rounded-2xl transition-all duration-300",
         glassmorphism &&
-          "bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10",
+          "backdrop-blur-md border",
         !glassmorphism &&
-          "bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800",
+          "border",
         hover &&
-          "hover:shadow-lg hover:shadow-blue-500/20 dark:hover:shadow-blue-500/10 hover:-translate-y-1",
+          "hover:-translate-y-1",
         className
       )}
+      style={{
+        background: glassmorphism ? undefined : 'var(--card-bg)',
+        borderColor: 'var(--card-border)',
+        boxShadow: hover ? undefined : 'var(--card-shadow)',
+        ...(glassmorphism
+          ? { background: 'var(--card-bg)', backdropFilter: 'blur(16px) saturate(1.4)' }
+          : {}),
+      }}
+      onMouseEnter={hover ? (e) => {
+        (e.currentTarget as HTMLDivElement).style.boxShadow = 'var(--card-hover-shadow)';
+        (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(56,189,248,0.25)';
+      } : undefined}
+      onMouseLeave={hover ? (e) => {
+        (e.currentTarget as HTMLDivElement).style.boxShadow = 'var(--card-shadow)';
+        (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--card-border)';
+      } : undefined}
       {...props}
     >
       {children}
@@ -40,7 +56,7 @@ export function CardHeader({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("px-6 py-4 border-b border-white/10", className)}>
+    <div className={cn("px-6 py-4 border-b", className)} style={{ borderColor: 'var(--border-base)' }}>
       {children}
     </div>
   );
@@ -58,7 +74,7 @@ export function CardFooter({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("px-6 py-4 border-t border-white/10", className)}>
+    <div className={cn("px-6 py-4 border-t", className)} style={{ borderColor: 'var(--border-base)' }}>
       {children}
     </div>
   );

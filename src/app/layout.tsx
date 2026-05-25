@@ -69,7 +69,7 @@ export default function RootLayout({
       className={`${geistSans.variable} h-full antialiased scroll-smooth`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-white dark:bg-gray-950 text-gray-900 dark:text-white transition-colors duration-300">
+      <body className="min-h-full flex flex-col transition-colors duration-300" style={{ backgroundColor: 'var(--bg-base)', color: 'var(--text-primary)' }}>
         <ThemeProvider>
           <Header />
           <main className="flex-1">{children}</main>

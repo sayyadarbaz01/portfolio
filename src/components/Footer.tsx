@@ -31,7 +31,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative bg-gradient-to-b from-transparent to-black/40 dark:to-black/60 border-t border-white/10">
+    <footer className="relative border-t" style={{ borderColor: 'var(--border-base)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12"
@@ -113,7 +113,7 @@ export function Footer() {
         </motion.div>
 
         {/* Divider */}
-        <div className="border-t border-gray-200 dark:border-gray-800 py-8">
+        <div className="border-t py-8" style={{ borderColor: 'var(--border-base)' }}>
           {/* Analytics Stats */}
           <div ref={ref} className="mb-8">
             <AnalyticsDisplay isInView={isInView} />
