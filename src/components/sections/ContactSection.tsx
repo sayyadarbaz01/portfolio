@@ -302,10 +302,11 @@ export function ContactSection() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Name */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
+                  <label htmlFor="contact-name" className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
                     Full Name
                   </label>
                   <input
+                    id="contact-name"
                     type="text"
                     name="name"
                     value={formData.name}
@@ -318,10 +319,11 @@ export function ContactSection() {
 
                 {/* Email */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
+                  <label htmlFor="contact-email" className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
                     Email Address
                   </label>
                   <input
+                    id="contact-email"
                     type="email"
                     name="email"
                     value={formData.email}
@@ -334,10 +336,11 @@ export function ContactSection() {
 
                 {/* Subject */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
+                  <label htmlFor="contact-subject" className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
                     Subject
                   </label>
                   <input
+                    id="contact-subject"
                     type="text"
                     name="subject"
                     value={formData.subject}
@@ -350,10 +353,11 @@ export function ContactSection() {
 
                 {/* Message */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
+                  <label htmlFor="contact-message" className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
                     Message
                   </label>
                   <textarea
+                    id="contact-message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}

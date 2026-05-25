@@ -261,7 +261,9 @@ export function RecruiterSummarySection() {
 
                         {fact.label === "Notice Period" ? (
                           <div className="relative flex items-center">
-                            <select className="text-sm font-semibold text-gray-900 dark:text-white bg-transparent outline-none cursor-pointer text-right appearance-none hover:text-blue-600 dark:hover:text-blue-400 transition-colors pr-4">
+                            <select
+                              aria-label="Notice period"
+                              className="text-sm font-semibold text-gray-900 dark:text-white bg-transparent outline-none cursor-pointer text-right appearance-none hover:text-blue-600 dark:hover:text-blue-400 transition-colors pr-4">
                               <option className="dark:bg-gray-800" value="Immediate">Immediate</option>
                               <option className="dark:bg-gray-800" value="15 Days">15 Days</option>
                               <option className="dark:bg-gray-800" value="30 Days">30 Days</option>

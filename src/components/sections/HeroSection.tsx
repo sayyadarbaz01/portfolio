@@ -7,10 +7,11 @@ import { Button } from "@/components/ui";
 import { downloadResume, scrollToSection } from "@/utils/helpers";
 
 const roles = [
-  "Senior Software Engineer",
-  "Full Stack Developer",
-  "React Specialist",
-  "Innovation Enthusiast",
+  { text: "Full Stack Experiences",   gradient: "from-blue-500 via-cyan-400 to-blue-600" },
+  { text: "Pixel-Perfect Interfaces",  gradient: "from-purple-500 via-pink-400 to-rose-500" },
+  { text: "Scalable Web Applications", gradient: "from-emerald-400 via-teal-400 to-cyan-500" },
+  { text: "Clean, Accessible Code",    gradient: "from-amber-400 via-orange-400 to-red-500" },
+  { text: "Products People Love",      gradient: "from-indigo-500 via-blue-400 to-cyan-400" },
 ];
 
 const stats = [
@@ -19,28 +20,38 @@ const stats = [
   { value: "15+", label: "Technologies" },
 ];
 
+// Stagger each character of the name
+const nameChars = "Mohammed Rizwan".split("");
+
 export function HeroSection() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
+  const [showCursor, setShowCursor] = useState(true);
+
+  // Blinking cursor
+  useEffect(() => {
+    const id = setInterval(() => setShowCursor((v) => !v), 530);
+    return () => clearInterval(id);
+  }, []);
 
   useEffect(() => {
-    const currentRole = roles[roleIndex];
+    const currentRole = roles[roleIndex].text;
     let timeout: NodeJS.Timeout;
 
     if (isTyping) {
       if (displayedText.length < currentRole.length) {
         timeout = setTimeout(() => {
           setDisplayedText(currentRole.slice(0, displayedText.length + 1));
-        }, 100);
+        }, 75);
       } else {
-        timeout = setTimeout(() => setIsTyping(false), 2000);
+        timeout = setTimeout(() => setIsTyping(false), 2200);
       }
     } else {
       if (displayedText.length > 0) {
         timeout = setTimeout(() => {
           setDisplayedText(currentRole.slice(0, displayedText.length - 1));
-        }, 50);
+        }, 35);
       } else {
         setRoleIndex((prev) => (prev + 1) % roles.length);
         setIsTyping(true);
@@ -119,28 +130,92 @@ export function HeroSection() {
               </span>
             </motion.div>
 
-            {/* Heading */}
-            <motion.div variants={itemVariants} className="mb-5">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-2 sm:mb-3">
-                Hi, I&apos;m{" "}
-                <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
-                  Mohammed
-                </span>
-                <br />
-                <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
-                  Rizwan
-                </span>
+            {/* Greeting */}
+            <motion.div variants={itemVariants} className="mb-2">
+              <span className="inline-flex items-center gap-2 text-sm sm:text-base font-medium text-gray-500 dark:text-gray-400 tracking-widest uppercase">
+                <motion.span
+                  animate={{ rotate: [0, 20, -10, 20, 0] }}
+                  transition={{ duration: 1.4, repeat: Infinity, repeatDelay: 3 }}
+                  className="inline-block text-lg sm:text-xl"
+                >
+                  👋
+                </motion.span>
+                Hey there, I&apos;m
+              </span>
+            </motion.div>
+
+            {/* Name — staggered letter reveal (standalone, not tied to itemVariants) */}
+            <div className="mb-4 sm:mb-5">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.05] tracking-tight overflow-hidden">
+                <motion.span
+                  className="inline-block whitespace-nowrap"
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    hidden: {},
+                    visible: {
+                      transition: {
+                        staggerChildren: 0.10,
+                        delayChildren: 0.5,
+                      },
+                    },
+                  }}
+                >
+                  {nameChars.map((char, i) => (
+                    <motion.span
+                      key={i}
+                      className="inline-block bg-gradient-to-r from-blue-500 via-indigo-400 to-cyan-400 bg-clip-text text-transparent"
+                      variants={{
+                        hidden: { opacity: 0, x: -28 },
+                        visible: {
+                          opacity: 1,
+                          x: 0,
+                          transition: {
+                            duration: 0.38,
+                            ease: "easeOut" as const,
+                          },
+                        },
+                      }}
+                    >
+                      {char === " " ? "\u00A0" : char}
+                    </motion.span>
+                  ))}
+                </motion.span>
               </h1>
 
-              {/* Typewriter */}
-              <div className="h-10 sm:h-12 flex items-center justify-center lg:justify-start">
-                <p className="text-lg sm:text-2xl lg:text-3xl font-semibold">
-                  <span className="text-gray-600 dark:text-gray-400">I build </span>
-                  <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent min-h-[1.2em] inline-block">
+              {/* Tagline — slides in after name finishes */}
+              <motion.p
+                className="mt-2 text-base sm:text-lg lg:text-xl font-semibold text-gray-400 dark:text-gray-500 tracking-wide"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.8, duration: 0.7, ease: "easeOut" }}
+              >
+                Senior Software Engineer · Full Stack · 3+ Yrs
+              </motion.p>
+            </div>
+
+            {/* Typewriter */}
+            <motion.div variants={itemVariants} className="mb-5">
+              <div className="flex items-baseline justify-center lg:justify-start gap-2 flex-wrap">
+                <span className="text-lg sm:text-2xl lg:text-3xl font-medium text-gray-500 dark:text-gray-400">
+                  I craft
+                </span>
+                <span className="relative text-lg sm:text-2xl lg:text-3xl font-extrabold">
+                  {/* Animated gradient text */}
+                  <span
+                    className={`bg-gradient-to-r ${
+                      roles[roleIndex].gradient
+                    } bg-clip-text text-transparent`}
+                  >
                     {displayedText}
-                    <span className="animate-pulse text-blue-500">|</span>
                   </span>
-                </p>
+                  {/* Cursor */}
+                  <motion.span
+                    className="inline-block w-[2px] h-[1em] ml-[1px] align-middle bg-blue-500 rounded-full"
+                    animate={{ opacity: showCursor ? 1 : 0 }}
+                    transition={{ duration: 0.1 }}
+                  />
+                </span>
               </div>
             </motion.div>
 
@@ -353,6 +428,7 @@ export function HeroSection() {
         <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
           <button
             onClick={() => scrollToSection("about")}
+            aria-label="Scroll to About section"
             className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-900/50 transition-all"
           >
             <ArrowDown className="w-6 h-6 text-gray-500 dark:text-gray-400" />

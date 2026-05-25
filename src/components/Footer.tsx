@@ -153,6 +153,7 @@ export function Footer() {
             {/* Scroll to Top Button */}
             <motion.button
               onClick={handleScrollToTop}
+              aria-label="Scroll to top"
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900/50 transition-all"
               whileHover={{ y: -5 }}
               whileTap={{ scale: 0.95 }}

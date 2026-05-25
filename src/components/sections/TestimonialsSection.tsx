@@ -141,7 +141,7 @@ export function TestimonialsSection() {
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="feedback-name" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Name
                     </label>
                     <div className="relative">
@@ -149,6 +149,7 @@ export function TestimonialsSection() {
                         <User className="h-4 w-4 text-gray-400" />
                       </div>
                       <input
+                        id="feedback-name"
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -161,14 +162,15 @@ export function TestimonialsSection() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Role & Company (Optional)
+                    <label htmlFor="feedback-role" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Role &amp; Company (Optional)
                     </label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <Briefcase className="h-4 w-4 text-gray-400" />
                       </div>
                       <input
+                        id="feedback-role"
                         type="text"
                         value={formData.role}
                         onChange={(e) => setFormData({ ...formData, role: e.target.value })}
@@ -180,10 +182,11 @@ export function TestimonialsSection() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="feedback-content" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Your Feedback
                     </label>
                     <textarea
+                      id="feedback-content"
                       value={formData.content}
                       onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                       rows={5}

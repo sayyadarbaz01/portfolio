@@ -173,11 +173,12 @@ export function SkillsSection() {
     const brandColor = getBrandColor(skill.icon);
 
     return (
-      <motion.div variants={itemVariants} key={index} className="h-full">
+      <motion.div variants={itemVariants} key={index} className="h-full" role="article" aria-label={skill.name}>
         <Card hover glassmorphism className="h-full group">
           <CardBody className="!p-2 sm:!p-3 flex flex-col items-center justify-center h-full text-center">
             {/* Icon Container - showing brand colors */}
             <div
+              aria-hidden="true"
               className={`mb-2 sm:mb-2.5 p-2 sm:p-2.5 rounded-md bg-white/5 dark:bg-white/10 group-hover:bg-white/10 dark:group-hover:bg-white/15 group-hover:shadow-lg transition-all duration-300`}
               style={{
                 boxShadow: `0 0 12px ${brandColor}20`,
