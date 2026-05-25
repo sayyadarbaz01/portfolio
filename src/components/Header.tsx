@@ -13,7 +13,7 @@ const navItems = [
   { label: "Skills", href: "skills", icon: "⚡" },
   { label: "Experience", href: "experience", icon: "💼" },
   { label: "Projects", href: "projects", icon: "🚀" },
-  { label: "Connect", href: "connect", icon: "📬" },
+  { label: "Connect", href: "contact", icon: "📬" },
 ];
 
 export function Header() {

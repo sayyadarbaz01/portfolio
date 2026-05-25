@@ -33,8 +33,11 @@ Key highlights:
 - Scroll progress indicator in the header
 - Live GitHub Contribution Graph via `react-github-calendar`
 - Interactive Terminal Widget bridging UI with personal context
-- Full-stack capability with Prisma ORM and SQLite for a Live Feedback Hub
+- Full-stack capability with Prisma ORM and PostgreSQL for database operations
 - EmailJS-powered contact form with client-side validation and toast notifications
+- **Portfolio Visitor Tracking** — Automatic visit counting with IP-based deduplication
+- **Resume Download Counter** — Tracks resume downloads with server actions
+- **"Let's Connect" Section** — Premium social/professional networking buttons with gradient effects
 
 ---
 
@@ -55,6 +58,9 @@ Key highlights:
 | 📈 Live GitHub Graph | Real-time contribution graph matching native GitHub styling |
 | 💬 Live Feedback Hub | Server Actions & Prisma-powered database for visitor testimonials |
 | 👨‍💻 Terminal Widget | Interactive, draggable floating terminal providing developer insights |
+| 👥 Portfolio Visitor Counter | Automatic visit tracking with animated display in footer |
+| ⬇️ Resume Download Counter | Track resume downloads with animated counters |
+| 🤝 "Let's Connect" Section | Premium social/professional networking buttons with gradient effects and hover animations |
 
 ---
 
@@ -300,6 +306,24 @@ Filterable by category (All / Enterprise / Fintech / Ecommerce / Productivity):
 - Interactive **Notice Period** dropdown that updates visually
 - Checkmarks indicating immediate availability, roles, and remote work preferences
 
+### 🤝 Let's Connect
+**NEW** — Premium social/professional networking section directly below GitHub activity.
+- Large, visually highlighted heading: "Let's Build Something Amazing Together"
+- Five CTA cards with gradient borders and glowing hover effects:
+  - **GitHub** (gray gradient) — View projects and open source contributions
+  - **LinkedIn** (blue gradient) — Professional networking
+  - **Email** (red gradient) — Direct communication
+  - **WhatsApp** (green gradient) — Quick message option
+  - **Twitter/X** (blue gradient) — Follow for tech insights
+- Each card features:
+  - Animated icon with gradient background
+  - Description text
+  - External link arrow indicator with subtle animation
+  - Hover scale and shadow effects
+- Bottom CTA buttons to send email or connect on LinkedIn
+- Fully responsive on mobile/tablet/desktop
+- Framer Motion animations with staggered entrance effects
+
 ### 🎓 Education & Certifications
 **Education:**
 - Bachelor of Commerce (B.Com) — Swami Ramanand Teerth Marathwada University, Nanded (2016–2019)
@@ -336,15 +360,114 @@ On success or failure, a toast notification appears at the top of the page.
 
 ## Database Setup
 
-The **Live Feedback Hub** is powered by a local **SQLite** database via **Prisma ORM**. It handles data persistence across reloads.
+The portfolio uses **Prisma ORM** with **PostgreSQL** (Neon DB) for data persistence. Models include:
 
-To manage or modify the database:
-1. Define models in `prisma/schema.prisma`
-2. Run `npx prisma db push` to synchronize your schema with `dev.db`
-3. Run `npx prisma generate` to update the TypeScript client
-4. *Note: If deploying to Vercel/production, swap the SQLite provider to PostgreSQL (like Supabase or Vercel Postgres).*
+### Database Models
 
----
+#### 1. Feedback
+```prisma
+model Feedback {
+  id             String   @id @default(cuid())
+  name           String
+  role           String
+  content        String
+  date           String
+  avatarGradient String
+  createdAt      DateTime @default(now())
+}
+```
+Used by the **Live Feedback Hub** for visitor testimonials.
+
+#### 2. Contact
+```prisma
+model Contact {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+}
+```
+Used by the **Contact Form** to store form submissions.
+
+#### 3. PortfolioAnalytics (NEW)
+```prisma
+model PortfolioAnalytics {
+  id            String   @id @default(cuid())
+  totalVisitors Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+```
+Tracks total portfolio visits automatically on homepage load. Displayed in the footer with animated counter.
+
+#### 4. ResumeAnalytics (NEW)
+```prisma
+model ResumeAnalytics {
+  id             String   @id @default(cuid())
+  totalDownloads Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+```
+Tracks resume downloads. Incremented when users click the "Download Resume" button.
+
+### Database Migration Commands
+
+```bash
+# Create a new migration
+npx prisma migrate dev --name migration_name
+
+# Apply pending migrations
+npx prisma migrate deploy
+
+# Reset database (development only)
+npx prisma migrate reset
+
+# Generate Prisma Client
+npx prisma generate
+
+# Open Prisma Studio for database inspection
+npx prisma studio
+```
+
+### Server Actions for Analytics
+
+**Location:** `src/actions/feedback.ts`
+
+```typescript
+// Track portfolio visit on homepage load
+trackPortfolioVisit() → { success: boolean, data: PortfolioAnalytics }
+
+// Get current visitor count
+getPortfolioVisitorCount() → { success: boolean, data: number }
+
+// Track resume download
+trackResumeDownload() → { success: boolean, data: ResumeAnalytics }
+
+// Get current download count
+getResumeDownloadCount() → { success: boolean, data: number }
+```
+
+### Implementation Details
+
+**Portfolio Visitor Tracking:**
+- Automatic visit tracking on page load via `useTrackVisit()` hook in `page.tsx`
+- Prevents duplicate increments using IP-based deduplication (IP stored in request headers)
+- Displayed in footer with animated counter using `AnalyticsDisplay` component
+
+**Resume Download Tracking:**
+- Triggered when "Download Resume" button is clicked in Hero section
+- Server action called via updated `downloadResume()` helper function
+- Displayed in footer with animated counter
+
+**Animated Counters:**
+- Built with `AnimatedCounter` component using Framer Motion
+- Smoothly counts from 0 to target number when component enters viewport
+- Supports custom duration, suffix, and prefix options
+
+
 
 ## Deployment
 

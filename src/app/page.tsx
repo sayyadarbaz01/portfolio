@@ -7,6 +7,7 @@ import {
   TerminalButton,
   TerminalWidget,
 } from "@/components";
+import { useTrackVisit } from "@/hooks";
 
 // Lazy load sections for better performance
 const AboutSection = lazy(() =>
@@ -44,6 +45,7 @@ const GitHubActivitySection = lazy(() =>
     default: mod.GitHubActivitySection,
   }))
 );
+
 const WhyWorkWithMeSection = lazy(() =>
   import("@/components/sections/WhyWorkWithMeSection").then((mod) => ({
     default: mod.WhyWorkWithMeSection,
@@ -72,6 +74,9 @@ const ContactSection = lazy(() =>
 
 export default function Home() {
   const [terminalOpen, setTerminalOpen] = useState(false);
+  
+  // Track portfolio visit on component mount
+  useTrackVisit();
 
   return (
     <>
@@ -106,6 +111,8 @@ export default function Home() {
         <GitHubActivitySection />
       </LazySection>
 
+
+
       <LazySection>
         <WhyWorkWithMeSection />
       </LazySection>
@@ -121,9 +128,6 @@ export default function Home() {
       <LazySection>
         <EducationSection />
       </LazySection>
-
-      {/* Connect anchor — nav "Connect" scrolls here */}
-      <div id="connect" />
 
       <LazySection>
         <ContactSection />

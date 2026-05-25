@@ -1,19 +1,21 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-
+import { trackResumeDownload } from "@/actions/feedback";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export async function downloadResume() {
+  // Track the download in database
+  try {
+    await trackResumeDownload();
+  } catch (error) {
+    console.error("Failed to track download:", error);
+  }
 
-export function downloadResume() {
-  // 1. Get the shareable link of your PDF file from Google Drive (Make sure it's "Anyone with the link can view")
-  // 2. The link will look like: https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing
-  // 3. Copy just the YOUR_FILE_ID part and paste it below:
-  // This special Google Drive URL forces a direct download of a FILE (Not a folder)
+  // Trigger download
   const directDownloadUrl = `https://drive.google.com/uc?export=download&id=${process.env.NEXT_PUBLIC_RESUME_ID}`;
-
   const link = document.createElement("a");
   link.href = directDownloadUrl;
   link.setAttribute("download", "MRizwan_Resume.pdf");
@@ -28,3 +30,4 @@ export const scrollToSection = (sectionId: string) => {
     element.scrollIntoView({ behavior: "smooth" });
   }
 };
+

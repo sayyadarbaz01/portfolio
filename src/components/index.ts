@@ -23,8 +23,11 @@ export { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 export { WhyWorkWithMeSection } from "@/components/sections/WhyWorkWithMeSection";
 export { GitHubActivitySection } from "@/components/sections/GitHubActivitySection";
 export { MetricsSection } from "@/components/sections/MetricsSection";
-// export { SmartConnectSection } from "@/components/sections/SmartConnectSection";
+
 export { RecruiterSummarySection } from "@/components/sections/RecruiterSummarySection";
+
+// Analytics Components
+export { AnalyticsDisplay, useAnalytics } from "@/components/AnalyticsDisplay";
 
 // Interactive Components
 export { TerminalWidget, TerminalButton } from "@/components/TerminalWidget";

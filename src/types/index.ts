@@ -45,3 +45,17 @@ export interface Certification {
   description?: string;
   link?: string;
 }
+
+export interface PortfolioAnalytics {
+  id: string;
+  totalVisitors: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ResumeAnalytics {
+  id: string;
+  totalDownloads: number;
+  createdAt: string;
+  updatedAt: string;
+}

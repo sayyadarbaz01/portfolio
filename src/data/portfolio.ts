@@ -241,6 +241,5 @@ export const navigation = [
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
   { label: "GitHub", href: "#github-activity" },
-  { label: "Connect", href: "#connect" },
-  { label: "Contact", href: "#contact" },
+  { label: "Connect", href: "#contact" },
 ];

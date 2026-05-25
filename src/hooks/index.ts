@@ -116,3 +116,5 @@ export function useAsyncData<T>(
 
   return { data, isLoading, error };
 }
+
+export { useTrackVisit } from "./useTrackVisit";

@@ -1,10 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { scrollToSection } from "@/utils/helpers";
 import { navigation, socialLinks } from "@/data/portfolio";
 import { Mail, ArrowUp } from "lucide-react";
+import { AnalyticsDisplay } from "@/components/AnalyticsDisplay";
+import { useInView } from "@/hooks";
 
 // lucide-react doesn't ship Github or Linkedin icons in this version
 const GithubIcon = ({ className }: { className?: string }) => (
@@ -21,6 +23,8 @@ const LinkedinIcon = ({ className }: { className?: string }) => (
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref);
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -110,6 +114,11 @@ export function Footer() {
 
         {/* Divider */}
         <div className="border-t border-gray-200 dark:border-gray-800 py-8">
+          {/* Analytics Stats */}
+          <div ref={ref} className="mb-8">
+            <AnalyticsDisplay isInView={isInView} />
+          </div>
+
           {/* Stats */}
           <motion.div
             className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8"
