@@ -194,6 +194,22 @@ export const education: Education[] = [
   {
     id: "1",
     institution: "Swami Ramanand Teerth Marathwada University",
+    degree: "P.G. Diploma in Taxation Law (PG.DTL)",
+    duration: "2019 – 2021",
+    location: "Nanded, Maharashtra, India",
+    description: "Specialized postgraduate diploma in taxation law and legal studies",
+  },
+  {
+    id: "2",
+    institution: "Swami Ramanand Teerth Marathwada University",
+    degree: "Master of Commerce (M.Com) | Second Year Drop-out",
+    duration: "2020 – 2021",
+    location: "Nanded, Maharashtra, India",
+    description: "Postgraduate studies in commerce",
+  },
+  {
+    id: "3",
+    institution: "Swami Ramanand Teerth Marathwada University",
     degree: "Bachelor of Commerce (B.Com)",
     duration: "2016 – 2019",
     location: "Nanded, Maharashtra",
