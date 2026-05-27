@@ -30,7 +30,6 @@ const quickFacts = [
   { label: "Experience",    value: "3+ Years" },
   { label: "Location",     value: "Maharashtra, IN" },
   { label: "Work Mode",    value: "Remote / Hybrid" },
-  { label: "Notice Period",value: "Immediate" },
   { label: "Employment",   value: "Full-Time / Freelance" },
   { label: "Specialization", value: "React + Next.js" },
 ];
@@ -259,19 +258,6 @@ export function RecruiterSummarySection() {
                           {fact.label}
                         </span>
 
-                        {fact.label === "Notice Period" ? (
-                          <div className="relative flex items-center">
-                            <select
-                              aria-label="Notice period"
-                              className="text-sm font-semibold text-gray-900 dark:text-white bg-transparent outline-none cursor-pointer text-right appearance-none hover:text-blue-600 dark:hover:text-blue-400 transition-colors pr-4">
-                              <option className="dark:bg-gray-800" value="Immediate">Immediate</option>
-                              <option className="dark:bg-gray-800" value="15 Days">15 Days</option>
-                              <option className="dark:bg-gray-800" value="30 Days">30 Days</option>
-                              <option className="dark:bg-gray-800" value="3 months">3 months</option>
-                            </select>
-                            <ChevronDown className="w-3 h-3 absolute right-0 text-gray-500 pointer-events-none" />
-                          </div>
-                        ) : (
                           <motion.span
                             className="text-sm font-semibold text-gray-900 dark:text-white"
                             initial={{ opacity: 0 }}
@@ -280,7 +266,6 @@ export function RecruiterSummarySection() {
                           >
                             {fact.value}
                           </motion.span>
-                        )}
                       </motion.div>
                     ))}
                   </div>
