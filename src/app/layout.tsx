@@ -70,13 +70,23 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col transition-colors duration-300" style={{ backgroundColor: 'var(--bg-base)', color: 'var(--text-primary)' }}>
-        <ThemeProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <ToasterWrapper />
-          <ScrollToTop />
-        </ThemeProvider>
+        {/* Animated Blobs Background */}
+        <div className="animated-blobs-container">
+          <div className="blob blob-1" />
+          <div className="blob blob-2" />
+          <div className="blob blob-3" />
+        </div>
+
+        {/* Main Content */}
+        <div className="relative z-10">
+          <ThemeProvider>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <ToasterWrapper />
+            <ScrollToTop />
+          </ThemeProvider>
+        </div>
       </body>
     </html>
   );

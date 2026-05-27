@@ -134,7 +134,19 @@ export const projects: Project[] = [
     website_link: "https://orders.mytitlegenius.com/",
     description:
       "A cutting-edge enterprise web platform designed for seamless property management and full web accessibility, featuring advanced endorsement templates and robust compliance.",
-    tags: ["Next.js", "React", "Redux", "TypeScript", "Accessibility"],
+    tags: [
+      "Next.js",
+      "React.js",
+      "Redux",
+      "Node.js",
+      "Express.js",
+      "NestJS",
+      "GraphQL",
+      "Prisma",
+      "PostgreSQL",
+      "Accessibility",
+      "TypeScript",
+    ],
     category: "enterprise",
     highlights: [
       "Achieved 100% WCAG compliance",
@@ -149,7 +161,17 @@ export const projects: Project[] = [
     website_link: "https://www.truscholar.io/en-gb/",
     description:
       "A secure, modern credential management solution enabling users to request and receive transcripts with real-time communication between users and universities.",
-    tags: ["React", "Node.js", "MongoDB", "Express", "Real-time API"],
+    tags: [
+      "React.js",
+      "Redux",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "REST APIs",
+      "TypeScript",
+      "Material-UI",
+      "Tailwind CSS",
+    ],
     category: "fintech",
     highlights: [
       "Secure transcript handling",
@@ -164,7 +186,16 @@ export const projects: Project[] = [
     website_link: "https://jd-store-frontend.vercel.app/",
     description:
       "A full-featured e-commerce platform offering seamless product management, intuitive shopping cart, and secure payment integration for a modern online shopping experience.",
-    tags: ["MERN Stack", "Stripe API", "Redux", "Responsive Design"],
+    tags: [
+      "MERN Stack",
+      "Redux",
+      "REST APIs",
+      "TypeScript",
+      "Material-UI",
+      "Tailwind CSS",
+      "Jwt-Authentication & Authorization",
+      "Responsive Design",
+    ],
     category: "ecommerce",
     highlights: [
       "Secure payment processing",
@@ -179,7 +210,15 @@ export const projects: Project[] = [
     website_link: "https://www.prodapt.com/",
     description:
       "A collaborative project management solution featuring real-time updates, advanced task tracking, and seamless team communication for enhanced productivity.",
-    tags: ["Next.js", "Node.js", "PostgreSQL", "Real-time"],
+    tags: [
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "JavaScript",
+      "Bootstrap",
+      "Git",
+    ],
     category: "productivity",
     highlights: [
       "Real-time collaboration",
