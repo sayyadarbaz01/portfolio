@@ -46,6 +46,7 @@ Key highlights:
 | Feature | Details |
 |---|---|
 | 🌗 Dark / Light Mode | Persisted in `localStorage`, respects OS preference |
+| ✨ Animated Background | Floating gradient blobs with smooth animations — responsive design |
 | ✍️ Typewriter Effect | Cycles through role titles in the hero section |
 | 🎞️ Scroll Animations | Entry animations triggered by Intersection Observer via `useInView` hook |
 | 📬 Contact Form | EmailJS integration — no backend required |
@@ -58,6 +59,7 @@ Key highlights:
 | 📈 Live GitHub Graph | Real-time contribution graph matching native GitHub styling |
 | 💬 Live Feedback Hub | Server Actions & Prisma-powered database for visitor testimonials |
 | 👨‍💻 Terminal Widget | Interactive, draggable floating terminal providing developer insights |
+| 📚 Career Changelog | Professional experience displayed as changelog with left-right timeline (desktop) / stacked (mobile) |
 | 👥 Portfolio Visitor Counter | Automatic visit tracking with animated display in footer |
 | ⬇️ Resume Download Counter | Track resume downloads with animated counters |
 | 🤝 "Let's Connect" Section | Premium social/professional networking buttons with gradient effects and hover animations |
@@ -69,7 +71,7 @@ Key highlights:
 ### Core
 | Package | Version | Purpose |
 |---|---|---|
-| `next` | 16.2.5 | Framework (App Router) |
+| `next` | 16.2.6 | Framework (App Router) |
 | `react` | 19.2.4 | UI library |
 | `react-dom` | 19.2.4 | DOM rendering |
 | `typescript` | ^5 | Type safety |
@@ -78,6 +80,7 @@ Key highlights:
 | Package | Version | Purpose |
 |---|---|---|
 | `tailwindcss` | ^4 | Utility-first CSS |
+| `postcss` | ^8.5.10 | CSS processing (XSS vulnerability fix) |
 | `framer-motion` | ^12 | Animations & transitions |
 | `lucide-react` | ^1.14 | Icon library |
 | `react-github-calendar`| ^5.0.6 | Live GitHub contributions |
@@ -248,7 +251,9 @@ npm run lint
 ## Sections
 
 ### 🏠 Hero
-- Full-screen section with animated background blobs
+- Full-screen section with animated floating gradient blob background
+- Smooth, organic floating animations in blue, cyan, and purple colors
+- Blobs respond to theme changes (dark/light mode)
 - Spinning gradient avatar with profile photo
 - Typewriter effect cycling through role titles: Senior Software Engineer, Full Stack Developer, React Specialist, Innovation Enthusiast
 - CTA buttons: **Hire Me**, **Download Resume**, **View Projects**
@@ -267,7 +272,14 @@ Skills are grouped into three categories with animated progress bars:
 - **Backend**: Node.js, Express.js, NestJS, MongoDB, PostgreSQL, GraphQL, Prisma ORM, REST APIs, JWT Authentication
 - **Tools**: Git/GitHub, GitLab, Postman, Docker, JIRA, VS Code, ARC Toolkit/WCAG
 
-### 💼 Professional Experience
+### 💼 Career Changelog
+**NEW DESIGN** — Professional experience displayed as a modern changelog with:
+- **Desktop**: Alternating left-right timeline layout with central gradient line for visual storytelling
+- **Mobile/Tablet**: Responsive stacked vertical layout for optimal viewing
+- Expandable/collapsible cards showing features, tech stack, and client details
+- Each entry includes: position, company, duration, location, features list, and technologies used
+- Smooth animations and transitions via Framer Motion
+
 Timeline of work history:
 1. **Senior Software Engineer** @ Vassu Tech Services Pvt Ltd (March 2025 – Present)  
    Client: Radian Title Genius · Hyderabad, Telangana  
@@ -467,7 +479,24 @@ getResumeDownloadCount() → { success: boolean, data: number }
 - Smoothly counts from 0 to target number when component enters viewport
 - Supports custom duration, suffix, and prefix options
 
+---
 
+## Security Updates
+
+This portfolio has been updated with the latest security patches to address known vulnerabilities:
+
+| Vulnerability | Package | Version | Fix | Severity |
+|---|---|---|---|---|
+| Authentication Bypass via Middleware | `next` | 16.2.6 | Upgraded from 16.2.5 | High (CVSS 8.7) |
+| XSS in CSS Stringify Output | `postcss` | 8.5.10 | Added explicit dependency | Medium (CVSS 5.3) |
+
+**Details:**
+- **CVE-2026-45109** (Next.js): Fixed authentication bypass vulnerability in middleware with Turbopack enabled
+- **CVE-2026-41305** (PostCSS): Fixed XSS vulnerability where `</style>` sequences in CSS weren't properly escaped
+
+All dependencies are kept up-to-date and regularly scanned for vulnerabilities using npm audit.
+
+---
 
 ## Deployment
 
