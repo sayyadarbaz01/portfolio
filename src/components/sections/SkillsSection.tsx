@@ -66,6 +66,12 @@ const iconMap: Record<string, React.ComponentType<{ size: number; className: str
   CheckCircle: Icons.CheckCircle,
   Sparkles: Icons.Sparkles,
   Zap: Icons.Zap,
+  
+  // Additional icons from lucide-react
+  Network: Icons.Network,
+  Type: Icons.Type,
+  Search: Icons.Search,
+  Package: Icons.Package,
 };
 
 const getCategoryColor = (category: string) => {
@@ -131,6 +137,105 @@ const getCategoryAccent = (category: string) => {
   return accents[category as keyof typeof accents] || accents.frontend;
 };
 
+interface SkillCardProps {
+  skill: (typeof skills)[0];
+  index: number;
+}
+
+const SkillCard = ({ skill, index }: SkillCardProps) => {
+  const IconComponent = skill.icon ? iconMap[skill.icon] : Icons.Code;
+  const brandColor = getBrandColor(skill.icon);
+
+  return (
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.5 },
+        },
+      }}
+      key={index}
+      className="h-full"
+      role="article"
+      aria-label={skill.name}
+    >
+      <Card hover glassmorphism className="h-full group">
+        <CardBody className="!p-2 sm:!p-3 flex flex-col items-center justify-center h-full text-center">
+          {/* Icon Container - showing brand colors */}
+          <div
+            aria-hidden="true"
+            className={`mb-2 sm:mb-2.5 p-2 sm:p-2.5 rounded-md bg-white/5 dark:bg-white/10 group-hover:bg-white/10 dark:group-hover:bg-white/15 group-hover:shadow-lg transition-all duration-300`}
+            style={{
+              boxShadow: `0 0 12px ${brandColor}20`,
+            }}
+          >
+            <IconComponent size={20} style={{ color: brandColor }} className="" />
+          </div>
+
+          {/* Skill Name */}
+          <h4 className="font-semibold text-gray-900 dark:text-white text-xs sm:text-sm leading-tight line-clamp-2">
+            {skill.name}
+          </h4>
+        </CardBody>
+      </Card>
+    </motion.div>
+  );
+};
+
+interface SkillCategorySectionProps {
+  title: string;
+  skillsData: (typeof skills)[0][];
+  category: string;
+  startIndex: number;
+  containerVariants: Record<string, unknown>;
+  itemVariants: Record<string, unknown>;
+  isInView: boolean;
+}
+
+const SkillCategorySection = ({
+  title,
+  skillsData,
+  category,
+  startIndex,
+  containerVariants,
+  itemVariants,
+  isInView,
+}: SkillCategorySectionProps) => {
+  const accentColor = getCategoryAccent(category);
+  const bgGradient = getCategoryColor(category);
+
+  return (
+    <motion.div variants={itemVariants}>
+      <div className="flex items-center gap-3 mb-3 sm:mb-4">
+        <div
+          className={`w-1 h-7 sm:h-8 rounded-full bg-gradient-to-b ${bgGradient}`}
+        />
+        <h3 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white">
+          {title}
+        </h3>
+        <span
+          className={`ml-auto text-xs sm:text-sm font-semibold px-2 sm:px-3 py-1 rounded-full ${accentColor}`}
+        >
+          {skillsData.length} skills
+        </span>
+      </div>
+
+      <motion.div
+        className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-1.5 sm:gap-2 md:gap-3"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
+        {skillsData.map((skill, index) => (
+          <SkillCard key={index} skill={skill} index={startIndex + index} />
+        ))}
+      </motion.div>
+    </motion.div>
+  );
+};
+
 export function SkillsSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref);
@@ -162,89 +267,6 @@ export function SkillsSection() {
     },
   };
 
-  const SkillCard = ({
-    skill,
-    index,
-  }: {
-    skill: (typeof skills)[0];
-    index: number;
-  }) => {
-    const IconComponent = skill.icon ? iconMap[skill.icon] : Icons.Code;
-    const brandColor = getBrandColor(skill.icon);
-
-    return (
-      <motion.div variants={itemVariants} key={index} className="h-full" role="article" aria-label={skill.name}>
-        <Card hover glassmorphism className="h-full group">
-          <CardBody className="!p-2 sm:!p-3 flex flex-col items-center justify-center h-full text-center">
-            {/* Icon Container - showing brand colors */}
-            <div
-              aria-hidden="true"
-              className={`mb-2 sm:mb-2.5 p-2 sm:p-2.5 rounded-md bg-white/5 dark:bg-white/10 group-hover:bg-white/10 dark:group-hover:bg-white/15 group-hover:shadow-lg transition-all duration-300`}
-              style={{
-                boxShadow: `0 0 12px ${brandColor}20`,
-              }}
-            >
-              <IconComponent size={20} style={{ color: brandColor }} className="" />
-            </div>
-
-            {/* Skill Name */}
-            <h4 className="font-semibold text-gray-900 dark:text-white text-xs sm:text-sm leading-tight line-clamp-2">
-              {skill.name}
-            </h4>
-          </CardBody>
-        </Card>
-      </motion.div>
-    );
-  };
-
-  const SkillCategorySection = ({
-    title,
-    skillsData,
-    category,
-    startIndex,
-  }: {
-    title: string;
-    skillsData: (typeof skills)[0][];
-    category: string;
-    startIndex: number;
-  }) => {
-    const accentColor = getCategoryAccent(category);
-    const bgGradient = getCategoryColor(category);
-
-    return (
-      <motion.div variants={itemVariants}>
-        <div className="flex items-center gap-3 mb-3 sm:mb-4">
-          <div
-            className={`w-1 h-7 sm:h-8 rounded-full bg-gradient-to-b ${bgGradient}`}
-          />
-          <h3 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white">
-            {title}
-          </h3>
-          <span
-            className={`ml-auto text-xs sm:text-sm font-semibold px-2 sm:px-3 py-1 rounded-full ${accentColor}`}
-          >
-            {skillsData.length} skills
-          </span>
-        </div>
-
-        <motion.div
-          className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-1.5 sm:gap-2 md:gap-3"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
-          {skillsData.map((skill, index) => (
-            <SkillCard
-              key={index}
-              skill={skill}
-              index={startIndex + index}
-            />
-          ))}
-        </motion.div>
-      </motion.div>
-    );
-  };
-
   return (
     <Section id="skills" title="Skills & Expertise" ref={ref}>
       <motion.div
@@ -260,6 +282,9 @@ export function SkillsSection() {
             skillsData={skillsByCategory.frontend}
             category="frontend"
             startIndex={0}
+            containerVariants={containerVariants}
+            itemVariants={itemVariants}
+            isInView={isInView}
           />
         )}
 
@@ -270,6 +295,9 @@ export function SkillsSection() {
             skillsData={skillsByCategory.backend}
             category="backend"
             startIndex={skillsByCategory.frontend.length}
+            containerVariants={containerVariants}
+            itemVariants={itemVariants}
+            isInView={isInView}
           />
         )}
 
@@ -282,6 +310,9 @@ export function SkillsSection() {
             startIndex={
               skillsByCategory.frontend.length + skillsByCategory.backend.length
             }
+            containerVariants={containerVariants}
+            itemVariants={itemVariants}
+            isInView={isInView}
           />
         )}
 
@@ -296,6 +327,9 @@ export function SkillsSection() {
               skillsByCategory.backend.length +
               skillsByCategory.tools.length
             }
+            containerVariants={containerVariants}
+            itemVariants={itemVariants}
+            isInView={isInView}
           />
         )}
       </motion.div>

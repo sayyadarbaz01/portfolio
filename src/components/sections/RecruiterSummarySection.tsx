@@ -16,22 +16,22 @@ import {
 } from "lucide-react";
 
 const summary = [
-  { label: "React / Next.js Expert" },
-  { label: "Full Stack MERN Developer" },
-  { label: "Accessibility (WCAG) Focused" },
-  { label: "Enterprise Experience" },
-  { label: "AI-Assisted Development" },
+  { label: "React.js / Full Stack Expert" },
+  { label: "AI Integration Specialist" },
+  { label: "Node.js / Express.js Backend" },
+  { label: "OpenAI API & RAG Systems" },
+  { label: "Enterprise FinTech Experience" },
   { label: "TypeScript Proficient" },
-  { label: "Available for Remote Opportunities" },
+  { label: "Docker & CI/CD" },
   { label: "Production-Ready Code Quality" },
 ];
 
 const quickFacts = [
-  { label: "Experience",    value: "3+ Years" },
-  { label: "Location",     value: "Maharashtra, IN" },
+  { label: "Experience",    value: "5+ Years" },
+  { label: "Location",     value: "Pune, India" },
   { label: "Work Mode",    value: "Remote / Hybrid" },
-  { label: "Employment",   value: "Full-Time / Freelance" },
-  { label: "Specialization", value: "React + Next.js" },
+  { label: "Employment",   value: "Full-Time" },
+  { label: "Specialization", value: "Full Stack & AI" },
 ];
 
 // ── Shared variants ────────────────────────────────────────────────────────────
@@ -119,7 +119,7 @@ export function RecruiterSummarySection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center text-gray-500 dark:text-gray-400 max-w-xl mx-auto"
         >
-          Everything you need to know about Mohammed Rizwan, at a glance.
+          Everything you need to know about Arbaz Sayyad, at a glance.
         </motion.p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -136,7 +136,7 @@ export function RecruiterSummarySection() {
                       whileHover={{ scale: 1.08, rotate: 3 }}
                       transition={{ type: "spring", stiffness: 300, damping: 18 }}
                     >
-                      MR
+                      AS
                       {/* Sparkle badge */}
                       <motion.span
                         className="absolute -top-1.5 -right-1.5 bg-amber-400 rounded-full p-0.5"
@@ -149,10 +149,10 @@ export function RecruiterSummarySection() {
 
                     <div>
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                        Mohammed Rizwan
+                        Arbaz Sayyad
                       </h3>
                       <p className="text-blue-600 dark:text-blue-400 font-medium">
-                        Senior Software Engineer
+                        Senior Full Stack & AI Integration Engineer
                       </p>
                       <div className="flex items-center gap-2 mt-1">
                         <span className="relative flex h-2 w-2">

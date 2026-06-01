@@ -47,14 +47,14 @@ export function Footer() {
               whileHover={{ scale: 1.05 }}
             >
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                <span className="text-white font-bold">MR</span>
+                <span className="text-white font-bold">AS</span>
               </div>
               <span className="font-bold text-lg bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Mohammed Rizwan
+                Arbaz Sayyad
               </span>
             </motion.div>
             <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-              Senior Software Engineer building scalable, modern web applications.
+              Senior Full Stack & AI Integration Engineer building scalable, high-performance applications.
             </p>
           </div>
 
@@ -128,10 +128,10 @@ export function Footer() {
             viewport={{ once: true }}
           >
             {[
-              { label: "Years Experience", value: "3+" },
-              { label: "Projects Done", value: "7+" },
-              { label: "Technologies", value: "15+" },
-              { label: "Happy Clients", value: "4+" },
+              { label: "Years Experience", value: "5+" },
+              { label: "Companies", value: "2" },
+              { label: "Technologies", value: "20+" },
+              { label: "Star Awards", value: "2" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <p className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
@@ -147,7 +147,7 @@ export function Footer() {
           {/* Bottom */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-gray-600 dark:text-gray-400 text-center sm:text-left">
-              © {currentYear} Mohammed Rizwan. All rights reserved.
+              © {currentYear} Arbaz Sayyad. All rights reserved.
             </p>
 
             {/* Scroll to Top Button */}

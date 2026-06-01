@@ -11,31 +11,31 @@ const highlights = [
     icon: Code2,
     title: "Full Stack Expertise",
     description:
-      "3+ years building scalable applications with MERN stack and modern web technologies",
+      "5+ years building scalable applications with React.js, Node.js, Express.js, and MongoDB in financial environments",
   },
   {
     icon: Zap,
     title: "Performance Driven",
     description:
-      "Optimizing applications for speed, efficiency, and seamless user experiences",
+      "Delivered 30-40% performance gains through optimization, Docker containerization, and CI/CD implementation",
   },
   {
     icon: Target,
-    title: "Accessibility First",
+    title: "AI Integration Specialist",
     description:
-      "Building inclusive web applications compliant with WCAG and ADA standards",
+      "Expert in OpenAI API, RAG, Vector Search, Text Embeddings, and Semantic Search integration in production systems",
   },
   {
     icon: Users,
-    title: "Team Collaborator",
+    title: "Enterprise Collaborator",
     description:
-      "Working effectively with cross-functional teams using Agile methodologies",
+      "Proven track record working with cross-functional teams in Agile environments supporting 500+ daily users",
   },
   {
     icon: Bot,
-    title: "AI-Assisted Development",
+    title: "FinTech Solutions",
     description:
-      "Leveraging ChatGPT, Claude, and GitHub Copilot to boost productivity, accelerate problem-solving, and optimize engineering workflows",
+      "Specialized in building compliance platforms, transaction risk workflows, and enterprise financial systems",
   },
 ];
 
@@ -75,41 +75,38 @@ export function AboutSection() {
         <motion.div variants={itemVariants} className="space-y-6">
           <div>
             <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-gray-900 dark:text-white">
-              Senior Software Engineer
+              Senior Full Stack & AI Integration Engineer
             </h3>
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base sm:text-lg">
-              I'm a passionate developer with a proven track record of building
-              scalable, accessible, and user-centric web applications. With 3+
-              years of professional experience, I've successfully delivered
-              enterprise-grade solutions that impact millions of users.
+              I&apos;m a senior full stack engineer with 5+ years of experience building scalable enterprise applications using React.js, Node.js, TypeScript, and MongoDB. I specialize in integrating AI technologies—OpenAI API, RAG, Vector Search, Text Embeddings, and Semantic Search—into production systems. Recognized for delivering 30–40% performance improvements, implementing Docker containerization, establishing CI/CD pipelines, and driving results in fast-paced Agile environments within financial technology.
             </p>
           </div>
 
           <div>
             <h4 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-900 dark:text-white">
-              What I'm Passionate About
+              What I&apos;m Passionate About
             </h4>
             <ul className="space-y-2 sm:space-y-3 text-gray-600 dark:text-gray-400 text-sm sm:text-base">
               <li className="flex items-start space-x-3">
                 <span className="text-blue-500 mt-1">→</span>
                 <span>
-                  Creating modern, interactive applications with exceptional UX
+                  Building AI-powered applications that solve real business problems
                 </span>
               </li>
               <li className="flex items-start space-x-3">
                 <span className="text-blue-500 mt-1">→</span>
                 <span>
-                  Ensuring web accessibility and compliance with WCAG standards
+                  Architecting scalable microservices and enterprise solutions
                 </span>
               </li>
               <li className="flex items-start space-x-3">
                 <span className="text-blue-500 mt-1">→</span>
-                <span>Optimizing performance and building robust backends</span>
+                <span>Optimizing performance and implementing best practices</span>
               </li>
               <li className="flex items-start space-x-3">
                 <span className="text-blue-500 mt-1">→</span>
                 <span>
-                  Collaborating with teams and mentoring fellow developers
+                  Collaborating with teams and delivering high-impact solutions
                 </span>
               </li>
             </ul>
@@ -118,7 +115,7 @@ export function AboutSection() {
           <div className="pt-4 sm:pt-6 flex gap-3 sm:gap-4 flex-wrap">
             <div className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-blue-500/10 dark:bg-blue-500/5 border border-blue-500/20">
               <p className="font-semibold text-blue-600 dark:text-blue-400 text-sm sm:text-base">
-                3+ Years
+                5+ Years
               </p>
               <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 of Experience
@@ -126,15 +123,15 @@ export function AboutSection() {
             </div>
             <div className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-purple-500/10 dark:bg-purple-500/5 border border-purple-500/20">
               <p className="font-semibold text-purple-600 dark:text-purple-400 text-sm sm:text-base">
-                7+
+                2
               </p>
               <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                Projects Delivered
+                Companies
               </p>
             </div>
             <div className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-cyan-500/10 dark:bg-cyan-500/5 border border-cyan-500/20">
               <p className="font-semibold text-cyan-600 dark:text-cyan-400 text-sm sm:text-base">
-                15+
+                20+
               </p>
               <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 Technologies

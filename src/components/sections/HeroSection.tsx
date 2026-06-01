@@ -15,13 +15,13 @@ const roles = [
 ];
 
 const stats = [
-  { value: "3+", label: "Years Exp." },
-  { value: "7+", label: "Projects" },
-  { value: "15+", label: "Technologies" },
+  { value: "5+", label: "Years Exp." },
+  { value: "2", label: "Companies" },
+  { value: "20+", label: "Technologies" },
 ];
 
 // Stagger each character of the name
-const nameChars = "Mohammed Rizwan".split("");
+const nameChars = "Arbaz Sayyad".split("");
 
 export function HeroSection() {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -190,7 +190,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.8, duration: 0.7, ease: "easeOut" }}
               >
-                Senior Software Engineer · Full Stack · 3+ Yrs
+                Senior Full Stack & AI Integration Engineer · 5+ Yrs
               </motion.p>
             </div>
 
@@ -224,9 +224,7 @@ export function HeroSection() {
               variants={itemVariants}
               className="text-sm sm:text-lg text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Senior Software Engineer crafting scalable, accessible, and modern
-              web applications. Specialized in React, Next.js, Node.js, and
-              building experiences that users love.
+              Senior Full Stack & AI Integration Engineer with production experience in OpenAI API, RAG, Vector Search, and enterprise applications. Building scalable, performant solutions that drive real business impact.
             </motion.p>
 
             {/* Location + Role chips */}
@@ -236,15 +234,15 @@ export function HeroSection() {
             >
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-900/60 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-800">
                 <MapPin className="w-3.5 h-3.5 text-blue-500" />
-                Maharashtra, India
+                Pune, India
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-900/60 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-800">
                 <Briefcase className="w-3.5 h-3.5 text-purple-500" />
-                3+ Years Experience
+                5+ Years Experience
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-900/60 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-800">
                 <Star className="w-3.5 h-3.5 text-yellow-500" />
-                MERN Stack Specialist
+                AI & Full Stack Specialist
               </span>
             </motion.div>
 

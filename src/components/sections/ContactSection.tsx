@@ -199,7 +199,7 @@ export function ContactSection() {
               Get In Touch
             </h3>
             <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
-              I'm always interested in hearing about new projects and
+              I&apos;m always interested in hearing about new projects and
               opportunities. Whether you have a question or just want to say
               hello, feel free to reach out!
             </p>
@@ -285,7 +285,7 @@ export function ContactSection() {
                     Location
                   </p>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    Maharashtra, India
+                    Pune, India
                   </p>
                 </div>
               </div>

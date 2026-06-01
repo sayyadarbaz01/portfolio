@@ -55,10 +55,10 @@ export function Header() {
               className="flex items-center space-x-2"
             >
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">MR</span>
+                <span className="text-white font-bold text-lg">AS</span>
               </div>
               <span className="font-bold text-lg hidden sm:inline bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Mohammed Rizwan
+                Arbaz Sayyad
               </span>
             </motion.div>
 
