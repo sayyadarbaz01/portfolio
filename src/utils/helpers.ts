@@ -18,7 +18,7 @@ export async function downloadResume() {
   const directDownloadUrl = `https://drive.google.com/uc?export=download&id=${process.env.NEXT_PUBLIC_RESUME_ID}`;
   const link = document.createElement("a");
   link.href = directDownloadUrl;
-  link.setAttribute("download", "MRizwan_Resume.pdf");
+  link.setAttribute("download", "Arbaz_Sayyad_Resume.pdf");
   link.target = "_blank";
   link.rel = "noopener noreferrer";
   document.body.appendChild(link);

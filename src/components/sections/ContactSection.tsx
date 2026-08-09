@@ -96,35 +96,50 @@ export function ContactSection() {
       return;
     }
     setIsSubmitting(true);
+    let emailOk = false;
     try {
-      // Send email
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        {
-          name: formData.name,
-          email: formData.email,
-          title: formData.subject,
-          message: formData.message,
-        },
-        EMAILJS_USER_ID
-      );
+      // Client-side EmailJS send (must run in browser)
+      if (EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_USER_ID) {
+        try {
+          emailjs.init({ publicKey: EMAILJS_USER_ID });
+          const result = await emailjs.send(
+            EMAILJS_SERVICE_ID,
+            EMAILJS_TEMPLATE_ID,
+            {
+              from_name: formData.name,
+              name: formData.name,
+              from_email: formData.email,
+              email: formData.email,
+              reply_to: formData.email,
+              subject: formData.subject,
+              title: formData.subject,
+              message: formData.message,
+            }
+          );
+          console.log("EmailJS SUCCESS:", result.status, result.text);
+          emailOk = true;
+        } catch (emailErr: any) {
+          console.error("EmailJS ERROR — status:", emailErr?.status, "| text:", emailErr?.text);
+        }
+      } else {
+        console.warn("EmailJS keys not configured in .env — skipping email send.");
+      }
 
-      // Save to database
-      const result = await saveContact({
+      // Always save contact to DB/fallback
+      await saveContact({
         name: formData.name,
         email: formData.email,
         subject: formData.subject,
         message: formData.message,
       });
 
-      if (result.success) {
-        toast.success("Message sent successfully! I'll get back to you soon.");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      } else {
-        toast.error("Message sent but failed to save to database.");
-      }
+      toast.success(emailOk
+        ? "Message sent! I'll get back to you soon."
+        : "Message received! (Email delivery may be pending — check your EmailJS config)"
+      );
+      setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (err) {
+      console.error("Failed to process message:", err);
       toast.error("Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);

@@ -36,7 +36,7 @@ const recentRepos = [
     forks: 2,
     language: "TypeScript",
     langColor: "#3178c6",
-    url: "https://github.com/mohammedrizwan6477",
+    url: "https://github.com/sayyadarbaz01",
   },
   {
     name: "jd-store",
@@ -45,7 +45,7 @@ const recentRepos = [
     forks: 3,
     language: "JavaScript",
     langColor: "#f7df1e",
-    url: "https://github.com/mohammedrizwan6477",
+    url: "https://github.com/sayyadarbaz01",
   },
   {
     name: "mern-auth-system",
@@ -54,7 +54,7 @@ const recentRepos = [
     forks: 6,
     language: "TypeScript",
     langColor: "#3178c6",
-    url: "https://github.com/mohammedrizwan6477",
+    url: "https://github.com/sayyadarbaz01",
   },
 ];
 
@@ -134,7 +134,7 @@ export function GitHubActivitySection() {
                   <div className="min-w-max">
                     {mounted ? (
                       <GitHubCalendar
-                        username="mohammedrizwan6477"
+                        username="sayyadarbaz01"
                         year={selectedYear}
                         colorScheme={theme === "dark" ? "dark" : "light"}
                         theme={{
@@ -230,7 +230,7 @@ export function GitHubActivitySection() {
         {/* GitHub Profile CTA */}
         <motion.div variants={itemVariants} className="text-center">
           <a
-            href="https://github.com/mohammedrizwan6477"
+            href="https://github.com/sayyadarbaz01"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-900 dark:bg-gray-800 text-white hover:bg-gray-800 dark:hover:bg-gray-700 transition-all font-medium text-sm hover:scale-105"

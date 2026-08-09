@@ -6,7 +6,7 @@ import { Terminal, X, Minus, Square } from "lucide-react";
 
 const COMMANDS: Record<string, string> = {
   help: `Available commands:
-  whoami      - About Mohammed Rizwan
+  whoami      - About Arbaz Sayyad
   skills      - List of technical skills
   experience  - Work experience summary
   projects    - Featured projects
@@ -15,7 +15,7 @@ const COMMANDS: Record<string, string> = {
   stack       - Tech stack overview
   ai          - AI tools I use
   clear       - Clear terminal`,
-  whoami: `Mohammed Rizwan
+  whoami: `Arbaz Sayyad
   ─────────────────────────────
   Senior Software Engineer | Full Stack Developer
   📍 Maharashtra, India
@@ -72,10 +72,10 @@ const COMMANDS: Record<string, string> = {
   Preferred start: Immediate`,
   contact: `Contact Information:
   ─────────────────────────────
-  📧 Email    → mohammedrizwan6477@gmail.com
-  💼 LinkedIn → linkedin.com/in/mohammedrizwan6477
-  🐙 GitHub   → github.com/mohammedrizwan6477
-  📱 WhatsApp → +91 9960556477
+  📧 Email    → arbazsayyad015@gmail.com
+  💼 LinkedIn → linkedin.com/in/arbazsayyad
+  🐙 GitHub   → github.com/sayyadarbaz01
+  📱 WhatsApp → +91 9518940046
   
   Type "status" to check availability`,
   stack: `Tech Stack:
@@ -107,7 +107,7 @@ interface TerminalLine {
   content: string;
 }
 
-const welcome = `Mohammed Rizwan's Terminal v1.0.0
+const welcome = `Arbaz Sayyad's Terminal v1.0.0
 Type 'help' to see available commands.
 ───────────────────────────────────────`;
 
@@ -217,7 +217,7 @@ export function TerminalWidget({ isOpen, onClose }: TerminalWidgetProps) {
               </div>
               <div className="flex-1 text-center">
                 <span className="text-xs text-gray-400 font-mono">
-                  mrizwan@portfolio:~
+                  arbaz@portfolio:~
                 </span>
               </div>
             </div>

@@ -1,6 +1,6 @@
-# Mohammed Rizwan — Portfolio
+# Arbaz Sayyad — Portfolio
 
-> Personal developer portfolio for **Mohammed Rizwan**, Senior Software Engineer specializing in React, Next.js, Node.js, and modern full-stack web development.
+> Personal developer portfolio for **Arbaz Sayyad**, Senior Full Stack & AI Integration Engineer specializing in React, Next.js, Node.js, and modern full-stack web development.
 
 🌐 **Live Site:** [http://localhost:3000](http://localhost:3000) (dev) · Deployable on Vercel
 
@@ -188,7 +188,7 @@ portfolio/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/mohammedrizwan6477/portfolio.git
+git clone https://github.com/sayyadarbaz01/portfolio.git
 cd portfolio
 
 # 2. Install dependencies
@@ -526,13 +526,13 @@ The app can also be exported as a static site or deployed to any Node.js hosting
 
 ## Author
 
-**Mohammed Rizwan**  
-Senior Software Engineer  
-📧 [mohammedrizwan6477@gmail.com](mailto:mohammedrizwan6477@gmail.com)  
-🔗 [linkedin.com/in/mohammedrizwan6477](https://linkedin.com/in/mohammedrizwan6477)  
-🐙 [github.com/mohammedrizwan6477](https://github.com/mohammedrizwan6477)  
-📱 [+91 9960556477](tel:+919960556477)  
-💬 [WhatsApp](https://wa.me/919960556477)
+**Arbaz Sayyad**  
+Senior Full Stack & AI Integration Engineer  
+📧 [arbazsayyad015@gmail.com](mailto:arbazsayyad015@gmail.com)  
+🔗 [linkedin.com/in/arbazsayyad](https://linkedin.com/in/arbazsayyad)  
+🐙 [github.com/sayyadarbaz01](https://github.com/sayyadarbaz01)  
+📱 [+91 9518940046](tel:+919518940046)  
+💬 [WhatsApp](https://wa.me/919518940046)
 
 ---
 

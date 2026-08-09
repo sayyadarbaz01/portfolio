@@ -190,9 +190,9 @@ export const certifications: Certification[] = [
 export const socialLinks = {
   github: "https://github.com/sayyadarbaz01",
   linkedin: "https://linkedin.com/in/arbazsayyad",
-  email: "arbaz.sayyad.frontend@gmail.com",
-  phone: "+91-8208450286",
-  whatsapp: "https://wa.me/918208450286",
+  email: "arbazsayyad015@gmail.com",
+  phone: "+91-9518940046",
+  whatsapp: "https://wa.me/919518940046",
 };
 
 export const navigation = [

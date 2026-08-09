@@ -7,11 +7,11 @@ import { Button } from "@/components/ui";
 import { downloadResume, scrollToSection } from "@/utils/helpers";
 
 const roles = [
-  { text: "Full Stack Experiences",   gradient: "from-blue-500 via-cyan-400 to-blue-600" },
-  { text: "Pixel-Perfect Interfaces",  gradient: "from-purple-500 via-pink-400 to-rose-500" },
+  { text: "Full Stack Experiences", gradient: "from-blue-500 via-cyan-400 to-blue-600" },
+  { text: "Pixel-Perfect Interfaces", gradient: "from-purple-500 via-pink-400 to-rose-500" },
   { text: "Scalable Web Applications", gradient: "from-emerald-400 via-teal-400 to-cyan-500" },
-  { text: "Clean, Accessible Code",    gradient: "from-amber-400 via-orange-400 to-red-500" },
-  { text: "Products People Love",      gradient: "from-indigo-500 via-blue-400 to-cyan-400" },
+  { text: "Clean, Accessible Code", gradient: "from-amber-400 via-orange-400 to-red-500" },
+  { text: "Products People Love", gradient: "from-indigo-500 via-blue-400 to-cyan-400" },
 ];
 
 const stats = [
@@ -203,9 +203,8 @@ export function HeroSection() {
                 <span className="relative text-lg sm:text-2xl lg:text-3xl font-extrabold">
                   {/* Animated gradient text */}
                   <span
-                    className={`bg-gradient-to-r ${
-                      roles[roleIndex].gradient
-                    } bg-clip-text text-transparent`}
+                    className={`bg-gradient-to-r ${roles[roleIndex].gradient
+                      } bg-clip-text text-transparent`}
                   >
                     {displayedText}
                   </span>
@@ -325,7 +324,7 @@ export function HeroSection() {
                   <div className="w-full h-full rounded-full overflow-hidden">
                     <img
                       src="/profile.jpeg"
-                      alt="Mohammed Rizwan — Senior Software Engineer"
+                      alt="Arbaz Sayyad — Senior Full Stack & AI Integration Engineer"
                       className="w-full h-full object-cover object-top scale-110"
                     />
                   </div>
@@ -360,8 +359,8 @@ export function HeroSection() {
               >
                 <span className="text-sm sm:text-lg">🚀</span>
                 <div>
-                  <p className="text-[10px] sm:text-xs font-bold text-gray-900 dark:text-white leading-none">MERN Stack</p>
-                  <p className="text-[8px] sm:text-[10px] text-gray-500 dark:text-gray-400 leading-none mt-0.5">Next.js · React · Node</p>
+                  <p className="text-[10px] sm:text-xs font-bold text-gray-900 dark:text-white leading-none">Full Stack</p>
+                  <p className="text-[8px] sm:text-[10px] text-gray-500 dark:text-gray-400 leading-none mt-0.5">React · Node · Sql</p>
                 </div>
               </motion.div>
 

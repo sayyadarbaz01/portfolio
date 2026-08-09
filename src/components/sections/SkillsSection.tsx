@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import {
   SiReact,
   SiNextdotjs,
@@ -189,8 +189,8 @@ interface SkillCategorySectionProps {
   skillsData: (typeof skills)[0][];
   category: string;
   startIndex: number;
-  containerVariants: Record<string, unknown>;
-  itemVariants: Record<string, unknown>;
+  containerVariants: Variants;
+  itemVariants: Variants;
   isInView: boolean;
 }
 
