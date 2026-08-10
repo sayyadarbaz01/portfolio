@@ -110,8 +110,12 @@ export async function saveContact(data: {
         emailError = responseText;
         console.error(`EmailJS API returned HTTP ${response.status}:`, responseText);
       }
-    } catch (emailErr: any) {
-      emailError = emailErr?.message || "Failed to call EmailJS REST API";
+    } catch (emailErr: unknown) {
+      if (emailErr instanceof Error) {
+        emailError = emailErr.message;
+      } else {
+        emailError = String(emailErr || "Failed to call EmailJS REST API");
+      }
       console.error("Failed to send email via EmailJS REST API:", emailErr);
     }
   }
@@ -144,10 +148,9 @@ export async function trackPortfolioVisit() {
   try {
     const prisma = getPrisma();
     if (!prisma) {
-      return { success: true, data: { totalVisitors: 1250 } };
+      return { success: true, data: { totalVisitors: 100 } };
     }
-    const headersList = await headers();
-    const ip = headersList.get("x-forwarded-for")?.split(",")[0] || headersList.get("x-real-ip") || "unknown";
+    await headers();
     
     // Get or create analytics record
     let analytics = await prisma.portfolioAnalytics.findFirst();
@@ -165,7 +168,7 @@ export async function trackPortfolioVisit() {
     return { success: true, data: analytics };
   } catch (error) {
     console.warn("Could not track visit in database:", error);
-    return { success: true, data: { totalVisitors: 1250 } };
+    return { success: true, data: { totalVisitors: 100 } };
   }
 }
 
@@ -176,13 +179,13 @@ export async function getPortfolioVisitorCount() {
   try {
     const prisma = getPrisma();
     if (!prisma) {
-      return { success: true, data: 1250 };
+      return { success: true, data: 100 };
     }
     const analytics = await prisma.portfolioAnalytics.findFirst();
-    return { success: true, data: analytics?.totalVisitors || 1250 };
+    return { success: true, data: analytics?.totalVisitors || 100 };
   } catch (error) {
     console.warn("Could not fetch visitor count from database:", error);
-    return { success: true, data: 1250 };
+    return { success: true, data: 100 };
   }
 }
 
@@ -193,7 +196,7 @@ export async function trackResumeDownload() {
   try {
     const prisma = getPrisma();
     if (!prisma) {
-      return { success: true, data: { totalDownloads: 480 } };
+      return { success: true, data: { totalDownloads: 0 } };
     }
     // Get or create analytics record
     let analytics = await prisma.resumeAnalytics.findFirst();
@@ -211,7 +214,7 @@ export async function trackResumeDownload() {
     return { success: true, data: analytics };
   } catch (error) {
     console.warn("Could not track resume download in database:", error);
-    return { success: true, data: { totalDownloads: 480 } };
+    return { success: true, data: { totalDownloads: 0 } };
   }
 }
 
@@ -222,12 +225,17 @@ export async function getResumeDownloadCount() {
   try {
     const prisma = getPrisma();
     if (!prisma) {
-      return { success: true, data: 480 };
+      return { success: true, data: 0 };
     }
-    const analytics = await prisma.resumeAnalytics.findFirst();
-    return { success: true, data: analytics?.totalDownloads || 480 };
+    let analytics = await prisma.resumeAnalytics.findFirst();
+    if (!analytics) {
+      analytics = await prisma.resumeAnalytics.create({
+        data: { totalDownloads: 0 },
+      });
+    }
+    return { success: true, data: analytics.totalDownloads };
   } catch (error) {
     console.warn("Could not fetch download count from database:", error);
-    return { success: true, data: 480 };
+    return { success: true, data: 0 };
   }
 }
