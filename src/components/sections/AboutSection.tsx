@@ -75,10 +75,10 @@ export function AboutSection() {
         <motion.div variants={itemVariants} className="space-y-6">
           <div>
             <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-gray-900 dark:text-white">
-              Senior Full Stack & AI Integration Engineer
+              Senior Full Stack Developer
             </h3>
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base sm:text-lg">
-              I&apos;m a senior full stack engineer with 5+ years of experience building scalable enterprise applications using React.js, Node.js, TypeScript, and MongoDB. I specialize in integrating AI technologies—OpenAI API, RAG, Vector Search, Text Embeddings, and Semantic Search—into production systems. Recognized for delivering 30–40% performance improvements, implementing Docker containerization, establishing CI/CD pipelines, and driving results in fast-paced Agile environments within financial technology.
+              I&apos;m a senior full stack developer with 5+ years of experience architecting scalable, enterprise-grade applications using React.js, Node.js, Express.js, SQL, MongoDB, and Redux Toolkit. I deliver measurable performance gains for BFSI platforms, reduce development overhead through reusable architecture, and integrate OpenAI API, RAG, and Vector Search into production systems.
             </p>
           </div>
 

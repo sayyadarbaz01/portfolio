@@ -17,13 +17,13 @@ import {
 
 const summary = [
   { label: "React.js / Full Stack Expert" },
-  { label: "AI Integration Specialist" },
+  { label: "OpenAI API, RAG & Vector Search" },
   { label: "Node.js / Express.js Backend" },
-  { label: "OpenAI API & RAG Systems" },
-  { label: "Enterprise FinTech Experience" },
-  { label: "TypeScript Proficient" },
-  { label: "Docker & CI/CD" },
-  { label: "Production-Ready Code Quality" },
+  { label: "JWT Auth & RBAC Security" },
+  { label: "Enterprise BFSI / Compliance Systems" },
+  { label: "Performance Optimization & Code Splitting" },
+  { label: "Docker, CI/CD & DevOps" },
+  { label: "TypeScript-First Architecture" },
 ];
 
 const quickFacts = [
@@ -152,7 +152,7 @@ export function RecruiterSummarySection() {
                         Arbaz Sayyad
                       </h3>
                       <p className="text-blue-600 dark:text-blue-400 font-medium">
-                        Senior Full Stack & AI Integration Engineer
+                        Senior Full Stack Developer
                       </p>
                       <div className="flex items-center gap-2 mt-1">
                         <span className="relative flex h-2 w-2">

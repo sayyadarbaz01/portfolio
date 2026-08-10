@@ -54,7 +54,7 @@ export function Footer() {
               </span>
             </motion.div>
             <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-              Senior Full Stack & AI Integration Engineer building scalable, high-performance applications.
+              Senior Full Stack Developer building scalable, high-performance applications.
             </p>
           </div>
 

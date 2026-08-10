@@ -7,11 +7,11 @@ import { Button } from "@/components/ui";
 import { downloadResume, scrollToSection } from "@/utils/helpers";
 
 const roles = [
-  { text: "Full Stack Experiences", gradient: "from-blue-500 via-cyan-400 to-blue-600" },
-  { text: "Pixel-Perfect Interfaces", gradient: "from-purple-500 via-pink-400 to-rose-500" },
-  { text: "Scalable Web Applications", gradient: "from-emerald-400 via-teal-400 to-cyan-500" },
-  { text: "Clean, Accessible Code", gradient: "from-amber-400 via-orange-400 to-red-500" },
-  { text: "Products People Love", gradient: "from-indigo-500 via-blue-400 to-cyan-400" },
+  { text: "React.js + Node.js Applications", gradient: "from-blue-500 via-cyan-400 to-blue-600" },
+  { text: "BFSI & Compliance Platforms", gradient: "from-purple-500 via-pink-400 to-rose-500" },
+  { text: "OpenAI API & RAG Systems", gradient: "from-emerald-400 via-teal-400 to-cyan-500" },
+  { text: "High-Performance User Experiences", gradient: "from-amber-400 via-orange-400 to-red-500" },
+  { text: "Accessible, Enterprise-Ready Code", gradient: "from-indigo-500 via-blue-400 to-cyan-400" },
 ];
 
 const stats = [
@@ -190,7 +190,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.8, duration: 0.7, ease: "easeOut" }}
               >
-                Senior Full Stack & AI Integration Engineer · 5+ Yrs
+                Senior Full Stack Developer · 5+ Years
               </motion.p>
             </div>
 
@@ -223,7 +223,7 @@ export function HeroSection() {
               variants={itemVariants}
               className="text-sm sm:text-lg text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Senior Full Stack & AI Integration Engineer with production experience in OpenAI API, RAG, Vector Search, and enterprise applications. Building scalable, performant solutions that drive real business impact.
+              Senior Full Stack Developer with production experience in React.js, Node.js, Express.js, OpenAI API, RAG, Vector Search, and enterprise BFSI applications. I build scalable, high-performance solutions that drive measurable business outcomes.
             </motion.p>
 
             {/* Location + Role chips */}
@@ -324,7 +324,7 @@ export function HeroSection() {
                   <div className="w-full h-full rounded-full overflow-hidden">
                     <img
                       src="/profile.jpeg"
-                      alt="Arbaz Sayyad — Senior Full Stack & AI Integration Engineer"
+                      alt="Arbaz Sayyad — Senior Full Stack Developer"
                       className="w-full h-full object-cover object-top scale-110"
                     />
                   </div>

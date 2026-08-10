@@ -18,9 +18,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Arbaz Sayyad | Senior Full Stack & AI Integration Engineer",
+  title: "Arbaz Sayyad | Senior Full Stack Developer",
   description:
-    "Senior Full Stack & AI Integration Engineer with 5+ years of experience building scalable enterprise applications using React.js, Node.js, TypeScript, and MongoDB. Production experience integrating OpenAI API, RAG, Vector Search, and Semantic Search. Available for full-time roles and freelance projects.",
+    "Senior Full Stack Developer with 5+ years architecting scalable, enterprise-grade applications using React.js, Node.js, Express.js, SQL, MongoDB, and Redux Toolkit. Delivered measurable BFSI performance gains through AI integration, code splitting, and CI/CD excellence.",
   keywords: [
     "Arbaz Sayyad",
     "Senior Full Stack Engineer",
@@ -43,15 +43,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "Arbaz Sayyad | Senior Full Stack & AI Integration Engineer",
+    title: "Arbaz Sayyad | Senior Full Stack Developer",
     description:
-      "Senior Full Stack & AI Integration Engineer specializing in React, Node.js, OpenAI API, RAG, and modern web technologies. Building scalable, high-performance applications.",
+      "Senior Full Stack Developer specializing in React, Node.js, OpenAI API, RAG, and modern web technologies. Building scalable, high-performance applications.",
     siteName: "Arbaz Sayyad Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Arbaz Sayyad | Senior Full Stack & AI Integration Engineer",
-    description: "Senior Full Stack & AI Integration Engineer | React · Node.js · OpenAI API · RAG · TypeScript",
+    title: "Arbaz Sayyad | Senior Full Stack Developer",
+    description: "Senior Full Stack Developer | React · Node.js · OpenAI API · RAG · TypeScript",
   },
   robots: {
     index: true,
