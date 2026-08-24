@@ -2,19 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun, Download } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 import { useScrollProgress } from "@/hooks";
-import { cn, scrollToSection } from "@/utils/helpers";
-
-const navItems = [
-  { label: "Home", href: "home", icon: "🏠" },
-  { label: "About", href: "about", icon: "👤" },
-  { label: "Skills", href: "skills", icon: "⚡" },
-  { label: "Experience", href: "experience", icon: "💼" },
-  { label: "Projects", href: "projects", icon: "🚀" },
-  { label: "Connect", href: "contact", icon: "📬" },
-];
+import { cn, scrollToSection, downloadResume } from "@/utils/helpers";
+import { navigation } from "@/data/portfolio";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +16,7 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 40);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -32,7 +24,8 @@ export function Header() {
   }, []);
 
   const handleNavClick = (href: string) => {
-    scrollToSection(href);
+    const targetId = href.replace("#", "");
+    scrollToSection(targetId);
     setIsOpen(false);
   };
 
@@ -40,146 +33,116 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-200 border-b",
           scrolled
-            ? "bg-white/10 dark:bg-black/20 backdrop-blur-md border-b border-white/10"
-            : "bg-transparent"
+            ? "bg-slate-900/90 dark:bg-slate-950/90 bg-white/90 backdrop-blur-md border-slate-200 dark:border-slate-800 shadow-sm"
+            : "bg-transparent border-transparent"
         )}
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* Logo */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="flex items-center space-x-2"
+            {/* Brand Logo & Senior Tag */}
+            <button
+              onClick={() => handleNavClick("home")}
+              className="flex items-center gap-3 group text-left"
             >
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">AS</span>
+              <div className="w-9 h-9 rounded-lg bg-slate-900 dark:bg-slate-100 dark:text-slate-900 text-slate-100 flex items-center justify-center font-mono font-bold text-sm border border-slate-700 dark:border-slate-300">
+                AS
               </div>
-              <span className="font-bold text-lg hidden sm:inline bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Arbaz Sayyad
-              </span>
-            </motion.div>
+              <div className="flex flex-col">
+                <span className="font-bold text-sm tracking-tight text-slate-900 dark:text-slate-100">
+                  Arbaz Sayyad
+                </span>
+                <span className="text-[10px] font-mono text-sky-600 dark:text-sky-400 tracking-wider">
+                  SENIOR FULL-STACK ENGINEER
+                </span>
+              </div>
+            </button>
 
             {/* Desktop Navigation */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="hidden md:flex items-center space-x-1"
-            >
-              {navItems.map((item) => (
+            <div className="hidden md:flex items-center space-x-1">
+              {navigation.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => handleNavClick(item.href)}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900/50 transition-all duration-200"
+                  className="px-3.5 py-1.5 text-xs font-medium font-mono text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors"
                 >
                   {item.label}
                 </button>
               ))}
-            </motion.div>
+            </div>
 
-            {/* Right Side Actions */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="flex items-center space-x-2"
-            >
+            {/* Right Action Items */}
+            <div className="flex items-center space-x-3">
+              {/* Status Pill */}
+              <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Available for Sr. Roles</span>
+              </div>
+
+              {/* Download Resume Button */}
+              <button
+                onClick={downloadResume}
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-sky-600 text-white hover:bg-sky-500 transition-colors shadow-sm"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>CV</span>
+              </button>
+
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900/50 transition-all duration-200"
+                className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? (
-                  <Sun className="w-5 h-5 text-yellow-400" />
+                  <Sun className="w-4 h-4 text-amber-400" />
                 ) : (
-                  <Moon className="w-5 h-5 text-gray-700" />
+                  <Moon className="w-4 h-4 text-slate-700" />
                 )}
               </button>
 
               {/* Mobile Menu Button */}
-              <motion.button
+              <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900/50 transition-all duration-200"
+                className="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                 aria-label="Toggle menu"
-                whileTap={{ scale: 0.95 }}
               >
-                <motion.div
-                  animate={{ rotate: isOpen ? 90 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {isOpen ? (
-                    <X className="w-6 h-6" />
-                  ) : (
-                    <Menu className="w-6 h-6" />
-                  )}
-                </motion.div>
-              </motion.button>
-            </motion.div>
+                {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
 
-          {/* Mobile Navigation - Enhanced */}
+          {/* Mobile Navigation Dropdown */}
           <AnimatePresence>
             {isOpen && (
-              <>
-                {/* Backdrop */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  onClick={() => setIsOpen(false)}
-                  className="fixed inset-0 bg-black/50 backdrop-blur-sm md:hidden"
-                  style={{ top: "64px" }}
-                />
-
-                {/* Menu Panel */}
-                <motion.div
-                  initial={{ opacity: 0, y: -10, x: 0 }}
-                  animate={{ opacity: 1, y: 0, x: 0 }}
-                  exit={{ opacity: 0, y: -10, x: 0 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="md:hidden absolute top-16 left-0 right-0 mx-4 bg-white/10 dark:bg-black/40 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl overflow-hidden shadow-2xl"
-                >
-                  <div className="px-4 py-3 space-y-1">
-                    {navItems.map((item, index) => (
-                      <motion.button
-                        key={item.label}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{
-                          duration: 0.3,
-                          delay: index * 0.05,
-                          ease: "easeOut",
-                        }}
-                        onClick={() => handleNavClick(item.href)}
-                        className="w-full flex items-center space-x-3 px-4 py-3 text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-500/10 dark:hover:bg-blue-500/20 rounded-lg transition-all duration-200 group"
-                      >
-                        <span className="text-lg group-hover:scale-125 transition-transform duration-200">
-                          {item.icon}
-                        </span>
-                        <span>{item.label}</span>
-                        <motion.span
-                          className="ml-auto text-blue-500 opacity-0 group-hover:opacity-100"
-                          animate={{ x: 0 }}
-                          whileHover={{ x: 4 }}
-                        >
-                          →
-                        </motion.span>
-                      </motion.button>
-                    ))}
-                  </div>
-                </motion.div>
-              </>
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="md:hidden border-t border-slate-200 dark:border-slate-800 py-3 space-y-1 bg-slate-900 text-slate-100 rounded-b-xl px-2"
+              >
+                {navigation.map((item) => (
+                  <button
+                    key={item.label}
+                    onClick={() => handleNavClick(item.href)}
+                    className="w-full text-left px-4 py-2 text-sm font-mono text-slate-300 hover:text-sky-400 hover:bg-slate-800/60 rounded-md"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </motion.div>
             )}
           </AnimatePresence>
         </nav>
 
         {/* Scroll Progress Bar */}
-        <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-100" style={{ width: `${scrollProgress}%` }} />
+        <div
+          className="absolute bottom-0 left-0 h-[2px] bg-sky-500 transition-all duration-100"
+          style={{ width: `${scrollProgress}%` }}
+        />
       </header>
     </>
   );
 }
+

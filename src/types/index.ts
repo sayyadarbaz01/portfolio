@@ -1,7 +1,9 @@
 export interface Skill {
   name: string;
-  category: 'frontend' | 'backend' | 'tools' | 'other';
+  category: 'frontend' | 'backend' | 'ai' | 'cloud' | 'tools' | 'other';
   icon?: string;
+  proficiency?: number; // percentage e.g. 95
+  highlight?: string;
 }
 
 export interface Experience {
@@ -13,6 +15,19 @@ export interface Experience {
   skills: string[];
   client?: string;
   location: string;
+  highlightsCategory?: {
+    architecture?: string[];
+    performance?: string[];
+    aiAndInnovation?: string[];
+  };
+}
+
+export interface ArchitectureDetails {
+  overview: string;
+  systemFlow: string[];
+  keyComponents: { name: string; role: string; tech: string }[];
+  metrics: { label: string; value: string }[];
+  tradeoffs: string;
 }
 
 export interface Project {
@@ -20,12 +35,14 @@ export interface Project {
   title: string;
   description: string;
   image?: string;
+  architectureImage?: string;
   tags: string[];
   github?: string;
   demo?: string;
   website_link?: string;
   category: string;
   highlights: string[];
+  architectureDetails?: ArchitectureDetails;
 }
 
 export interface Education {

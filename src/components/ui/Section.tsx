@@ -23,14 +23,12 @@ export const Section = React.forwardRef<HTMLElement, SectionProps>(
           {(title || subtitle) && (
             <div className="mb-8 sm:mb-12 text-center">
               {title && (
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-                  <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                    {title}
-                  </span>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100 mb-3 font-mono">
+                  {title}
                 </h2>
               )}
               {subtitle && (
-                <p className="text-lg" style={{ color: 'var(--text-muted)' }}>
+                <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
                   {subtitle}
                 </p>
               )}

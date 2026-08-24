@@ -52,20 +52,22 @@ export function AnalyticsDisplay({ isInView }: AnalyticsDisplayProps) {
   const { visitors, downloads, isLoading } = useAnalytics();
 
   return (
-    <div className="flex gap-8 justify-center items-center flex-wrap mt-8">
+    <div className="flex gap-6 justify-center items-center flex-wrap my-4 font-mono">
       {/* Visitors */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.95 }}
         animate={isInView && !isLoading ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 0.5 }}
-        className="flex items-center gap-3 px-6 py-3 rounded-xl bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10"
+        transition={{ duration: 0.3 }}
+        className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none"
       >
-        <Eye className="w-5 h-5 text-blue-400" />
+        <div className="p-2 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+          <Eye className="w-4 h-4" />
+        </div>
         <div className="flex flex-col">
-          <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
-            Portfolio Visitors
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+            PORTFOLIO VISITORS
           </span>
-          <span className="text-lg font-bold text-gray-900 dark:text-white">
+          <span className="text-xl font-bold text-slate-900 dark:text-slate-100">
             {isLoading ? "..." : <AnimatedCounter target={visitors} isInView={isInView && !isLoading} />}
           </span>
         </div>
@@ -73,17 +75,19 @@ export function AnalyticsDisplay({ isInView }: AnalyticsDisplayProps) {
 
       {/* Downloads */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.95 }}
         animate={isInView && !isLoading ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="flex items-center gap-3 px-6 py-3 rounded-xl bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10"
+        transition={{ duration: 0.3, delay: 0.1 }}
+        className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none"
       >
-        <Download className="w-5 h-5 text-cyan-400" />
+        <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+          <Download className="w-4 h-4" />
+        </div>
         <div className="flex flex-col">
-          <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
-            Resume Downloads
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+            RESUME DOWNLOADS
           </span>
-          <span className="text-lg font-bold text-gray-900 dark:text-white">
+          <span className="text-xl font-bold text-slate-900 dark:text-slate-100">
             {isLoading ? "..." : <AnimatedCounter target={downloads} isInView={isInView && !isLoading} />}
           </span>
         </div>

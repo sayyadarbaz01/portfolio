@@ -94,15 +94,15 @@ export function CurrentlyWorkingSection() {
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="space-y-12"
+        className="space-y-10"
       >
         {/* Section intro */}
-        <motion.div variants={itemVariants} className="text-center max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400 text-sm font-medium mb-4">
-            <Sparkles className="w-4 h-4 animate-pulse" />
+        <motion.div variants={itemVariants} className="text-left max-w-2xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-purple-500/10 border border-purple-500/20 text-purple-700 dark:text-purple-400 text-xs font-mono font-semibold mb-3">
+            <Sparkles className="w-3.5 h-3.5 animate-pulse" />
             Active learning &amp; growth areas
           </div>
-          <p className="text-gray-600 dark:text-gray-400 text-lg">
+          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
             I believe in continuous growth. Here&apos;s what I&apos;m actively leveling up right now.
           </p>
         </motion.div>
@@ -114,95 +114,61 @@ export function CurrentlyWorkingSection() {
         >
           {explorations.map((item, index) => (
             <motion.div key={index} variants={itemVariants}>
-              <Card hover glassmorphism className="h-full group">
-                <CardBody className="space-y-4">
+              <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-4 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors h-full flex flex-col justify-between">
+                <div className="space-y-3">
                   <div className="flex items-start gap-3">
                     <div className={`flex-shrink-0 w-10 h-10 rounded-xl ${item.bgColor} border ${item.borderColor} flex items-center justify-center text-xl`}>
                       {item.icon}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-gray-900 dark:text-white text-sm leading-snug mb-1">
+                      <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm leading-snug mb-1 font-sans">
                         {item.title}
                       </h4>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
                         {item.description}
                       </p>
                     </div>
                   </div>
+                </div>
 
-                  {/* Progress bar */}
-                  <div>
-                    <div className="flex justify-between items-center mb-1.5">
-                      <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
-                        <TrendingUp className="w-3 h-3" /> Proficiency
-                      </span>
-                      <span className={`text-xs font-bold bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>
-                        {item.progress}%
-                      </span>
-                    </div>
-                    <div className="h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                      <motion.div
-                        className={`h-full rounded-full bg-gradient-to-r ${item.color}`}
-                        initial={{ width: 0 }}
-                        animate={isInView ? { width: `${item.progress}%` } : { width: 0 }}
-                        transition={{ duration: 1.2, delay: index * 0.1, ease: "easeOut" }}
-                      />
-                    </div>
+                {/* Progress bar */}
+                <div>
+                  <div className="flex justify-between items-center mb-1.5 font-mono text-xs">
+                    <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                      <TrendingUp className="w-3 h-3 text-sky-600 dark:text-sky-400" /> Proficiency
+                    </span>
+                    <span className={`font-bold bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>
+                      {item.progress}%
+                    </span>
                   </div>
-                </CardBody>
-              </Card>
+                  <div className="h-1.5 bg-slate-100 dark:bg-slate-950 rounded-full overflow-hidden border border-slate-200 dark:border-slate-800">
+                    <motion.div
+                      className={`h-full rounded-full bg-gradient-to-r ${item.color}`}
+                      initial={{ width: 0 }}
+                      animate={isInView ? { width: `${item.progress}%` } : { width: 0 }}
+                      transition={{ duration: 1.2, delay: index * 0.1, ease: "easeOut" }}
+                    />
+                  </div>
+                </div>
+              </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* 2026 Goals */}
-        {/* <motion.div variants={itemVariants}>
-          <Card glassmorphism className="overflow-hidden">
-            <CardBody>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                  <Target className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">2026 Goals</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Engineering roadmap &amp; milestones</p>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {goals2026.map((goal, index) => (
-                  <motion.div
-                    key={index}
-                    className="flex items-start gap-3 p-3 rounded-lg bg-white/50 dark:bg-white/5 border border-gray-100 dark:border-white/10 hover:border-blue-500/30 transition-all group"
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-                    transition={{ delay: 0.3 + index * 0.1 }}
-                    whileHover={{ x: 4 }}
-                  >
-                    <span className="text-lg flex-shrink-0">{goal.icon}</span>
-                    <span className="text-sm text-gray-700 dark:text-gray-300 leading-snug">{goal.text}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </CardBody>
-          </Card>
-        </motion.div> */}
-
         {/* Status banner */}
         <motion.div variants={itemVariants}>
-          <div className="flex flex-wrap gap-3 justify-center">
+          <div className="flex flex-wrap gap-3 justify-start font-mono text-xs">
             {[
               { label: "🟢 Available for Full-Time Roles", color: "bg-emerald-500/10 border-emerald-500/30 text-emerald-700 dark:text-emerald-400" },
-              { label: "🟡 Open to Freelance Projects", color: "bg-amber-500/10 border-amber-500/30 text-amber-700 dark:text-amber-400" },
-              { label: "🤝 Open to Collaborations", color: "bg-blue-500/10 border-blue-500/30 text-blue-700 dark:text-blue-400" },
+              { label: "🟡 Open to Architecture Consulting", color: "bg-amber-500/10 border-amber-500/30 text-amber-700 dark:text-amber-400" },
+              { label: "🤝 Open to Tech Collaborations", color: "bg-sky-500/10 border-sky-500/30 text-sky-700 dark:text-sky-400" },
             ].map((status, i) => (
-              <motion.span
+              <span
                 key={i}
-                className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium border ${status.color}`}
-                animate={{ y: [0, -4, 0] }}
-                transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.5 }}
+                className={`inline-flex items-center px-3.5 py-1.5 rounded-lg font-semibold border ${status.color}`}
               >
                 {status.label}
-              </motion.span>
+              </span>
             ))}
           </div>
         </motion.div>
@@ -210,3 +176,4 @@ export function CurrentlyWorkingSection() {
     </Section>
   );
 }
+

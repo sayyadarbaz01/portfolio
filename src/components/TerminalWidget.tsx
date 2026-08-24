@@ -2,103 +2,58 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, X, Minus, Square } from "lucide-react";
+import { Terminal, X } from "lucide-react";
 
 const COMMANDS: Record<string, string> = {
   help: `Available commands:
-  whoami      - About Arbaz Sayyad
-  skills      - List of technical skills
-  experience  - Work experience summary
-  projects    - Featured projects
-  status      - Current availability
-  contact     - Contact information
-  stack       - Tech stack overview
-  ai          - AI tools I use
-  clear       - Clear terminal`,
-  whoami: `Arbaz Sayyad
-  ─────────────────────────────
-  Senior Software Engineer | Full Stack Developer
-  📍 Maharashtra, India
-  🎯 3+ Years Experience
-  🚀 MERN Stack Specialist
-  ♿ Accessibility Expert
-  🤖 AI-Assisted Developer`,
-  skills: `Technical Skills:
-  ─────────────────────────────
-  Frontend   → React.js, Next.js, TypeScript, Tailwind CSS
-  State      → Redux, Redux Toolkit, Context API
-  Backend    → Node.js, Express.js, NestJS
-  Database   → MongoDB, PostgreSQL, Prisma ORM
-  APIs       → GraphQL, REST APIs, WebSockets
-  Tools      → Git, Docker, Postman, JIRA
-  A11y       → WCAG 2.1, ARC Toolkit, ARIA`,
-  experience: `Work Experience:
-  ─────────────────────────────
-  [2025-Now]  Senior Software Engineer @ Vassu Tech Services
-              → Led WCAG accessibility implementation
-              → Built complex endorsement templates
-              → Production-grade Next.js + NestJS apps
-  
-  [2023-2025] Full Stack Developer @ TruScholar
-              → Built Learner Module for transcript management
-              → React, Redux, Node.js, MongoDB
-  
-  [2022-2023] Software Engineer @ Prodapt Solutions
-              → MERN stack application development
-              → Reusable UI component library`,
-  projects: `Featured Projects:
-  ─────────────────────────────
-  🏢 Radian Title Genius
-     → Enterprise property management platform
-     → 100% WCAG 2.1 compliance
-     → URL: https://orders.mytitlegenius.com
+  whoami      - Executive summary & identity
+  arch        - System architecture & RAG breakdown
+  metrics     - Quantitative engineering benchmarks
+  skills      - Full-stack technical matrix
+  experience  - Production roles at Synechron & Nexvia
+  contact     - Direct contact channels
+  clear       - Clear terminal output`,
+  whoami: `Arbaz Sayyad — Senior Full-Stack Engineer
+─────────────────────────────────────────────
+• 5+ Years Experience (Enterprise BFSI & Retail POS)
+• Specialized in React.js, TypeScript, Node.js & OpenAI RAG
+• Location: Pune, India
+• Availability: Open to Senior / Tech Lead roles`,
+  arch: `System Architecture Showcase:
+─────────────────────────────────────────────
+[KYT Compliance & Risk Platform (U.S. Bank)]
+Client: React 19 + TypeScript SPA
+Gateway: Express.js API Gateway (JWT, Rate Limiter)
+RAG Engine: Node.js + OpenAI GPT-4 Completions
+Vector Store: MongoDB Atlas Vector Search (HNSW Index)
+Throughput: Sub-300ms query latency across 500+ users`,
+  metrics: `Performance Benchmarks:
+─────────────────────────────────────────────
+• 35% reduction in compliance risk summary write-up time
+• 40% speedup in vector search policy retrieval
+• 500+ active daily enterprise users supported
+• 50% initial page load speedup (4.0s → 2.0s)`,
+  skills: `Technical Matrix:
+─────────────────────────────────────────────
+Frontend: React.js, TypeScript, Next.js, Redux Toolkit, Tailwind CSS
+Backend: Node.js, Express.js, REST APIs, Microservices Architecture
+AI & Data: OpenAI API, RAG, MongoDB Vector Search, Text Embeddings
+DevOps: Docker Containerization, CI/CD Pipelines, Git/GitHub`,
+  experience: `Production Experience:
+─────────────────────────────────────────────
+[2022 - 2025] Senior Associate Technology @ Synechron (U.S. Bank)
+              • Built enterprise BFSI compliance RAG & vector search.
+              • Containerized Node services with Docker & CI/CD.
 
-  🎓 TruScholar Learner Module
-     → Secure credential management
-     → Real-time university communication
-     → URL: https://www.truscholar.io
-
-  🛒 JD Store (E-Commerce)
-     → Full MERN stack with Stripe payments
-     → URL: https://jd-store-frontend.vercel.app`,
-  status: `Current Status:
-  ─────────────────────────────
-  🟢 Available for Full-Time Roles
-  🟡 Open to Freelance Projects
-  🤝 Open to Technical Consulting
-  🌍 Remote Friendly
-  
-  Response time: ~24 hours
-  Preferred start: Immediate`,
-  contact: `Contact Information:
-  ─────────────────────────────
-  📧 Email    → arbazsayyad015@gmail.com
-  💼 LinkedIn → linkedin.com/in/arbazsayyad
-  🐙 GitHub   → github.com/sayyadarbaz01
-  📱 WhatsApp → +91 9518940046
-  
-  Type "status" to check availability`,
-  stack: `Tech Stack:
-  ─────────────────────────────
-  Runtime    → Node.js 20+, Bun
-  Framework  → Next.js 15+, NestJS
-  Language   → TypeScript 5+
-  Styling    → Tailwind CSS 4, CSS Modules
-  Animation  → Framer Motion
-  DB         → MongoDB Atlas, PostgreSQL
-  ORM        → Prisma, Mongoose
-  Auth       → JWT, NextAuth.js
-  Deploy     → Vercel, Railway, Docker`,
-  ai: `AI Tools I Use Daily:
-  ─────────────────────────────
-  🤖 GitHub Copilot  → Code completion & review
-  🧠 Claude (Anthropic) → Architecture & debugging
-  💬 ChatGPT        → Problem-solving & ideation
-  🔍 Perplexity     → Technical research
-  📝 Notion AI      → Documentation
-  
-  AI has 10x'd my productivity while
-  maintaining code quality standards.`,
+[2020 - 2022] Software Engineer @ Nexvia Software
+              • Engineered POS e-commerce checkout components.
+              • Optimized Redux Toolkit state & Axios interceptors.`,
+  contact: `Direct Contact:
+─────────────────────────────────────────────
+📧 Email:    arbazsayyad015@gmail.com
+💼 LinkedIn: linkedin.com/in/arbazsayyad
+🐙 GitHub:   github.com/sayyadarbaz01
+📱 Phone:    +91-9518940046`,
   clear: "CLEAR",
 };
 
@@ -107,9 +62,9 @@ interface TerminalLine {
   content: string;
 }
 
-const welcome = `Arbaz Sayyad's Terminal v1.0.0
-Type 'help' to see available commands.
-───────────────────────────────────────`;
+const welcome = `Arbaz Sayyad Workstation CLI v2.4.0
+Type 'help' for available system commands.
+───────────────────────────────────────────`;
 
 interface TerminalWidgetProps {
   isOpen: boolean;
@@ -190,55 +145,55 @@ export function TerminalWidget({ isOpen, onClose }: TerminalWidgetProps) {
         >
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
             onClick={onClose}
           />
 
           {/* Terminal window */}
           <motion.div
-            className="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl shadow-black/50 border border-gray-700"
-            initial={{ scale: 0.9, y: 20 }}
+            className="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl bg-slate-950 border border-slate-800"
+            initial={{ scale: 0.95, y: 20 }}
             animate={{ scale: 1, y: 0 }}
-            exit={{ scale: 0.9, y: 20 }}
-            transition={{ type: "spring", damping: 20, stiffness: 300 }}
+            exit={{ scale: 0.95, y: 20 }}
+            transition={{ duration: 0.2 }}
           >
             {/* Title bar */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-gray-800 border-b border-gray-700">
+            <div className="flex items-center gap-2 px-4 py-3 bg-slate-900 border-b border-slate-800">
               <div className="flex items-center gap-1.5">
                 <button
                   onClick={onClose}
-                  className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors flex items-center justify-center group"
+                  className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors flex items-center justify-center"
                   aria-label="Close terminal"
                 >
-                  <X className="w-1.5 h-1.5 text-red-900 opacity-0 group-hover:opacity-100" />
+                  <X className="w-2 h-2 text-red-950 opacity-0 hover:opacity-100" />
                 </button>
                 <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                <div className="w-3 h-3 rounded-full bg-green-500" />
+                <div className="w-3 h-3 rounded-full bg-emerald-500" />
               </div>
               <div className="flex-1 text-center">
-                <span className="text-xs text-gray-400 font-mono">
-                  arbaz@portfolio:~
+                <span className="text-xs text-slate-400 font-mono">
+                  arbaz@dev-workstation:~
                 </span>
               </div>
             </div>
 
             {/* Terminal content */}
             <div
-              className="bg-gray-950 p-4 font-mono text-sm h-80 overflow-y-auto cursor-text"
+              className="bg-slate-950 p-4 font-mono text-xs h-80 overflow-y-auto cursor-text text-slate-300"
               onClick={() => inputRef.current?.focus()}
             >
               {lines.map((line, i) => (
-                <div key={i} className="mb-1">
+                <div key={i} className="mb-2">
                   {line.type === "welcome" && (
-                    <pre className="text-cyan-400 text-xs leading-relaxed whitespace-pre-wrap">
+                    <pre className="text-sky-400 font-mono leading-relaxed whitespace-pre-wrap">
                       {line.content}
                     </pre>
                   )}
                   {line.type === "input" && (
-                    <p className="text-green-400">{line.content}</p>
+                    <p className="text-emerald-400 font-mono">{line.content}</p>
                   )}
                   {line.type === "output" && (
-                    <pre className="text-gray-300 text-xs leading-relaxed whitespace-pre-wrap">
+                    <pre className="text-slate-300 font-mono leading-relaxed whitespace-pre-wrap">
                       {line.content}
                     </pre>
                   )}
@@ -247,15 +202,15 @@ export function TerminalWidget({ isOpen, onClose }: TerminalWidgetProps) {
 
               {/* Input line */}
               <div className="flex items-center gap-2 mt-2">
-                <span className="text-green-400">$</span>
+                <span className="text-emerald-400">$</span>
                 <input
                   ref={inputRef}
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  className="flex-1 bg-transparent text-green-300 outline-none caret-green-400 placeholder-gray-600"
-                  placeholder="type a command..."
+                  className="flex-1 bg-transparent text-emerald-300 outline-none caret-emerald-400 font-mono"
+                  placeholder="type command..."
                   spellCheck={false}
                   autoComplete="off"
                   aria-label="Terminal input"
@@ -264,14 +219,14 @@ export function TerminalWidget({ isOpen, onClose }: TerminalWidgetProps) {
               <div ref={bottomRef} />
             </div>
 
-            {/* Quick commands */}
-            <div className="bg-gray-900 px-4 py-2 border-t border-gray-700">
+            {/* Quick commands bar */}
+            <div className="bg-slate-900 px-4 py-2 border-t border-slate-800">
               <div className="flex flex-wrap gap-1.5">
-                {["whoami", "skills", "status", "contact", "help"].map((cmd) => (
+                {["whoami", "arch", "metrics", "skills", "experience", "contact", "help"].map((cmd) => (
                   <button
                     key={cmd}
                     onClick={() => handleCommand(cmd)}
-                    className="px-2 py-0.5 text-xs rounded bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white transition-colors font-mono"
+                    className="px-2 py-1 text-[11px] rounded bg-slate-800 text-slate-300 hover:bg-sky-600 hover:text-white transition-colors font-mono"
                   >
                     {cmd}
                   </button>
@@ -290,16 +245,14 @@ export function TerminalButton({ onClick }: { onClick: () => void }) {
   return (
     <motion.button
       onClick={onClick}
-      className="fixed bottom-20 right-4 sm:bottom-8 sm:right-24 z-40 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-900 dark:bg-gray-800 text-white shadow-lg border border-gray-700 hover:border-green-500/50 transition-all text-sm font-mono group"
+      className="fixed bottom-6 right-6 z-40 flex items-center gap-2 px-3.5 py-2 rounded-lg bg-slate-900 text-slate-200 border border-slate-800 shadow-xl hover:border-sky-500 transition-all text-xs font-mono"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 2 }}
-      aria-label="Open terminal"
+      aria-label="Open CLI Terminal"
     >
-      <Terminal className="w-4 h-4 text-green-400 group-hover:animate-pulse" />
-      <span className="hidden sm:inline">Terminal</span>
+      <Terminal className="w-4 h-4 text-sky-400" />
+      <span className="hidden sm:inline">CLI Terminal</span>
     </motion.button>
   );
 }
+

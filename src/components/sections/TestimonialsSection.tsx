@@ -123,103 +123,105 @@ export function TestimonialsSection() {
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="max-w-5xl mx-auto space-y-12"
+        className="max-w-5xl mx-auto space-y-12 text-left"
       >
-        <motion.p variants={itemVariants} className="text-center text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
+        <motion.p variants={itemVariants} className="text-center text-slate-600 dark:text-slate-400 max-w-xl mx-auto text-sm sm:text-base">
           Have we worked together? I&apos;d love to hear your thoughts! Drop a quick note about your experience collaborating with me.
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Form Section */}
           <motion.div variants={itemVariants} className="md:col-span-2">
-            <Card glassmorphism>
-              <CardBody>
-                <div className="flex items-center gap-2 mb-6">
-                  <MessageSquare className="w-5 h-5 text-blue-500" />
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">Leave Feedback</h3>
-                </div>
+            <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm dark:shadow-none space-y-4">
+              <div className="flex items-center gap-2 mb-2">
+                <MessageSquare className="w-5 h-5 text-sky-600 dark:text-sky-400" />
+                <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 font-sans">Leave Feedback</h3>
+              </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label htmlFor="feedback-name" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Name
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <User className="h-4 w-4 text-gray-400" />
-                      </div>
-                      <input
-                        id="feedback-name"
-                        type="text"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="block w-full pl-9 pr-3 py-2.5 text-sm bg-white/50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors dark:text-white outline-none"
-                        placeholder="John Doe"
-                        required
-                        disabled={isSubmitting}
-                      />
+              <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
+                <div>
+                  <label htmlFor="feedback-name" className="block font-medium text-slate-700 dark:text-slate-300 mb-1">
+                    YOUR NAME *
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <User className="h-3.5 w-3.5 text-slate-400" />
                     </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="feedback-role" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Role &amp; Company (Optional)
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <Briefcase className="h-4 w-4 text-gray-400" />
-                      </div>
-                      <input
-                        id="feedback-role"
-                        type="text"
-                        value={formData.role}
-                        onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                        className="block w-full pl-9 pr-3 py-2.5 text-sm bg-white/50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors dark:text-white outline-none"
-                        placeholder="e.g. Product Manager at TechCorp"
-                        disabled={isSubmitting}
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="feedback-content" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Your Feedback
-                    </label>
-                    <textarea
-                      id="feedback-content"
-                      value={formData.content}
-                      onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                      rows={5}
-                      className="block w-full px-3 py-2.5 text-sm bg-white/50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none dark:text-white outline-none"
-                      placeholder="What was it like working together?"
+                    <input
+                      id="feedback-name"
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="block w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 outline-none"
+                      placeholder="e.g. John Doe"
                       required
                       disabled={isSubmitting}
                     />
                   </div>
+                </div>
 
-                  <Button type="submit" className="w-full justify-center py-2.5" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      <span className="animate-pulse">Submitting...</span>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 mr-2" />
-                        Post Feedback
-                      </>
-                    )}
-                  </Button>
-                </form>
-              </CardBody>
-            </Card>
+                <div>
+                  <label htmlFor="feedback-role" className="block font-medium text-slate-700 dark:text-slate-300 mb-1">
+                    ROLE & COMPANY (OPTIONAL)
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Briefcase className="h-3.5 w-3.5 text-slate-400" />
+                    </div>
+                    <input
+                      id="feedback-role"
+                      type="text"
+                      value={formData.role}
+                      onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                      className="block w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 outline-none"
+                      placeholder="e.g. Product Lead at Synechron"
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="feedback-content" className="block font-medium text-slate-700 dark:text-slate-300 mb-1">
+                    YOUR FEEDBACK *
+                  </label>
+                  <textarea
+                    id="feedback-content"
+                    value={formData.content}
+                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                    rows={4}
+                    className="block w-full px-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 resize-none outline-none"
+                    placeholder="What was it like working together?"
+                    required
+                    disabled={isSubmitting}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-2.5 rounded-lg font-semibold bg-sky-600 hover:bg-sky-500 text-white transition-colors flex items-center justify-center gap-2"
+                >
+                  {isSubmitting ? (
+                    <span className="animate-pulse">Submitting...</span>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Post Feedback</span>
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
           </motion.div>
 
           {/* Live Feed Section */}
           <motion.div variants={itemVariants} className="md:col-span-3 space-y-4">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2 px-1">
+            <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-2 px-1">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              Live Feed
+              Verified Feedback Feed
             </h3>
 
             <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 pb-2">
@@ -232,11 +234,11 @@ export function TestimonialsSection() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="text-center py-12 px-4 border border-dashed border-gray-200 dark:border-gray-800 rounded-xl"
+                    className="text-center py-12 px-4 border border-dashed border-slate-300 dark:border-slate-800 rounded-xl"
                   >
-                    <MessageSquare className="w-8 h-8 mx-auto text-gray-300 dark:text-gray-700 mb-3" />
-                    <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">No feedback yet.</p>
-                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Be the first to leave a review using the form!</p>
+                    <MessageSquare className="w-8 h-8 mx-auto text-slate-400 dark:text-slate-600 mb-3" />
+                    <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">No feedback yet.</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-500 mt-1 font-mono">Be the first to leave a review using the form!</p>
                   </motion.div>
                 ) : (
                   feedbacks.map((item) => (
@@ -248,49 +250,47 @@ export function TestimonialsSection() {
                       transition={{ duration: 0.3 }}
                       layout
                     >
-                      <Card glassmorphism hover>
-                        <CardBody className="p-4 sm:p-5">
-                          <div className="flex gap-4">
-                            <div
-                              className={`w-10 h-10 rounded-full bg-gradient-to-br ${item.avatarGradient} flex items-center justify-center text-white font-bold shrink-0 shadow-inner`}
-                            >
-                              {item.name.charAt(0).toUpperCase()}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex justify-between items-start mb-1">
-                                <div>
-                                  <h4 className="text-sm font-bold text-gray-900 dark:text-white truncate">
-                                    {item.name}
-                                  </h4>
-                                  <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                                    {item.role}
-                                  </p>
-                                </div>
-                                <div className="flex items-center gap-1 text-[10px] text-gray-400 font-medium bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-full">
-                                  <Clock className="w-3 h-3" />
-                                  {item.date}
-                                </div>
-                              </div>
-                              <p className="text-sm text-gray-700 dark:text-gray-300 mt-3 leading-relaxed italic">
-                                &ldquo;
-                                {expandedIds.has(item.id)
-                                  ? item.content
-                                  : truncateText(item.content).truncated}
-                                {truncateText(item.content).isTruncated && !expandedIds.has(item.id) && "..."}
-                                &rdquo;
-                              </p>
-                              {truncateText(item.content).isTruncated && (
-                                <button
-                                  onClick={() => toggleExpanded(item.id)}
-                                  className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 mt-2 transition-colors"
-                                >
-                                  {expandedIds.has(item.id) ? "Show Less ↑" : "Show More ↓"}
-                                </button>
-                              )}
-                            </div>
+                      <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-xl p-4 sm:p-5 shadow-sm dark:shadow-none space-y-3">
+                        <div className="flex gap-4">
+                          <div
+                            className={`w-10 h-10 rounded-full bg-gradient-to-br ${item.avatarGradient} flex items-center justify-center text-white font-bold shrink-0 shadow-inner`}
+                          >
+                            {item.name.charAt(0).toUpperCase()}
                           </div>
-                        </CardBody>
-                      </Card>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex justify-between items-start mb-1">
+                              <div>
+                                <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100 truncate font-sans">
+                                  {item.name}
+                                </h4>
+                                <p className="text-xs font-mono text-sky-600 dark:text-sky-400 truncate">
+                                  {item.role}
+                                </p>
+                              </div>
+                              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-950 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-800">
+                                <Clock className="w-3 h-3" />
+                                {item.date}
+                              </div>
+                            </div>
+                            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 mt-3 leading-relaxed italic">
+                              &ldquo;
+                              {expandedIds.has(item.id)
+                                ? item.content
+                                : truncateText(item.content).truncated}
+                              {truncateText(item.content).isTruncated && !expandedIds.has(item.id) && "..."}
+                              &rdquo;
+                            </p>
+                            {truncateText(item.content).isTruncated && (
+                              <button
+                                onClick={() => toggleExpanded(item.id)}
+                                className="text-xs font-mono font-semibold text-sky-600 dark:text-sky-400 hover:underline mt-2 transition-colors"
+                              >
+                                {expandedIds.has(item.id) ? "Show Less ↑" : "Show More ↓"}
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      </div>
                     </motion.div>
                   ))
                 )}

@@ -1,144 +1,117 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion } from "framer-motion";
 import { useInView } from "@/hooks";
-import { Section, Card, CardBody } from "@/components/ui";
+import { Section } from "@/components/ui";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { Trophy, Rocket, Users, Star, Zap, Shield, Award } from "lucide-react";
+import { Cpu, Zap, Users, Gauge, CheckCircle2 } from "lucide-react";
 
 const metrics = [
   {
-    icon: Rocket,
-    value: 5,
-    suffix: "+",
-    label: "Years Experience",
-    sublabel: "Professional engineering",
-    color: "from-blue-500 to-cyan-500",
-    bgColor: "bg-blue-500/10",
-  },
-  {
-    icon: Trophy,
-    value: 2,
-    suffix: "+",
-    label: "Companies",
-    sublabel: "Enterprise & fintech",
-    color: "from-amber-500 to-orange-500",
-    bgColor: "bg-amber-500/10",
-  },
-  {
     icon: Zap,
+    value: 35,
+    suffix: "%",
+    label: "Analyst Write-Up Time Reduction",
+    sublabel: "OpenAI GPT narrative synthesis in KYT platform",
+  },
+  {
+    icon: Cpu,
     value: 40,
     suffix: "%",
-    label: "Performance Gains",
-    sublabel: "Average improvement",
-    color: "from-purple-500 to-pink-500",
-    bgColor: "bg-purple-500/10",
+    label: "Vector Retrieval Latency Cut",
+    sublabel: "MongoDB Atlas Vector Search HNSW indexing",
   },
   {
-    icon: Star,
-    value: 2,
-    suffix: "",
-    label: "Star Awards",
-    sublabel: "Exceptional contributions",
-    color: "from-emerald-500 to-green-500",
-    bgColor: "bg-emerald-500/10",
+    icon: Users,
+    value: 500,
+    suffix: "+",
+    label: "Active BFSI Analysts Supported",
+    sublabel: "Mission-critical financial compliance environment",
+  },
+  {
+    icon: Gauge,
+    value: 50,
+    suffix: "%",
+    label: "Page Load Speedup (4s → 2s)",
+    sublabel: "Redux Toolkit component optimization & memoization",
   },
 ];
 
 const achievements = [
-  { text: "Integrated OpenAI API for AI-assisted transaction risk summaries, reducing analyst write-up time by 35%", icon: "🤖" },
-  { text: "Built RAG pipeline using Node.js and MongoDB Vector Search, cutting retrieval time by 40%", icon: "⚡" },
-  { text: "Engineered enterprise applications supporting 500+ daily users in mission-critical financial environments", icon: "🏢" },
-  { text: "Architected reusable component libraries reducing page load time from 4.0s to 2.0s", icon: "⚙️" },
-  { text: "Awarded Star Awards in 2023 and 2024 for outstanding performance and exceptional contributions", icon: "🏆" },
+  "Integrated OpenAI API with custom prompt pipelines for automated transaction risk summaries at Synechron.",
+  "Architected Node.js RAG pipeline with MongoDB Atlas Vector Search for semantic compliance document lookup.",
+  "Engineered reusable React + TypeScript component design system serving 500+ daily operational users.",
+  "Containerized microservices with Docker for zero-downtime staging and production deployment gates.",
+  "Honored with 2 consecutive Star Awards (2023 & 2024) at Synechron Technologies for exceptional engineering output.",
 ];
 
 export function MetricsSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5 } },
-  };
-
   return (
-    <Section id="metrics" title="By The Numbers" ref={ref}>
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="space-y-10"
-      >
-        {/* Section intro */}
-        <motion.p variants={itemVariants} className="text-center text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
-          Real numbers from real projects. These aren&apos;t estimates—they&apos;re results.
-        </motion.p>
+    <Section id="metrics" title="Performance Engineering Benchmarks" ref={ref}>
+      <div className="space-y-8">
+        
+        <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl text-left">
+          Empirical production metrics resulting from architectural refactoring, vector retrieval optimization, and AI workflow integration.
+        </p>
 
-        {/* Metrics grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {/* Metrics Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {metrics.map((metric, index) => {
             const Icon = metric.icon;
             return (
-              <motion.div key={index} variants={itemVariants}>
-                <Card hover glassmorphism className="h-full text-center group">
-                  <CardBody className="space-y-2 py-5">
-                    <div className={`w-12 h-12 rounded-xl ${metric.bgColor} flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300`}>
-                      <Icon className="w-6 h-6 text-blue-500" />
-                    </div>
-                    <p className={`text-3xl sm:text-4xl font-black bg-gradient-to-br ${metric.color} bg-clip-text text-transparent`}>
-                      <AnimatedCounter
-                        target={metric.value}
-                        suffix={metric.suffix}
-                        isInView={isInView}
-                        delay={index * 0.1}
-                      />
-                    </p>
-                    <p className="font-semibold text-gray-900 dark:text-white text-sm">{metric.label}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{metric.sublabel}</p>
-                  </CardBody>
-                </Card>
-              </motion.div>
+              <div
+                key={index}
+                className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors"
+              >
+                <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
+                  <Icon className="w-5 h-5 text-sky-600 dark:text-sky-400" />
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                    METRIC #0{index + 1}
+                  </span>
+                </div>
+
+                <div>
+                  <p className="text-3xl sm:text-4xl font-bold font-mono text-slate-900 dark:text-slate-100">
+                    <AnimatedCounter
+                      target={metric.value}
+                      suffix={metric.suffix}
+                      isInView={isInView}
+                      delay={index * 0.1}
+                    />
+                  </p>
+                  <p className="font-semibold text-xs sm:text-sm text-slate-800 dark:text-slate-200 mt-1">
+                    {metric.label}
+                  </p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
+                    {metric.sublabel}
+                  </p>
+                </div>
+              </div>
             );
           })}
-
         </div>
 
-        {/* Key achievements */}
-        <motion.div variants={itemVariants}>
-          <Card glassmorphism>
-            <CardBody>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-amber-400" />
-                Key Achievements
-              </h3>
-              <div className="space-y-3">
-                {achievements.map((a, i) => (
-                  <motion.div
-                    key={i}
-                    className="flex items-start gap-3 p-3 rounded-lg bg-white/50 dark:bg-white/5 border border-gray-100 dark:border-white/10 hover:border-blue-500/30 transition-colors"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ delay: 0.5 + i * 0.1 }}
-                  >
-                    <span className="text-xl flex-shrink-0">{a.icon}</span>
-                    <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{a.text}</p>
-                  </motion.div>
-                ))}
+        {/* Core Technical Deliverables */}
+        <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-sm dark:shadow-none">
+          <h3 className="text-sm font-mono text-sky-600 dark:text-sky-400 uppercase tracking-wider font-semibold">
+            Verified Technical Accomplishments
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+            {achievements.map((item, idx) => (
+              <div key={idx} className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800/80 font-mono text-xs">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0" />
+                <span>{item}</span>
               </div>
-            </CardBody>
-          </Card>
-        </motion.div>
-      </motion.div>
+            ))}
+          </div>
+        </div>
+
+      </div>
     </Section>
   );
 }
+
+
