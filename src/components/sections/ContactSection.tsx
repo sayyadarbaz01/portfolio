@@ -112,7 +112,7 @@ export function ContactSection() {
   return (
     <Section id="contact" title="Contact & Direct Communication" ref={ref}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-        
+
         {/* Left Column: Direct Info */}
         <div className="space-y-6 text-slate-900 dark:text-slate-100">
           <div>
