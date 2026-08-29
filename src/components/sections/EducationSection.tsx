@@ -53,7 +53,7 @@ export function EducationSection() {
           >
             {education.map((edu) => (
               <motion.div key={edu.id} variants={itemVariants}>
-                <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-2 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors">
+                <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-2 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
                       <h4 className="text-base font-bold text-slate-900 dark:text-slate-100">
@@ -67,7 +67,7 @@ export function EducationSection() {
                       {edu.duration}
                     </span>
                   </div>
-                  <p className="text-xs font-mono text-slate-500 dark:text-slate-400">
+                  <p className="text-xs font-mono text-slate-600 dark:text-slate-300 font-medium">
                     {edu.location}
                   </p>
                   {edu.description && (
@@ -95,7 +95,7 @@ export function EducationSection() {
           >
             {certifications.map((cert) => (
               <motion.div key={cert.id} variants={itemVariants}>
-                <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-2.5 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors h-full flex flex-col justify-between">
+                <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-2.5 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors h-full flex flex-col justify-between">
                   <div>
                     <div className="flex justify-between items-start gap-2 mb-1">
                       <h4 className="text-base font-bold text-slate-900 dark:text-slate-100 font-sans">

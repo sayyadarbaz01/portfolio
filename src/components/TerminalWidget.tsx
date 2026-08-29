@@ -10,50 +10,47 @@ const COMMANDS: Record<string, string> = {
   arch        - System architecture & RAG breakdown
   metrics     - Quantitative engineering benchmarks
   skills      - Full-stack technical matrix
-  experience  - Production roles at Synechron & Nexvia
+  experience  - Production role & projects at Synechron
   contact     - Direct contact channels
   clear       - Clear terminal output`,
-  whoami: `Arbaz Sayyad — Senior Full-Stack Engineer
+  whoami: `Arbaz Sayyad — Full Stack Developer (3+ YOE)
 ─────────────────────────────────────────────
-• 5+ Years Experience (Enterprise BFSI & Retail POS)
-• Specialized in React.js, TypeScript, Node.js & OpenAI RAG
-• Location: Pune, India
-• Availability: Open to Senior / Tech Lead roles`,
+• 3+ Years Experience (Enterprise Web & Microservices)
+• Core Focus: Frontend Architecture, Backend Microservices & AI RAG Systems
+• Key Stack: React.js, TypeScript, Node.js, Express, MongoDB, OpenAI RAG
+• Location: Pune, India | Open for Full Stack / Lead roles`,
   arch: `System Architecture Showcase:
 ─────────────────────────────────────────────
-[KYT Compliance & Risk Platform (U.S. Bank)]
-Client: React 19 + TypeScript SPA
-Gateway: Express.js API Gateway (JWT, Rate Limiter)
-RAG Engine: Node.js + OpenAI GPT-4 Completions
+[KYT Compliance & AI Risk Platform (U.S. Bank)]
+Client: React 19 + TypeScript SPA (Redux Toolkit, MUI)
+Gateway: Express.js REST API Gateway (JWT, RBAC)
+RAG Engine: Node.js + OpenAI GPT Prompt Engineering
 Vector Store: MongoDB Atlas Vector Search (HNSW Index)
-Throughput: Sub-300ms query latency across 500+ users`,
+Throughput: Sub-200ms query latency across 500+ daily users`,
   metrics: `Performance Benchmarks:
 ─────────────────────────────────────────────
+• 4s → 2s page load speedup (50% speedup) via code splitting & memoized selectors
+• 25% development overhead reduction via TypeScript component design system
 • 35% reduction in compliance risk summary write-up time
 • 40% speedup in vector search policy retrieval
-• 500+ active daily enterprise users supported
-• 50% initial page load speedup (4.0s → 2.0s)`,
+• 500+ active daily enterprise compliance users supported`,
   skills: `Technical Matrix:
 ─────────────────────────────────────────────
-Frontend: React.js, TypeScript, Next.js, Redux Toolkit, Tailwind CSS
-Backend: Node.js, Express.js, REST APIs, Microservices Architecture
-AI & Data: OpenAI API, RAG, MongoDB Vector Search, Text Embeddings
-DevOps: Docker Containerization, CI/CD Pipelines, Git/GitHub`,
-  experience: `Production Experience:
+Frontend: React.js, TypeScript, JavaScript, Redux Toolkit, MUI, Tailwind CSS, WCAG 2.1
+Backend:  Node.js, Express.js, REST APIs, MongoDB, SQL, JWT, RBAC, Docker, Microservices, CI/CD
+AI & Data: OpenAI API, RAG Architecture, MongoDB Vector Search, Prompt Engineering`,
+  experience: `Production Experience & Key Projects:
 ─────────────────────────────────────────────
-[2022 - 2025] Senior Associate Technology @ Synechron (U.S. Bank)
-              • Built enterprise BFSI compliance RAG & vector search.
-              • Containerized Node services with Docker & CI/CD.
-
-[2020 - 2022] Software Engineer @ Nexvia Software
-              • Engineered POS e-commerce checkout components.
-              • Optimized Redux Toolkit state & Axios interceptors.`,
+[2022 - Present] Senior Associate Technology @ Synechron Technologies
+                 • U.S. Bank – KYT Compliance Platform (React, TS, Node, OpenAI API, Vector Search)
+                 • Governance Dashboard Platform (React, Redux, REST API, Tailwind CSS, Jest)
+                 • Cut page load time 4s→2s and dev overhead by 25%.`,
   contact: `Direct Contact:
 ─────────────────────────────────────────────
-📧 Email:    arbazsayyad015@gmail.com
+📧 Email:    sayyadarbaz046@gmail.com
 💼 LinkedIn: linkedin.com/in/arbazsayyad
 🐙 GitHub:   github.com/sayyadarbaz01
-📱 Phone:    +91-9518940046`,
+📱 Phone:    +91-7841050046`,
   clear: "CLEAR",
 };
 
@@ -220,13 +217,13 @@ export function TerminalWidget({ isOpen, onClose }: TerminalWidgetProps) {
             </div>
 
             {/* Quick commands bar */}
-            <div className="bg-slate-900 px-4 py-2 border-t border-slate-800">
-              <div className="flex flex-wrap gap-1.5">
+            <div className="bg-slate-900 px-4 py-2.5 border-t border-slate-800">
+              <div className="flex flex-wrap gap-2">
                 {["whoami", "arch", "metrics", "skills", "experience", "contact", "help"].map((cmd) => (
                   <button
                     key={cmd}
                     onClick={() => handleCommand(cmd)}
-                    className="px-2 py-1 text-[11px] rounded bg-slate-800 text-slate-300 hover:bg-sky-600 hover:text-white transition-colors font-mono"
+                    className="px-2.5 py-1 rounded text-xs bg-slate-800 text-slate-200 hover:bg-sky-600 hover:text-white transition-colors font-mono font-medium border border-slate-700/60"
                   >
                     {cmd}
                   </button>

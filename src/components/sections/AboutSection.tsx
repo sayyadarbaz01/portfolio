@@ -8,23 +8,23 @@ import { Cpu, Zap, Shield, Layers, Users } from "lucide-react";
 const principles = [
   {
     icon: Cpu,
-    title: "Full-Stack Architecture",
-    description: "Building scalable single-page applications and event-driven Node.js microservices with strict TypeScript interfaces.",
+    title: "Frontend Architecture & Systems",
+    description: "Designing responsive, accessible (WCAG 2.1) React/TypeScript design systems cutting component overhead by 25%.",
   },
   {
     icon: Zap,
-    title: "Performance Engineering",
-    description: "Optimizing bundle splitting, component memoization, and database vector indexing to achieve sub-200ms latency.",
+    title: "Backend & Microservices Gateway",
+    description: "Building event-driven Node.js REST API gateways with JWT, RBAC, Docker containerization, and automated CI/CD pipelines.",
   },
   {
     icon: Shield,
-    title: "Enterprise BFSI Governance",
-    description: "Designing audit-compliant transaction monitoring and risk triage workflows for financial institutions like U.S. Bank.",
+    title: "AI & RAG Integration",
+    description: "Vectorizing text narratives with OpenAI API prompt engineering and MongoDB Atlas Vector Search for automated summaries.",
   },
   {
     icon: Layers,
-    title: "AI & RAG Integration",
-    description: "Vectorizing text narratives with OpenAI embeddings & MongoDB Atlas Vector Search for retrieval-augmented generation.",
+    title: "Empirical Performance",
+    description: "Cutting initial page load times from 4.0s to 2.0s (50% speedup) and policy retrieval latency by 40% for 500+ daily users.",
   },
 ];
 
@@ -39,19 +39,19 @@ export function AboutSection() {
         {/* Left Column: Narrative */}
         <div className="lg:col-span-6 space-y-5 text-left">
           <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-            Senior Full-Stack Developer · 5+ Years Experience
+            Full Stack Developer · 3+ YOE
           </h3>
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-            I specialize in building production-grade web applications, microservices, and intelligent AI workflows. Over 5+ years at Synechron and Nexvia, I have led technical implementations for high-concurrency compliance platforms supporting 500+ daily financial analysts.
+            I specialize in building production-grade web applications, microservices, and intelligent AI workflows. Over 3+ YOE at Synechron Technologies, I have led technical implementations for high-concurrency compliance platforms supporting 500+ daily financial analysts.
           </p>
           <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-            My core focus spans React/TypeScript frontend architecture, Node.js API gateways, Docker containerization, and integrating generative AI with custom RAG pipelines.
+            My technical expertise spans frontend architecture (React.js, TypeScript, Redux, MUI, Tailwind, WCAG 2.1), backend microservices (Node.js, Express, REST APIs, MongoDB, SQL, JWT, RBAC, Docker, CI/CD), and generative AI integration (OpenAI API, RAG, Vector Search, Prompt Engineering).
           </p>
 
-          <div className="p-4 bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-xl space-y-2 font-mono text-xs text-slate-700 dark:text-slate-300">
+          <div className="p-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl space-y-2 font-mono text-xs text-slate-700 dark:text-slate-300">
             <p className="text-sky-600 dark:text-sky-400 font-bold uppercase tracking-wider">Engineering Philosophy</p>
             <p className="text-slate-700 dark:text-slate-300">
-              &quot;Write clean, deterministic code. Optimize for readability, measurable performance metrics, and resilient system boundaries.&quot;
+              &quot;Write clean, deterministic code. Optimize for readability, measurable performance metrics (4s→2s load times), and resilient system boundaries.&quot;
             </p>
           </div>
         </div>
@@ -63,7 +63,7 @@ export function AboutSection() {
             return (
               <div
                 key={idx}
-                className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-xl p-4 space-y-2 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors"
+                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 space-y-2 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors"
               >
                 <div className="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center">
                   <Icon className="w-4 h-4" />
@@ -71,7 +71,7 @@ export function AboutSection() {
                 <h4 className="font-mono font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100">
                   {p.title}
                 </h4>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-snug">
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
                   {p.description}
                 </p>
               </div>

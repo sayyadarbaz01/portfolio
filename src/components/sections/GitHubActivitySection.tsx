@@ -96,21 +96,21 @@ export function GitHubActivitySection() {
       >
         <motion.div variants={itemVariants} className="flex items-center gap-3">
           <Activity className="w-4 h-4 text-emerald-600 dark:text-emerald-400 animate-pulse" />
-          <p className="text-slate-600 dark:text-slate-400 text-sm font-mono">
+          <p className="text-slate-600 dark:text-slate-300 text-sm font-mono font-medium">
             Empirical commit trajectory and open-source contributions.
           </p>
         </motion.div>
 
         {/* Contribution heatmap */}
         <motion.div variants={itemVariants}>
-          <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm dark:shadow-none space-y-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm dark:shadow-none space-y-4">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
                 <Activity className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               </div>
               <div>
                 <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm font-sans">Contribution Graph</h4>
-                <p className="text-xs font-mono text-slate-500 dark:text-slate-400">Live Telemetry from GitHub</p>
+                <p className="text-xs font-mono text-slate-600 dark:text-slate-300 font-medium">Live Telemetry from GitHub</p>
               </div>
             </div>
             <div className="flex flex-col md:flex-row gap-6 items-start">
@@ -180,7 +180,7 @@ export function GitHubActivitySection() {
                 className="block group"
                 whileHover={{ y: -2 }}
               >
-                <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-xl p-4 sm:p-5 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors h-full flex flex-col justify-between space-y-3">
+                <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 sm:p-5 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors h-full flex flex-col justify-between space-y-3">
                   <div className="space-y-2">
                     <div className="flex items-start justify-between">
                       <h5 className="font-mono font-bold text-sky-600 dark:text-sky-400 text-sm group-hover:underline">
@@ -193,7 +193,7 @@ export function GitHubActivitySection() {
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-4 text-[11px] font-mono text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200 dark:border-slate-800">
+                  <div className="flex items-center gap-4 text-[11px] font-mono text-slate-600 dark:text-slate-300 pt-2 border-t border-slate-200 dark:border-slate-800 font-medium">
                     <div className="flex items-center gap-1.5 font-medium">
                       <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: repo.langColor }} />
                       {repo.language}

@@ -8,20 +8,20 @@ import { socialLinks } from "@/data/portfolio";
 import { Check, Download, Mail, ExternalLink, ShieldCheck } from "lucide-react";
 
 const summary = [
-  "Senior Full-Stack Developer (5+ Years Professional Experience)",
-  "Production OpenAI API, RAG & MongoDB Vector Search Pipelines",
-  "React 19, TypeScript, Next.js & Redux Toolkit Architecture",
-  "Node.js & Express.js Microservices API Gateway Design",
-  "Enterprise BFSI Financial Compliance Systems (U.S. Bank)",
-  "Docker Containerization & Production CI/CD Pipelines",
+  "Full Stack Developer (3+ YOE Professional Experience)",
+  "Frontend Architecture: React.js, TypeScript, Redux Toolkit, MUI, Tailwind, WCAG 2.1, Code Splitting",
+  "Backend & Microservices: Node.js, Express.js, REST APIs, MongoDB, SQL, JWT, RBAC, Docker, CI/CD",
+  "AI Integration & RAG: OpenAI API, RAG Architecture, MongoDB Vector Search, Prompt Engineering",
+  "Verified Performance: 4s→2s Page Load Speedup (50%) & 25% Dev Overhead Reduction",
+  "Enterprise Impact: 35% Analyst Time Cut, 40% Retrieval Speedup & 500+ Active Users",
 ];
 
 const quickFacts = [
-  { label: "Experience Level", value: "Senior (5+ Years)" },
-  { label: "Location", value: "Pune, India" },
-  { label: "Work Preference", value: "Remote / Hybrid / On-Site" },
-  { label: "Role Availability", value: "Open for Sr. Developer / Tech Lead" },
-  { label: "Key Stack", value: "React, TypeScript, Node.js, AI/RAG" },
+  { label: "Experience Level", value: "3+ YOE (Full Stack Developer)" },
+  { label: "Technical Domain", value: "Full Stack Web & AI Systems" },
+  { label: "Location", value: "Pune, India (Open to Remote)" },
+  { label: "Role Availability", value: "Open for Full Stack / Lead Roles" },
+  { label: "Core Stack", value: "React, TypeScript, Node.js, AI/RAG" },
 ];
 
 export function RecruiterSummarySection() {
@@ -39,7 +39,7 @@ export function RecruiterSummarySection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
           {/* Profile & Qualifications */}
-          <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-6 text-slate-900 dark:text-slate-100 flex flex-col justify-between shadow-sm dark:shadow-none">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-6 text-slate-900 dark:text-slate-100 flex flex-col justify-between shadow-sm dark:shadow-none">
             <div className="space-y-4">
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
                 <div className="flex items-center gap-3">
@@ -51,7 +51,7 @@ export function RecruiterSummarySection() {
                       Arbaz Sayyad
                     </h3>
                     <p className="text-xs text-sky-600 dark:text-sky-400 font-mono font-semibold">
-                      Senior Full-Stack Engineer
+                      Full Stack Developer (3+ YOE)
                     </p>
                   </div>
                 </div>
@@ -92,7 +92,7 @@ export function RecruiterSummarySection() {
           </div>
 
           {/* Quick Facts & Direct Channels */}
-          <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-6 text-slate-900 dark:text-slate-100 flex flex-col justify-between shadow-sm dark:shadow-none">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-6 text-slate-900 dark:text-slate-100 flex flex-col justify-between shadow-sm dark:shadow-none">
             <div className="space-y-4">
               <h4 className="font-mono text-xs text-sky-600 dark:text-sky-400 uppercase tracking-wider border-b border-slate-200 dark:border-slate-800 pb-3 font-semibold">
                 Operational Overview
@@ -101,7 +101,7 @@ export function RecruiterSummarySection() {
               <div className="divide-y divide-slate-200 dark:divide-slate-800/80 font-mono text-xs">
                 {quickFacts.map((fact, idx) => (
                   <div key={idx} className="py-2.5 flex justify-between items-center text-slate-700 dark:text-slate-300">
-                    <span className="text-slate-500 dark:text-slate-400">{fact.label}:</span>
+                    <span className="text-slate-600 dark:text-slate-300 font-medium">{fact.label}:</span>
                     <span className="font-semibold text-slate-900 dark:text-slate-100">{fact.value}</span>
                   </div>
                 ))}

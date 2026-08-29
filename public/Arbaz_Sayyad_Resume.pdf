@@ -1,0 +1,122 @@
+%PDF-1.4
+1 0 obj
+<<
+  /Type /Catalog
+  /Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+  /Type /Pages
+  /Kids [3 0 R]
+  /Count 1
+>>
+endobj
+
+3 0 obj
+<<
+  /Type /Page
+  /Parent 2 0 R
+  /MediaBox [0 0 612 1008]
+  /Resources <<
+    /Font <<
+      /F1 <<
+        /Type /Font
+        /Subtype /Type1
+        /BaseFont /Courier
+      >>
+    >>
+  >>
+  /Contents 4 0 R
+>>
+endobj
+
+4 0 obj
+<< /Length 4256 >>
+stream
+BT
+/F1 9 Tf
+12 TL
+50 780 Td
+T* (ARBAZ SAYYAD) Tj
+T* (Full Stack Developer | 3+ YOE) Tj
+T* (Email: sayyadarbaz046@gmail.com | Phone: +91-7841050046) Tj
+T* (Location: Pune, India | GitHub: github.com/sayyadarbaz01 | LinkedIn: linkedin.com/in/arbazsayyad) Tj
+T* () Tj
+T* (================================================================================) Tj
+T* (SUMMARY) Tj
+T* (================================================================================) Tj
+T* (Full Stack Developer with 3+ YOE architecting high-throughput enterprise web ) Tj
+T* (applications, resilient microservices, and AI-assisted workflows. Specialized in ) Tj
+T* (React.js, TypeScript, Redux Toolkit, Node.js, Express.js, MongoDB, SQL, Docker, ) Tj
+T* (OpenAI API, RAG architecture, and Vector Search.) Tj
+T* () Tj
+T* (================================================================================) Tj
+T* (CORE COMPETENCIES & TECHNICAL MATRIX) Tj
+T* (================================================================================) Tj
+T* (- Frontend: React.js, TypeScript, JavaScript \(ES6+\), Redux Toolkit, Material UI, ) Tj
+T* (  Tailwind CSS, SCSS, HTML5, CSS3, WCAG 2.1 Accessibility, Code Splitting, Jest/RTL) Tj
+T* (- Backend: Node.js, Express.js, REST APIs, MongoDB, SQL Databases, JWT, RBAC, ) Tj
+T* (  Docker, Microservices Architecture, CI/CD Pipelines) Tj
+T* (- AI Systems: OpenAI API, RAG Architecture, MongoDB Vector Search, Prompt Engineering) Tj
+T* () Tj
+T* (================================================================================) Tj
+T* (PROFESSIONAL EXPERIENCE) Tj
+T* (================================================================================) Tj
+T* (Synechron Technologies Pvt. Ltd — Senior Associate Technology \(Full Stack Developer\)) Tj
+T* (Aug 2022 - Sep 2025 | Pune, India \(Client: U.S. Bank - BFSI Compliance Domain\)) Tj
+T* (- Architected enterprise React.js and Node.js applications supporting 500+ daily ) Tj
+T* (  financial compliance analysts with sub-200ms API response rates.) Tj
+T* (- Engineered reusable TypeScript + MUI component design system, reducing frontend ) Tj
+T* (  development overhead by 25%.) Tj
+T* (- Optimized web application bundle size and component rendering tree, cutting ) Tj
+T* (  initial page load speed from 4.0s to 2.0s \(50% speedup\).) Tj
+T* (- Integrated OpenAI API with prompt-engineered GPT completions for automated ) Tj
+T* (  transaction risk summaries, reducing analyst write-up time by 35%.) Tj
+T* (- Built Node.js RAG pipeline with MongoDB Atlas Vector Search HNSW indexing, ) Tj
+T* (  improving semantic policy retrieval speed by 40%.) Tj
+T* (- Containerized backend microservices with Docker and maintained CI/CD pipelines.) Tj
+T* () Tj
+T* (================================================================================) Tj
+T* (KEY PROJECTS) Tj
+T* (================================================================================) Tj
+T* (1. U.S. Bank - KYT \(Know Your Transaction\) Compliance Platform) Tj
+T* (   Stack: React.js, TypeScript, Node.js, OpenAI API, MongoDB Vector Search, Jest/RTL) Tj
+T* (   - Real-time transaction monitoring platform serving 500+ compliance analysts.) Tj
+T* (   - Designed GPT prompt templates returning structured JSON with zero post-processing.) Tj
+T* (   - Wrote unit and component tests with Jest and React Testing Library.) Tj
+T* () Tj
+T* (2. Governance Dashboard Platform) Tj
+T* (   Stack: React.js, JavaScript, Redux, Node.js, Tailwind CSS, REST API, Jest, CI/CD) Tj
+T* (   - Internal governance dashboard providing consolidated reporting metrics.) Tj
+T* (   - Wired up Redux/Context API state management and integrated REST APIs with Postman.) Tj
+T* (   - Contributed to GitHub/GitLab CI pipelines for automated build and test gates.) Tj
+T* () Tj
+T* (================================================================================) Tj
+T* (EDUCATION & CERTIFICATIONS) Tj
+T* (================================================================================) Tj
+T* (- B.Sc. in Information Technology \(BSc-IT\) | Dr. Babasaheb Ambedkar Marathwada University \(2018 - 2021\)) Tj
+T* (- Star Award - Performance Excellence | Synechron Technologies \(2023\)) Tj
+T* (- Star Award - Technical Innovation | Synechron Technologies \(2024\)) Tj
+T* () Tj
+ET
+endstream
+endobj
+
+xref
+0 5
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000300 00000 n 
+
+trailer
+<<
+  /Size 5
+  /Root 1 0 R
+>>
+startxref
+4606
+%%EOF

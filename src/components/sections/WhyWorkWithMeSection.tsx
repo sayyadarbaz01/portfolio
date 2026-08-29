@@ -57,7 +57,7 @@ export function WhyWorkWithMeSection() {
             return (
               <div
                 key={idx}
-                className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors"
+                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors"
               >
                 <div className="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center">
                   <Icon className="w-4 h-4" />
@@ -74,7 +74,7 @@ export function WhyWorkWithMeSection() {
         </div>
 
         {/* Engineering Banner */}
-        <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-900 dark:text-slate-100 shadow-sm dark:shadow-none">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-900 dark:text-slate-100 shadow-sm dark:shadow-none">
           <div className="space-y-1 text-center sm:text-left">
             <h3 className="font-mono font-bold text-base text-slate-900 dark:text-slate-100">
               Ready to Architect & Scale Your Platform?

@@ -64,7 +64,7 @@ export function AnalyticsDisplay({ isInView }: AnalyticsDisplayProps) {
           <Eye className="w-4 h-4" />
         </div>
         <div className="flex flex-col">
-          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+          <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">
             PORTFOLIO VISITORS
           </span>
           <span className="text-xl font-bold text-slate-900 dark:text-slate-100">
@@ -84,7 +84,7 @@ export function AnalyticsDisplay({ isInView }: AnalyticsDisplayProps) {
           <Download className="w-4 h-4" />
         </div>
         <div className="flex flex-col">
-          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+          <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">
             RESUME DOWNLOADS
           </span>
           <span className="text-xl font-bold text-slate-900 dark:text-slate-100">

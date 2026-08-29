@@ -25,9 +25,9 @@ export function Button({
     secondary:
       "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg hover:shadow-purple-500/50 focus:ring-purple-500",
     outline:
-      "border text-[var(--text-primary)] focus:ring-[var(--accent-blue)]",
+      "border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 focus:ring-sky-500 dark:focus:ring-offset-slate-950",
     ghost:
-      "text-[var(--text-secondary)] focus:ring-[var(--accent-blue)]",
+      "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 focus:ring-sky-500 dark:focus:ring-offset-slate-950",
   };
 
   const sizes = {
@@ -36,14 +36,9 @@ export function Button({
     lg: "px-8 py-3 text-lg",
   };
 
-  const outlineStyle = (variant === 'outline' || variant === 'ghost')
-    ? { borderColor: 'var(--border-base)' } as React.CSSProperties
-    : undefined;
-
   return (
     <button
       className={cn(baseStyles, variants[variant], sizes[size], className)}
-      style={outlineStyle}
       {...props}
     >
       {children}

@@ -35,7 +35,7 @@ export function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-200 border-b",
           scrolled
-            ? "bg-slate-900/90 dark:bg-slate-950/90 bg-white/90 backdrop-blur-md border-slate-200 dark:border-slate-800 shadow-sm"
+            ? "bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-slate-200 dark:border-slate-800 shadow-sm"
             : "bg-transparent border-transparent"
         )}
       >
@@ -54,7 +54,7 @@ export function Header() {
                   Arbaz Sayyad
                 </span>
                 <span className="text-[10px] font-mono text-sky-600 dark:text-sky-400 tracking-wider">
-                  SENIOR FULL-STACK ENGINEER
+                  FULL-STACK & AI ENGINEER
                 </span>
               </div>
             </button>
@@ -120,13 +120,13 @@ export function Header() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
-                className="md:hidden border-t border-slate-200 dark:border-slate-800 py-3 space-y-1 bg-slate-900 text-slate-100 rounded-b-xl px-2"
+                className="md:hidden border-t border-slate-200 dark:border-slate-800 py-3 space-y-1 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 rounded-b-xl px-2 shadow-lg"
               >
                 {navigation.map((item) => (
                   <button
                     key={item.label}
                     onClick={() => handleNavClick(item.href)}
-                    className="w-full text-left px-4 py-2 text-sm font-mono text-slate-300 hover:text-sky-400 hover:bg-slate-800/60 rounded-md"
+                    className="w-full text-left px-4 py-2 text-sm font-mono text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 rounded-md"
                   >
                     {item.label}
                   </button>

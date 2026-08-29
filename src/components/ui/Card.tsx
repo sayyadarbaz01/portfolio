@@ -56,7 +56,7 @@ export function CardHeader({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("px-6 py-4 border-b", className)} style={{ borderColor: 'var(--border-base)' }}>
+    <div className={cn("px-6 py-4 border-b border-slate-200 dark:border-slate-800/80", className)}>
       {children}
     </div>
   );
@@ -74,7 +74,7 @@ export function CardFooter({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("px-6 py-4 border-t", className)} style={{ borderColor: 'var(--border-base)' }}>
+    <div className={cn("px-6 py-4 border-t border-slate-200 dark:border-slate-800/80", className)}>
       {children}
     </div>
   );

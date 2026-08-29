@@ -21,6 +21,7 @@
 
   /* Engineering Accents */
   --accent-primary:  #2563eb;
+  --accent-blue:     #2563eb;
   --accent-sky:      #0284c7;
   --accent-emerald:  #059669;
   --accent-mono:     #475569;
@@ -28,7 +29,9 @@
   /* Card & Panel System */
   --card-bg:         #ffffff;
   --card-border:     #e2e8f0;
+  --border-base:     #e2e8f0;
   --card-shadow:     0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  --card-hover-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   --card-hover-border: #cbd5e1;
 
   /* Input & Form */
@@ -59,6 +62,7 @@
 
   /* Engineering Accents */
   --accent-primary:  #3b82f6;
+  --accent-blue:     #38bdf8;
   --accent-sky:      #38bdf8;
   --accent-emerald:  #10b981;
   --accent-mono:     #94a3b8;
@@ -66,7 +70,9 @@
   /* Card & Panel System */
   --card-bg:         #101726;
   --card-border:     rgba(255, 255, 255, 0.08);
+  --border-base:     rgba(255, 255, 255, 0.1);
   --card-shadow:     0 4px 20px -2px rgba(0, 0, 0, 0.5);
+  --card-hover-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   --card-hover-border: rgba(56, 189, 248, 0.25);
 
   /* Input & Form */
@@ -76,7 +82,7 @@
 
   /* Scrollbar */
   --scrollbar-track: #090d16;
-  --scrollbar-thumb: #1e293b;
+  --scrollbar-thumb: #334155;
 
   --background: #090d16;
   --foreground: #f8fafc;
@@ -150,17 +156,17 @@ html.light {
 input,
 textarea,
 select {
-  background-color: var(--input-bg) !important;
-  border-color: var(--input-border) !important;
-  color: var(--text-primary) !important;
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: var(--input-focus) !important;
+  border-color: var(--input-focus);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15) !important;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
 }
 
 /* ============================================================

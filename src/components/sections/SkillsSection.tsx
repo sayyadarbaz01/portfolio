@@ -8,20 +8,12 @@ import { Cpu, Layout, Server, Database, CheckCircle2 } from "lucide-react";
 
 const domainCategories = [
   {
-    key: "ai",
-    title: "AI Systems, RAG & Vector Search",
-    icon: Cpu,
-    color: "text-sky-500",
-    borderColor: "border-sky-500/20",
-    bgBadge: "bg-sky-500/10 text-sky-400 border-sky-500/20",
-  },
-  {
     key: "frontend",
-    title: "Frontend Architecture & Engineering",
+    title: "Frontend Architecture",
     icon: Layout,
     color: "text-blue-500",
     borderColor: "border-blue-500/20",
-    bgBadge: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    bgBadge: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
   },
   {
     key: "backend",
@@ -29,15 +21,15 @@ const domainCategories = [
     icon: Server,
     color: "text-indigo-500",
     borderColor: "border-indigo-500/20",
-    bgBadge: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
+    bgBadge: "bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border-indigo-500/20",
   },
   {
-    key: "cloud",
-    title: "Databases & Cloud Infrastructure",
-    icon: Database,
-    color: "text-emerald-500",
-    borderColor: "border-emerald-500/20",
-    bgBadge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    key: "ai",
+    title: "AI Systems, RAG & Vector Search",
+    icon: Cpu,
+    color: "text-sky-500",
+    borderColor: "border-sky-500/20",
+    bgBadge: "bg-sky-500/10 text-sky-700 dark:text-sky-400 border-sky-500/20",
   },
 ];
 
@@ -52,7 +44,7 @@ export function SkillsSection() {
         
         {/* Section Subhead */}
         <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl text-left">
-          Core technical competencies honed across 5+ years of full-stack engineering, performance tuning, and AI microservice implementation in enterprise environments.
+          Core technical matrix honed across 3+ YOE of full-stack software development, performance engineering, and enterprise AI microservice integration.
         </p>
 
         {/* Categories Grid */}
@@ -66,7 +58,7 @@ export function SkillsSection() {
             return (
               <div
                 key={domain.key}
-                className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-sm dark:shadow-none"
+                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-sm dark:shadow-none"
               >
                 {/* Header */}
                 <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
@@ -93,7 +85,7 @@ export function SkillsSection() {
                           {skill.name}
                         </span>
                         {skill.proficiency && (
-                          <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">
+                          <span className="text-[10px] font-mono text-slate-600 dark:text-slate-300 font-medium">
                             {skill.proficiency}%
                           </span>
                         )}

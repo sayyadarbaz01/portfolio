@@ -153,10 +153,10 @@ export function ArchitectureModal({ project, onClose }: ArchitectureModalProps) 
             {/* Engineering Trade-offs */}
             {tradeoffs && (
               <div>
-                <h4 className="text-sm font-mono text-amber-400 tracking-wider uppercase mb-2 flex items-center gap-2">
+                <h4 className="text-sm font-mono text-amber-400 tracking-wider uppercase mb-2 flex items-center gap-2 font-semibold">
                   <ShieldCheck className="w-4 h-4" /> Architectural Trade-offs & Decisions
                 </h4>
-                <p className="text-slate-300 text-xs leading-relaxed bg-amber-500/5 p-4 rounded-xl border border-amber-500/20 font-mono">
+                <p className="text-amber-100 text-xs leading-relaxed bg-amber-500/10 p-4 rounded-xl border border-amber-500/30 font-mono">
                   {tradeoffs}
                 </p>
               </div>

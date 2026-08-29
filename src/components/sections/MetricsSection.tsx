@@ -4,45 +4,46 @@ import React, { useRef } from "react";
 import { useInView } from "@/hooks";
 import { Section } from "@/components/ui";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { Cpu, Zap, Users, Gauge, CheckCircle2 } from "lucide-react";
+import { Cpu, Zap, Users, Gauge, Layers, CheckCircle2 } from "lucide-react";
 
 const metrics = [
-  {
-    icon: Zap,
-    value: 35,
-    suffix: "%",
-    label: "Analyst Write-Up Time Reduction",
-    sublabel: "OpenAI GPT narrative synthesis in KYT platform",
-  },
-  {
-    icon: Cpu,
-    value: 40,
-    suffix: "%",
-    label: "Vector Retrieval Latency Cut",
-    sublabel: "MongoDB Atlas Vector Search HNSW indexing",
-  },
-  {
-    icon: Users,
-    value: 500,
-    suffix: "+",
-    label: "Active BFSI Analysts Supported",
-    sublabel: "Mission-critical financial compliance environment",
-  },
   {
     icon: Gauge,
     value: 50,
     suffix: "%",
     label: "Page Load Speedup (4s → 2s)",
-    sublabel: "Redux Toolkit component optimization & memoization",
+    sublabel: "Route code splitting, lazy loading & memoized selectors",
+  },
+  {
+    icon: Layers,
+    value: 25,
+    suffix: "%",
+    label: "Dev Overhead Reduction",
+    sublabel: "Reusable React + TypeScript component design system",
+  },
+  {
+    icon: Zap,
+    value: 35,
+    suffix: "%",
+    label: "Analyst Write-Up Time Cut",
+    sublabel: "OpenAI GPT prompt completions & automated risk summaries",
+  },
+  {
+    icon: Cpu,
+    value: 40,
+    suffix: "%",
+    label: "Vector Retrieval Speedup",
+    sublabel: "MongoDB Atlas Vector Search HNSW indexing & RAG",
   },
 ];
 
 const achievements = [
-  "Integrated OpenAI API with custom prompt pipelines for automated transaction risk summaries at Synechron.",
-  "Architected Node.js RAG pipeline with MongoDB Atlas Vector Search for semantic compliance document lookup.",
-  "Engineered reusable React + TypeScript component design system serving 500+ daily operational users.",
-  "Containerized microservices with Docker for zero-downtime staging and production deployment gates.",
-  "Honored with 2 consecutive Star Awards (2023 & 2024) at Synechron Technologies for exceptional engineering output.",
+  "Engineered reusable TypeScript + MUI design system reducing component development overhead by 25%.",
+  "Optimized bundle size and component rendering tree, cutting initial page load speed from 4.0s to 2.0s (50% speedup).",
+  "Integrated OpenAI API with custom prompt pipelines for automated transaction risk summaries, cutting analyst write-up time by 35%.",
+  "Architected Node.js RAG pipeline with MongoDB Atlas Vector Search HNSW index, boosting policy retrieval speed by 40%.",
+  "Supported 500+ daily operational compliance analysts in mission-critical enterprise environments.",
+  "Honored with 2 consecutive Star Awards (2023 & 2024) at Synechron Technologies for performance & technical innovation.",
 ];
 
 export function MetricsSection() {
@@ -64,11 +65,11 @@ export function MetricsSection() {
             return (
               <div
                 key={index}
-                className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors"
+                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors"
               >
                 <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
                   <Icon className="w-5 h-5 text-sky-600 dark:text-sky-400" />
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-slate-600 dark:text-slate-300 font-semibold">
                     METRIC #0{index + 1}
                   </span>
                 </div>
@@ -85,7 +86,7 @@ export function MetricsSection() {
                   <p className="font-semibold text-xs sm:text-sm text-slate-800 dark:text-slate-200 mt-1">
                     {metric.label}
                   </p>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-1 leading-snug font-medium">
                     {metric.sublabel}
                   </p>
                 </div>
@@ -95,7 +96,7 @@ export function MetricsSection() {
         </div>
 
         {/* Core Technical Deliverables */}
-        <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-sm dark:shadow-none">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-sm dark:shadow-none">
           <h3 className="text-sm font-mono text-sky-600 dark:text-sky-400 uppercase tracking-wider font-semibold">
             Verified Technical Accomplishments
           </h3>

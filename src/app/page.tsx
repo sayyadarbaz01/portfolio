@@ -9,7 +9,7 @@ import {
 } from "@/components";
 import { useTrackVisit } from "@/hooks";
 
-// Lazy load sections for better performance
+// Lazy load core sections for optimal performance
 const AboutSection = lazy(() =>
   import("@/components/sections/AboutSection").then((mod) => ({
     default: mod.AboutSection,
@@ -30,40 +30,9 @@ const ExperienceSection = lazy(() =>
     default: mod.ExperienceSection,
   }))
 );
-const CurrentlyWorkingSection = lazy(() =>
-  import("@/components/sections/CurrentlyWorkingSection").then((mod) => ({
-    default: mod.CurrentlyWorkingSection,
-  }))
-);
 const ProjectsSection = lazy(() =>
   import("@/components/sections/ProjectsSection").then((mod) => ({
     default: mod.ProjectsSection,
-  }))
-);
-const GitHubActivitySection = lazy(() =>
-  import("@/components/sections/GitHubActivitySection").then((mod) => ({
-    default: mod.GitHubActivitySection,
-  }))
-);
-
-const WhyWorkWithMeSection = lazy(() =>
-  import("@/components/sections/WhyWorkWithMeSection").then((mod) => ({
-    default: mod.WhyWorkWithMeSection,
-  }))
-);
-const TestimonialsSection = lazy(() =>
-  import("@/components/sections/TestimonialsSection").then((mod) => ({
-    default: mod.TestimonialsSection,
-  }))
-);
-const RecruiterSummarySection = lazy(() =>
-  import("@/components/sections/RecruiterSummarySection").then((mod) => ({
-    default: mod.RecruiterSummarySection,
-  }))
-);
-const EducationSection = lazy(() =>
-  import("@/components/sections/EducationSection").then((mod) => ({
-    default: mod.EducationSection,
   }))
 );
 const ContactSection = lazy(() =>
@@ -80,66 +49,44 @@ export default function Home() {
 
   return (
     <>
-      {/* Main Sections */}
+      {/* 1. Hero Section */}
       <HeroSection />
       
+      {/* 2. About Section */}
       <LazySection>
         <AboutSection />
       </LazySection>
 
-      <LazySection>
-        <MetricsSection />
-      </LazySection>
-
+      {/* 3. Skills Matrix */}
       <LazySection>
         <SkillsSection />
       </LazySection>
 
+      {/* 4. Performance Engineering Benchmarks */}
+      <LazySection>
+        <MetricsSection />
+      </LazySection>
+
+      {/* 5. Professional Engineering Experience */}
       <LazySection>
         <ExperienceSection />
       </LazySection>
 
-      <LazySection>
-        <CurrentlyWorkingSection />
-      </LazySection>
-
+      {/* 6. Featured Resume Projects */}
       <LazySection>
         <ProjectsSection />
       </LazySection>
 
-      <LazySection>
-        <GitHubActivitySection />
-      </LazySection>
-
-
-
-      <LazySection>
-        <WhyWorkWithMeSection />
-      </LazySection>
-
-      <LazySection>
-        <TestimonialsSection />
-      </LazySection>
-
-      <LazySection>
-        <RecruiterSummarySection />
-      </LazySection>
-
-      <LazySection>
-        <EducationSection />
-      </LazySection>
-
+      {/* 7. Contact & Footer */}
       <LazySection>
         <ContactSection />
       </LazySection>
 
-      {/* Floating Terminal Button */}
+      {/* Floating CLI Terminal Button */}
       <TerminalButton onClick={() => setTerminalOpen(true)} />
 
-      {/* Terminal Modal */}
+      {/* Interactive Terminal Modal */}
       <TerminalWidget isOpen={terminalOpen} onClose={() => setTerminalOpen(false)} />
-
-
     </>
   );
 }

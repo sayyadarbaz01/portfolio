@@ -15,14 +15,14 @@ export function ExperienceSection() {
       <div className="space-y-8">
         
         <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl text-left">
-          5+ years of full-stack software development, architectural leadership, and performance engineering in enterprise financial tech.
+          3+ YOE of full-stack software development, architectural leadership, and performance engineering in enterprise platforms.
         </p>
 
         <div className="space-y-8">
           {experiences.map((exp) => (
             <div
               key={exp.id}
-              className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 text-slate-900 dark:text-slate-100 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors"
+              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 text-slate-900 dark:text-slate-100 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors"
             >
               {/* Header */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-5">
@@ -34,19 +34,19 @@ export function ExperienceSection() {
                     <Building className="w-4 h-4" />
                     <span>{exp.company}</span>
                     {exp.client && (
-                      <span className="text-slate-500 dark:text-slate-400 text-xs font-normal">
+                      <span className="text-slate-600 dark:text-slate-300 text-xs font-medium">
                         ({exp.client})
                       </span>
                     )}
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-slate-600 dark:text-slate-400">
-                  <span className="flex items-center gap-1 bg-slate-100 dark:bg-slate-950 px-3 py-1 rounded-md border border-slate-200 dark:border-slate-800">
+                <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-slate-700 dark:text-slate-300">
+                  <span className="flex items-center gap-1 bg-slate-100 dark:bg-slate-950 px-3 py-1 rounded-md border border-slate-200 dark:border-slate-800 font-medium">
                     <Calendar className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
                     {exp.duration}
                   </span>
-                  <span className="flex items-center gap-1 bg-slate-100 dark:bg-slate-950 px-3 py-1 rounded-md border border-slate-200 dark:border-slate-800">
+                  <span className="flex items-center gap-1 bg-slate-100 dark:bg-slate-950 px-3 py-1 rounded-md border border-slate-200 dark:border-slate-800 font-medium">
                     <MapPin className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                     {exp.location}
                   </span>

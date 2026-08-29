@@ -132,7 +132,7 @@ export function TestimonialsSection() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Form Section */}
           <motion.div variants={itemVariants} className="md:col-span-2">
-            <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm dark:shadow-none space-y-4">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm dark:shadow-none space-y-4">
               <div className="flex items-center gap-2 mb-2">
                 <MessageSquare className="w-5 h-5 text-sky-600 dark:text-sky-400" />
                 <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 font-sans">Leave Feedback</h3>
@@ -152,7 +152,7 @@ export function TestimonialsSection() {
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="block w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 outline-none"
+                      className="block w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 outline-none"
                       placeholder="e.g. John Doe"
                       required
                       disabled={isSubmitting}
@@ -173,7 +173,7 @@ export function TestimonialsSection() {
                       type="text"
                       value={formData.role}
                       onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                      className="block w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 outline-none"
+                      className="block w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 outline-none"
                       placeholder="e.g. Product Lead at Synechron"
                       disabled={isSubmitting}
                     />
@@ -189,7 +189,7 @@ export function TestimonialsSection() {
                     value={formData.content}
                     onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                     rows={4}
-                    className="block w-full px-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 resize-none outline-none"
+                    className="block w-full px-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 resize-none outline-none"
                     placeholder="What was it like working together?"
                     required
                     disabled={isSubmitting}
@@ -250,7 +250,7 @@ export function TestimonialsSection() {
                       transition={{ duration: 0.3 }}
                       layout
                     >
-                      <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-xl p-4 sm:p-5 shadow-sm dark:shadow-none space-y-3">
+                      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 sm:p-5 shadow-sm dark:shadow-none space-y-3">
                         <div className="flex gap-4">
                           <div
                             className={`w-10 h-10 rounded-full bg-gradient-to-br ${item.avatarGradient} flex items-center justify-center text-white font-bold shrink-0 shadow-inner`}
@@ -267,7 +267,7 @@ export function TestimonialsSection() {
                                   {item.role}
                                 </p>
                               </div>
-                              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-950 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-800">
+                              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-950 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-800 font-medium">
                                 <Clock className="w-3 h-3" />
                                 {item.date}
                               </div>

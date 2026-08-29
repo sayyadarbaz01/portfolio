@@ -24,7 +24,7 @@ export function ProjectsSection() {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden flex flex-col shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-all duration-200"
+              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden flex flex-col shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-all duration-200"
             >
               {/* Project Image Preview */}
               {project.image && (

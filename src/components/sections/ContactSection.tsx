@@ -118,36 +118,36 @@ export function ContactSection() {
           <div className="space-y-3 font-mono text-xs text-slate-700 dark:text-slate-300">
             <a
               href={`mailto:${socialLinks.email}`}
-              className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none hover:border-sky-500 transition-colors"
+              className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none hover:border-sky-500 transition-colors"
             >
               <div className="p-2 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
                 <Mail className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-slate-500 dark:text-slate-400 text-[10px]">EMAIL</p>
+                <p className="text-slate-600 dark:text-slate-300 text-[10px] font-medium">EMAIL</p>
                 <p className="font-semibold text-slate-900 dark:text-slate-100">{socialLinks.email}</p>
               </div>
             </a>
 
             <a
               href={`tel:${socialLinks.phone}`}
-              className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none hover:border-emerald-500 transition-colors"
+              className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none hover:border-emerald-500 transition-colors"
             >
               <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
                 <Phone className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-slate-500 dark:text-slate-400 text-[10px]">PHONE / WHATSAPP</p>
+                <p className="text-slate-600 dark:text-slate-300 text-[10px] font-medium">PHONE / WHATSAPP</p>
                 <p className="font-semibold text-slate-900 dark:text-slate-100">{socialLinks.phone}</p>
               </div>
             </a>
 
-            <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none">
+            <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none">
               <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
                 <MapPin className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-slate-500 dark:text-slate-400 text-[10px]">LOCATION</p>
+                <p className="text-slate-600 dark:text-slate-300 text-[10px] font-medium">LOCATION</p>
                 <p className="font-semibold text-slate-900 dark:text-slate-100">Pune, India (Open to Remote)</p>
               </div>
             </div>
@@ -155,14 +155,14 @@ export function ContactSection() {
         </div>
 
         {/* Right Column: Contact Form */}
-        <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 text-slate-900 dark:text-slate-100 shadow-sm dark:shadow-none">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 text-slate-900 dark:text-slate-100 shadow-sm dark:shadow-none">
           <h4 className="font-mono text-xs text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-2 flex items-center gap-2 font-semibold">
             <MessageSquare className="w-4 h-4" /> Direct Message Form
           </h4>
 
           <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
             <div>
-              <label htmlFor="contact-name" className="block text-slate-600 dark:text-slate-400 mb-1">
+              <label htmlFor="contact-name" className="block text-slate-700 dark:text-slate-300 mb-1 font-medium">
                 FULL NAME *
               </label>
               <input
@@ -172,13 +172,13 @@ export function ContactSection() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600"
+                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
                 placeholder="e.g. Sarah Jenkins"
               />
             </div>
 
             <div>
-              <label htmlFor="contact-email" className="block text-slate-600 dark:text-slate-400 mb-1">
+              <label htmlFor="contact-email" className="block text-slate-700 dark:text-slate-300 mb-1 font-medium">
                 EMAIL ADDRESS *
               </label>
               <input
@@ -188,13 +188,13 @@ export function ContactSection() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600"
+                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
                 placeholder="e.g. sarah@company.com"
               />
             </div>
 
             <div>
-              <label htmlFor="contact-subject" className="block text-slate-600 dark:text-slate-400 mb-1">
+              <label htmlFor="contact-subject" className="block text-slate-700 dark:text-slate-300 mb-1 font-medium">
                 SUBJECT / ROLE *
               </label>
               <input
@@ -204,13 +204,13 @@ export function ContactSection() {
                 value={formData.subject}
                 onChange={handleChange}
                 required
-                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600"
+                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
                 placeholder="e.g. Senior Full-Stack Engineer Role"
               />
             </div>
 
             <div>
-              <label htmlFor="contact-message" className="block text-slate-600 dark:text-slate-400 mb-1">
+              <label htmlFor="contact-message" className="block text-slate-700 dark:text-slate-300 mb-1 font-medium">
                 MESSAGE DETAILS *
               </label>
               <textarea
@@ -220,7 +220,7 @@ export function ContactSection() {
                 onChange={handleChange}
                 required
                 rows={4}
-                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 resize-none"
+                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 resize-none"
                 placeholder="Details about project, tech stack, or open role..."
               />
             </div>
