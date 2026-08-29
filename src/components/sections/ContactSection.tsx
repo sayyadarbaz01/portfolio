@@ -59,7 +59,6 @@ export function ContactSection() {
     try {
       if (EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_USER_ID) {
         try {
-          emailjs.init({ publicKey: EMAILJS_USER_ID });
           const result = await emailjs.send(
             EMAILJS_SERVICE_ID,
             EMAILJS_TEMPLATE_ID,
@@ -72,26 +71,36 @@ export function ContactSection() {
               subject: formData.subject,
               title: formData.subject,
               message: formData.message,
-            }
+            },
+            EMAILJS_USER_ID
           );
-          emailOk = true;
+          if (result.status === 200 || result.text === "OK") {
+            emailOk = true;
+          }
         } catch (emailErr: any) {
-          console.error("EmailJS ERROR:", emailErr);
+          console.error("EmailJS Client Error:", emailErr);
         }
       }
 
-      await saveContact({
+      const res = await saveContact({
         name: formData.name,
         email: formData.email,
         subject: formData.subject,
         message: formData.message,
       });
 
-      toast.success(emailOk
-        ? "Message sent successfully!"
-        : "Message received! I'll be in touch shortly."
-      );
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      const isDispatched = emailOk || res?.emailSent || res?.success;
+
+      if (isDispatched) {
+        toast.success(
+          emailOk || res?.emailSent
+            ? "Message dispatched successfully! Check your inbox."
+            : "Message received! I will be in touch shortly."
+        );
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        toast.error("Message saved, but email notification could not be delivered.");
+      }
     } catch (err) {
       console.error("Failed to process message:", err);
       toast.error("Failed to send message. Please try again.");
