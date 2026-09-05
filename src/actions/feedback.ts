@@ -51,8 +51,8 @@ async function syncFeedbacksFromDb() {
 }
 
 export async function getFeedbacks() {
-  if (Date.now() - lastFeedbacksSync > 30000) {
-    syncFeedbacksFromDb().catch(() => {});
+  if (lastFeedbacksSync === 0 || Date.now() - lastFeedbacksSync > 30000) {
+    await syncFeedbacksFromDb();
   }
   return { success: true, data: cachedFeedbacks };
 }
@@ -189,7 +189,7 @@ export async function saveContact(data: {
 }
 
 // In-Memory Analytics Cache
-let cachedVisitors = 100;
+let cachedVisitors = 0;
 let cachedDownloads = 0;
 let lastVisitorSync = 0;
 let lastDownloadSync = 0;
@@ -311,27 +311,33 @@ async function bgIncrementDownload() {
 }
 
 export async function trackPortfolioVisit() {
+  if (lastVisitorSync === 0) {
+    await syncVisitorCountFromDb();
+  }
   cachedVisitors += 1;
   bgIncrementVisitor().catch(() => {});
   return { success: true, data: { totalVisitors: cachedVisitors } };
 }
 
 export async function getPortfolioVisitorCount() {
-  if (Date.now() - lastVisitorSync > 30000) {
-    syncVisitorCountFromDb().catch(() => {});
+  if (lastVisitorSync === 0 || Date.now() - lastVisitorSync > 30000) {
+    await syncVisitorCountFromDb();
   }
   return { success: true, data: cachedVisitors };
 }
 
 export async function trackResumeDownload() {
+  if (lastDownloadSync === 0) {
+    await syncDownloadCountFromDb();
+  }
   cachedDownloads += 1;
   bgIncrementDownload().catch(() => {});
   return { success: true, data: { totalDownloads: cachedDownloads } };
 }
 
 export async function getResumeDownloadCount() {
-  if (Date.now() - lastDownloadSync > 30000) {
-    syncDownloadCountFromDb().catch(() => {});
+  if (lastDownloadSync === 0 || Date.now() - lastDownloadSync > 30000) {
+    await syncDownloadCountFromDb();
   }
   return { success: true, data: cachedDownloads };
 }
