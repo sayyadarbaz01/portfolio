@@ -31,10 +31,8 @@ export function useTheme() {
 
   useEffect(() => {
     setMounted(true);
-    const isDark =
-      localStorage.getItem("theme") === "dark" ||
-      (!localStorage.getItem("theme") &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
+    const savedTheme = localStorage.getItem("theme");
+    const isDark = savedTheme ? savedTheme === "dark" : true;
     setTheme(isDark ? "dark" : "light");
     document.documentElement.classList.toggle("dark", isDark);
   }, []);
