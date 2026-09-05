@@ -6,7 +6,7 @@ import React, { useRef, useState } from "react";
 import { Section } from "@/components/ui";
 import { socialLinks } from "@/data/portfolio";
 import { saveContact } from "@/actions/feedback";
-import { Mail, Phone, MapPin, Send, MessageSquare } from "lucide-react";
+import { Mail, Phone, MapPin, Send, MessageSquare, Loader2 } from "lucide-react";
 
 interface FormData {
   name: string;
@@ -49,6 +49,8 @@ export function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
     const error = validate();
     if (error) {
       toast.error(error);
@@ -89,17 +91,15 @@ export function ContactSection() {
         message: formData.message,
       });
 
-      const isDispatched = emailOk || res?.emailSent || res?.success;
-
-      if (isDispatched) {
+      if (emailOk || res?.success) {
         toast.success(
-          emailOk || res?.emailSent
+          emailOk
             ? "Message dispatched successfully! Check your inbox."
             : "Message received! I will be in touch shortly."
         );
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
-        toast.error("Message saved, but email notification could not be delivered.");
+        toast.error("Failed to send message. Please try again.");
       }
     } catch (err) {
       console.error("Failed to process message:", err);
@@ -180,8 +180,9 @@ export function ContactSection() {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
+                disabled={isSubmitting}
                 required
-                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
+                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 disabled:opacity-60 disabled:cursor-not-allowed"
                 placeholder="e.g. Sarah Jenkins"
               />
             </div>
@@ -196,8 +197,9 @@ export function ContactSection() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                disabled={isSubmitting}
                 required
-                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
+                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 disabled:opacity-60 disabled:cursor-not-allowed"
                 placeholder="e.g. sarah@company.com"
               />
             </div>
@@ -212,8 +214,9 @@ export function ContactSection() {
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
+                disabled={isSubmitting}
                 required
-                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
+                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 disabled:opacity-60 disabled:cursor-not-allowed"
                 placeholder="e.g. Senior Full-Stack Engineer Role"
               />
             </div>
@@ -227,9 +230,10 @@ export function ContactSection() {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
+                disabled={isSubmitting}
                 required
                 rows={4}
-                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 resize-none"
+                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 resize-none disabled:opacity-60 disabled:cursor-not-allowed"
                 placeholder="Details about project, tech stack, or open role..."
               />
             </div>
@@ -237,10 +241,19 @@ export function ContactSection() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-3 rounded-lg font-semibold bg-sky-600 hover:bg-sky-500 text-white transition-colors flex items-center justify-center gap-2"
+              className="w-full py-3 rounded-lg font-semibold bg-sky-600 hover:bg-sky-500 disabled:opacity-50 disabled:cursor-not-allowed text-white transition-colors flex items-center justify-center gap-2"
             >
-              <Send className="w-4 h-4" />
-              <span>{isSubmitting ? "Sending Message..." : "Dispatch Message"}</span>
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Sending Message...</span>
+                </>
+              ) : (
+                <>
+                  <Send className="w-4 h-4" />
+                  <span>Message</span>
+                </>
+              )}
             </button>
           </form>
         </div>

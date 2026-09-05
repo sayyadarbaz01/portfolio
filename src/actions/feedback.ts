@@ -12,7 +12,13 @@ export async function getFeedbacks() {
     const feedbacks = await prisma.feedback.findMany({
       orderBy: { createdAt: "desc" },
     });
-    return { success: true, data: feedbacks };
+    return {
+      success: true,
+      data: feedbacks.map((f) => ({
+        ...f,
+        createdAt: f.createdAt.toISOString(),
+      })),
+    };
   } catch (error) {
     console.warn("Could not fetch feedbacks from database, using fallback:", error);
     return { success: true, data: [] };
@@ -50,7 +56,13 @@ export async function addFeedback(data: {
         avatarGradient: data.avatarGradient,
       },
     });
-    return { success: true, data: newFeedback };
+    return {
+      success: true,
+      data: {
+        ...newFeedback,
+        createdAt: newFeedback.createdAt.toISOString(),
+      },
+    };
   } catch (error) {
     console.warn("Failed to add feedback to DB, returning fallback:", error);
     return { success: true, data: fallbackFeedback };
@@ -72,63 +84,10 @@ export async function saveContact(data: {
     createdAt: new Date().toISOString(),
   };
 
-  // Try sending email via EmailJS REST API from server if credentials configured
-  const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || process.env.EMAILJS_SERVICE_ID;
-  const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || process.env.EMAILJS_TEMPLATE_ID;
-  const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID || process.env.EMAILJS_USER_ID;
-
-  let emailSent = false;
-  let emailError: string | null = null;
-
-  if (serviceId && templateId && userId) {
-    try {
-      const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Origin": "http://localhost:3000",
-          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-          "Referer": "http://localhost:3000/",
-        },
-        body: JSON.stringify({
-          service_id: serviceId,
-          template_id: templateId,
-          user_id: userId,
-          template_params: {
-            from_name: data.name,
-            name: data.name,
-            from_email: data.email,
-            email: data.email,
-            reply_to: data.email,
-            subject: data.subject,
-            title: data.subject,
-            message: data.message,
-          },
-        }),
-      });
-
-      const responseText = await response.text();
-      if (response.ok) {
-        emailSent = true;
-        console.log("EmailJS email sent successfully:", responseText);
-      } else {
-        emailError = responseText;
-        console.error(`EmailJS API returned HTTP ${response.status}:`, responseText);
-      }
-    } catch (emailErr: unknown) {
-      if (emailErr instanceof Error) {
-        emailError = emailErr.message;
-      } else {
-        emailError = String(emailErr || "Failed to call EmailJS REST API");
-      }
-      console.error("Failed to send email via EmailJS REST API:", emailErr);
-    }
-  }
-
   try {
     const prisma = getPrisma();
     if (!prisma) {
-      return { success: true, emailSent, emailError, data: fallbackContact };
+      return { success: true, data: fallbackContact };
     }
     const newContact = await prisma.contact.create({
       data: {
@@ -138,10 +97,20 @@ export async function saveContact(data: {
         message: data.message,
       },
     });
-    return { success: true, emailSent, emailError, data: newContact };
+    return {
+      success: true,
+      data: {
+        id: newContact.id,
+        name: newContact.name,
+        email: newContact.email,
+        subject: newContact.subject,
+        message: newContact.message,
+        createdAt: newContact.createdAt.toISOString(),
+      },
+    };
   } catch (error) {
     console.warn("Failed to save contact to DB, returning fallback:", error);
-    return { success: true, emailSent, emailError, data: fallbackContact };
+    return { success: true, data: fallbackContact };
   }
 }
 
