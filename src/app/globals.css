@@ -186,4 +186,16 @@ select:focus {
 ::selection {
   background: rgba(56, 189, 248, 0.2);
   color: inherit;
+}
+
+/* Global Pointer Cursor Rules for Interactive Elements */
+button,
+a,
+[role="button"] {
+  cursor: pointer;
+}
+
+button:disabled,
+[role="button"][aria-disabled="true"] {
+  cursor: not-allowed;
 }
