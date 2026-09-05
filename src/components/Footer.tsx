@@ -32,7 +32,7 @@ export function Footer() {
     <footer className="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 py-12 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          
+
           {/* Brand */}
           <div className="space-y-3">
             <div className="flex items-center gap-2.5">
@@ -44,7 +44,7 @@ export function Footer() {
               </span>
             </div>
             <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed max-w-sm font-sans">
-              Senior Full-Stack Engineer specializing in React.js, TypeScript, Node.js microservices, and AI/RAG platform architecture.
+              Full Stack Engineer specializing in React.js, TypeScript, Node.js microservices, and AI/RAG platform architecture.
             </p>
           </div>
 

@@ -31,10 +31,11 @@ export function useTheme() {
 
   useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem("theme");
-    const isDark = savedTheme ? savedTheme === "dark" : true;
-    setTheme(isDark ? "dark" : "light");
-    document.documentElement.classList.toggle("dark", isDark);
+    const isDark = true;
+    localStorage.setItem("theme", "dark");
+    setTheme("dark");
+    document.documentElement.classList.add("dark");
+    document.documentElement.classList.remove("light");
   }, []);
 
   const toggleTheme = () => {

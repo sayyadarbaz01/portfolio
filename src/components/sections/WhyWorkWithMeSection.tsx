@@ -80,7 +80,7 @@ export function WhyWorkWithMeSection() {
               Ready to Architect & Scale Your Platform?
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-400 font-mono">
-              Open for Senior Full-Stack, Tech Lead, and AI Integration positions.
+              Open for Full Stack and AI Integration positions.
             </p>
           </div>
 

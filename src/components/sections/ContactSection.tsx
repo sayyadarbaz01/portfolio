@@ -120,7 +120,7 @@ export function ContactSection() {
               Let&apos;s Build Systems Together
             </h3>
             <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-              Open to senior full-stack development, tech lead roles, and architecture consulting. Reach out directly via email or the form.
+              Open to full stack development and architecture consulting. Reach out directly via email or the form.
             </p>
           </div>
 
@@ -217,7 +217,7 @@ export function ContactSection() {
                 disabled={isSubmitting}
                 required
                 className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 disabled:opacity-60 disabled:cursor-not-allowed"
-                placeholder="e.g. Senior Full-Stack Engineer Role"
+                placeholder="e.g. Full Stack Engineer Role"
               />
             </div>
 

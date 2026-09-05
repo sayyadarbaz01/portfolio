@@ -3,14 +3,11 @@ import { trackPortfolioVisit } from "@/actions/feedback";
 
 export function useTrackVisit() {
   useEffect(() => {
-    const trackVisit = async () => {
-      try {
-        await trackPortfolioVisit();
-      } catch (error) {
+    const timer = setTimeout(() => {
+      trackPortfolioVisit().catch((error) => {
         console.error("Failed to track visit:", error);
-      }
-    };
-
-    trackVisit();
+      });
+    }, 300);
+    return () => clearTimeout(timer);
   }, []);
 }
