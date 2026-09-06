@@ -14,8 +14,9 @@ export async function downloadResume() {
     console.error("Failed to track download:", error);
   }
 
-  // Trigger download
-  const directDownloadUrl = `https://drive.google.com/uc?export=download&id=${process.env.NEXT_PUBLIC_RESUME_ID}`;
+  // Trigger download with fallback ID if env variable is not set on Vercel
+  const resumeId = process.env.NEXT_PUBLIC_RESUME_ID || "1eb60XrobRG9EaK8uLfCWmvfXIffN5JUq";
+  const directDownloadUrl = `https://drive.google.com/uc?export=download&id=${resumeId}`;
   const link = document.createElement("a");
   link.href = directDownloadUrl;
   link.setAttribute("download", "Arbaz_Sayyad_Resume.pdf");
