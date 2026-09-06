@@ -315,7 +315,11 @@ export async function trackPortfolioVisit() {
     await syncVisitorCountFromDb();
   }
   cachedVisitors += 1;
-  bgIncrementVisitor().catch(() => {});
+  try {
+    await bgIncrementVisitor();
+  } catch (e) {
+    console.warn("Failed to increment visitor count in DB:", e);
+  }
   return { success: true, data: { totalVisitors: cachedVisitors } };
 }
 
@@ -331,7 +335,11 @@ export async function trackResumeDownload() {
     await syncDownloadCountFromDb();
   }
   cachedDownloads += 1;
-  bgIncrementDownload().catch(() => {});
+  try {
+    await bgIncrementDownload();
+  } catch (e) {
+    console.warn("Failed to increment download count in DB:", e);
+  }
   return { success: true, data: { totalDownloads: cachedDownloads } };
 }
 
