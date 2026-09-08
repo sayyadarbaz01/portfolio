@@ -26,10 +26,15 @@ export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
-    if (!formData.name.trim() || formData.name.length > 100) return "Please enter your name (max 100 chars).";
-    if (!formData.email.trim() || !/^\S+@\S+\.\S+$/.test(formData.email)) return "Please enter a valid email address.";
-    if (!formData.subject.trim() || formData.subject.length > 200) return "Please enter a subject (max 200 chars).";
-    if (!formData.message.trim() || formData.message.length > 2000) return "Please enter a message (max 2000 chars).";
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const subject = formData.subject.trim();
+    const message = formData.message.trim();
+
+    if (!name || name.length > 100) return "Please enter your name (max 100 chars).";
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Please enter a valid email address.";
+    if (!subject || subject.length > 200) return "Please enter a subject (max 200 chars).";
+    if (!message || message.length > 2000) return "Please enter a message (max 2000 chars).";
     return null;
   };
 
@@ -43,9 +48,9 @@ export function ContactSection() {
     }));
   };
 
-  const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "";
-  const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "";
-  const EMAILJS_USER_ID = process.env.NEXT_PUBLIC_EMAILJS_USER_ID || "";
+  const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_e5d4csq";
+  const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_pm5nmwq";
+  const EMAILJS_USER_ID = process.env.NEXT_PUBLIC_EMAILJS_USER_ID || "iStpH3q--1G4-Oy-b";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,6 +63,13 @@ export function ContactSection() {
     }
     setIsSubmitting(true);
     let emailOk = false;
+    const cleanData = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      subject: formData.subject.trim(),
+      message: formData.message.trim(),
+    };
+
     try {
       if (EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_USER_ID) {
         try {
@@ -65,14 +77,14 @@ export function ContactSection() {
             EMAILJS_SERVICE_ID,
             EMAILJS_TEMPLATE_ID,
             {
-              from_name: formData.name,
-              name: formData.name,
-              from_email: formData.email,
-              email: formData.email,
-              reply_to: formData.email,
-              subject: formData.subject,
-              title: formData.subject,
-              message: formData.message,
+              from_name: cleanData.name,
+              name: cleanData.name,
+              from_email: cleanData.email,
+              email: cleanData.email,
+              reply_to: cleanData.email,
+              subject: cleanData.subject,
+              title: cleanData.subject,
+              message: cleanData.message,
             },
             EMAILJS_USER_ID
           );
@@ -84,12 +96,7 @@ export function ContactSection() {
         }
       }
 
-      const res = await saveContact({
-        name: formData.name,
-        email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-      });
+      const res = await saveContact(cleanData);
 
       if (emailOk || res?.success) {
         toast.success(
@@ -182,6 +189,8 @@ export function ContactSection() {
                 onChange={handleChange}
                 disabled={isSubmitting}
                 required
+                autoComplete="name"
+                autoCapitalize="words"
                 className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 disabled:opacity-60 disabled:cursor-not-allowed"
                 placeholder="e.g. Sarah Jenkins"
               />
@@ -199,6 +208,10 @@ export function ContactSection() {
                 onChange={handleChange}
                 disabled={isSubmitting}
                 required
+                inputMode="email"
+                autoComplete="email"
+                autoCapitalize="none"
+                autoCorrect="off"
                 className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 disabled:opacity-60 disabled:cursor-not-allowed"
                 placeholder="e.g. sarah@company.com"
               />
@@ -216,6 +229,7 @@ export function ContactSection() {
                 onChange={handleChange}
                 disabled={isSubmitting}
                 required
+                autoComplete="off"
                 className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 disabled:opacity-60 disabled:cursor-not-allowed"
                 placeholder="e.g. Full Stack Engineer Role"
               />
@@ -233,6 +247,7 @@ export function ContactSection() {
                 disabled={isSubmitting}
                 required
                 rows={4}
+                autoComplete="off"
                 className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 resize-none disabled:opacity-60 disabled:cursor-not-allowed"
                 placeholder="Details about project, tech stack, or open role..."
               />

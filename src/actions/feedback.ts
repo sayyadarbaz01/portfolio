@@ -52,6 +52,8 @@ async function syncVisitorCountFromDb() {
     }
   } catch (e) {
     console.error("Error syncing visitor count from DB:", e);
+    if (cachedVisitors === null) cachedVisitors = 0;
+    lastVisitorSync = Date.now();
   }
 }
 
@@ -77,6 +79,8 @@ async function syncDownloadCountFromDb() {
     }
   } catch (e) {
     console.error("Error syncing download count from DB:", e);
+    if (cachedDownloads === null) cachedDownloads = 0;
+    lastDownloadSync = Date.now();
   }
 }
 
@@ -113,6 +117,8 @@ async function syncFeedbacksFromDb() {
     }
   } catch (e) {
     console.error("Error syncing feedbacks from DB:", e);
+    if (cachedFeedbacks === null) cachedFeedbacks = [];
+    lastFeedbacksSync = Date.now();
   }
 }
 
@@ -217,7 +223,9 @@ async function bgIncrementDownload() {
 // ==========================================
 
 export async function getFeedbacks() {
-  if (cachedFeedbacks === null || Date.now() - lastFeedbacksSync > 60000) {
+  if (cachedFeedbacks === null) {
+    await syncFeedbacksFromDb();
+  } else if (Date.now() - lastFeedbacksSync > 60000) {
     syncFeedbacksFromDb().catch(() => {});
   }
   return { success: true, data: cachedFeedbacks || [] };
@@ -357,30 +365,40 @@ export async function saveContact(data: {
 }
 
 // ==========================================
-// HIGH-SPEED ANALYTICS ACTIONS (< 1ms execution)
+// HIGH-SPEED ANALYTICS ACTIONS (< 1ms execution when cached)
 // ==========================================
 
 export async function getPortfolioVisitorCount() {
-  if (cachedVisitors === null || Date.now() - lastVisitorSync > 60000) {
+  if (cachedVisitors === null) {
+    await syncVisitorCountFromDb();
+  } else if (Date.now() - lastVisitorSync > 60000) {
     syncVisitorCountFromDb().catch(() => {});
   }
   return { success: true, data: cachedVisitors ?? 0 };
 }
 
 export async function trackPortfolioVisit() {
+  if (cachedVisitors === null) {
+    await syncVisitorCountFromDb();
+  }
   cachedVisitors = (cachedVisitors ?? 0) + 1;
   bgIncrementVisitor().catch((err) => console.error("bgIncrementVisitor error:", err));
   return { success: true, data: { totalVisitors: cachedVisitors } };
 }
 
 export async function getResumeDownloadCount() {
-  if (cachedDownloads === null || Date.now() - lastDownloadSync > 60000) {
+  if (cachedDownloads === null) {
+    await syncDownloadCountFromDb();
+  } else if (Date.now() - lastDownloadSync > 60000) {
     syncDownloadCountFromDb().catch(() => {});
   }
   return { success: true, data: cachedDownloads ?? 0 };
 }
 
 export async function trackResumeDownload() {
+  if (cachedDownloads === null) {
+    await syncDownloadCountFromDb();
+  }
   cachedDownloads = (cachedDownloads ?? 0) + 1;
   bgIncrementDownload().catch((err) => console.error("bgIncrementDownload error:", err));
   return { success: true, data: { totalDownloads: cachedDownloads } };

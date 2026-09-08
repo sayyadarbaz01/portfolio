@@ -131,6 +131,19 @@ export function Header() {
                     {item.label}
                   </button>
                 ))}
+
+                <div className="pt-2 border-t border-slate-200 dark:border-slate-800 px-2 mt-2">
+                  <button
+                    onClick={() => {
+                      setIsOpen(false);
+                      downloadResume();
+                    }}
+                    className="w-full py-2.5 px-4 rounded-lg text-xs font-mono font-semibold bg-sky-600 text-white hover:bg-sky-500 transition-colors flex items-center justify-center gap-2 shadow-sm"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Download Resume / CV</span>
+                  </button>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>

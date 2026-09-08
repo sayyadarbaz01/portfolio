@@ -22,35 +22,51 @@ export function AnimatedCounter({
   delay = 0,
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(0);
-  const hasAnimated = useRef(false);
+  const currentCountRef = useRef(0);
+  const animatedTargetRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (!isInView || hasAnimated.current) return;
-    hasAnimated.current = true;
+    currentCountRef.current = count;
+  }, [count]);
 
+  useEffect(() => {
+    if (!isInView) return;
+    if (animatedTargetRef.current === target) return;
+
+    animatedTargetRef.current = target;
+    const startVal = currentCountRef.current;
     const startTime = Date.now() + delay * 1000;
-    const endTime = startTime + duration * 1000;
+    const totalDuration = duration * 1000;
+
+    let animationFrameId: number;
 
     const update = () => {
       const now = Date.now();
       if (now < startTime) {
-        requestAnimationFrame(update);
+        animationFrameId = requestAnimationFrame(update);
         return;
       }
       const elapsed = now - startTime;
-      const totalDuration = duration * 1000;
       const progress = Math.min(elapsed / totalDuration, 1);
       // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * target));
+      const nextCount = Math.floor(startVal + eased * (target - startVal));
+      setCount(nextCount);
+
       if (progress < 1) {
-        requestAnimationFrame(update);
+        animationFrameId = requestAnimationFrame(update);
       } else {
         setCount(target);
       }
     };
 
-    requestAnimationFrame(update);
+    animationFrameId = requestAnimationFrame(update);
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
   }, [isInView, target, duration, delay]);
 
   return (
