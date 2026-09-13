@@ -11,53 +11,68 @@ interface ArchitectureModalProps {
 }
 
 export function ArchitectureModal({ project, onClose }: ArchitectureModalProps) {
-  if (!project || !project.architectureDetails) return null;
+  // Close on Escape key
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    if (project) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [project, onClose]);
 
-  const { overview, systemFlow, keyComponents, metrics, tradeoffs } = project.architectureDetails;
+  const { overview, systemFlow, keyComponents, metrics, tradeoffs } =
+    project?.architectureDetails || {};
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-y-auto">
-        {/* Backdrop */}
-        <motion.div
-          className="fixed inset-0 bg-slate-950/80 backdrop-blur-md"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-        />
+      {project && project.architectureDetails && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto">
+          {/* Backdrop */}
+          <motion.div
+            className="fixed inset-0 bg-slate-950/80 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+          />
 
-        {/* Modal Container */}
-        <motion.div
-          className="relative w-full max-w-4xl bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden z-10 my-auto text-slate-100 max-h-[90vh] flex flex-col"
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ duration: 0.2 }}
-        >
-          {/* Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/90 backdrop-blur-sm sticky top-0 z-20">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400">
-                <Cpu className="w-5 h-5" />
+          {/* Modal Container */}
+          <motion.div
+            className="relative w-full max-w-4xl bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden z-10 my-auto text-slate-100 max-h-[92vh] sm:max-h-[90vh] flex flex-col"
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ duration: 0.2 }}
+          >
+            {/* Header */}
+            <div className="flex items-start sm:items-center justify-between px-4 py-3.5 sm:px-6 sm:py-4 border-b border-slate-800 bg-slate-900/95 backdrop-blur-sm sticky top-0 z-20 gap-3">
+              <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                <div className="p-2 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400 flex-shrink-0">
+                  <Cpu className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-sm sm:text-lg font-bold text-slate-100 truncate flex items-center gap-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-[10px] sm:text-xs text-slate-400 font-mono tracking-wide">
+                    SYSTEM ARCHITECTURE & TECHNICAL SPECIFICATIONS
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-bold text-slate-100 flex items-center gap-2">
-                  {project.title}
-                </h3>
-                <p className="text-xs text-slate-400 font-mono">
-                  SYSTEM ARCHITECTURE & TECHNICAL SPECIFICATIONS
-                </p>
-              </div>
+              <button
+                onClick={onClose}
+                className="p-1.5 sm:p-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors flex-shrink-0"
+                aria-label="Close Architecture Modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
             </div>
-            <button
-              onClick={onClose}
-              className="p-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors"
-              aria-label="Close Architecture Modal"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
 
           {/* Body Content (Scrollable) */}
           <div className="p-6 overflow-y-auto space-y-8 flex-1">
@@ -174,7 +189,8 @@ export function ArchitectureModal({ project, onClose }: ArchitectureModalProps) 
             </button>
           </div>
         </motion.div>
-      </div>
+        </div>
+      )}
     </AnimatePresence>
   );
 }

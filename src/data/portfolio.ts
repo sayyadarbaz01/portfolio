@@ -88,7 +88,63 @@ export const experiences: Experience[] = [
 
 export const projects: Project[] = [
   {
-    id: "1",
+    id: "taxflow",
+    title: "TaxFlow – Tax & Audit Practice Management Platform",
+    image: "",
+    architectureImage: "",
+    website_link: "https://taxflow-tc.vercel.app/",
+    description:
+      "A full-stack, multi-tenant SaaS platform built for Indian Chartered Accountants, tax consultants, and audit firms to manage client onboarding, statutory compliance, tax audits, billing, and practice operations from a centralized workspace. Automated deadline engines, RBAC, WhatsApp reminders, UPI payments, and AI assistance reduce manual follow-ups and improve compliance visibility.",
+    tags: [
+      "React 18",
+      "TypeScript",
+      "Tailwind CSS",
+      "Redux Toolkit",
+      "RTK Query",
+      "Node.js",
+      "Express.js",
+      "PostgreSQL",
+      "Prisma",
+      "JWT",
+      "Ollama",
+      "WhatsApp API",
+      "Docker",
+    ],
+    category: "Full-Stack SaaS",
+    highlights: [
+      "Automated ITR and GST deadline calculations with automatic AY 2026–27 filing and recurring GST schedule provisioning.",
+      "Built Section 44AB tax-audit workflows with Form 3CA/3CB–3CD support and interactive compliance checks.",
+      "Developed GST-enabled invoicing, aging tracking, and dynamic UPI payment QR/intent links for faster fee collection.",
+      "Implemented multi-tenant RBAC, client data isolation, KYC tracking, WhatsApp reminders, and an Ollama-powered AI assistant.",
+    ],
+    architectureDetails: {
+      overview:
+        "Engineered as a multi-tenant practice automation SaaS with strict client data isolation, granular role-based access control (Partner, Manager, Staff, Client), and an automated statutory due-date engine. It integrates a local Ollama LLM intent layer for privacy-compliant AI assistance and dynamic UPI QR generation for instant payment collections.",
+      systemFlow: [
+        "Multi-Tenant Auth & RBAC: JWT-based stateless authentication with tenant-level scoping and role-specific permissions.",
+        "Statutory Due-Date Engine: Automated scheduling for ITR (AY 2026-27) and recurring GST returns with proactive threshold warnings.",
+        "Section 44AB Audit & Invoicing: Form 3CA/3CB-3CD compliance checklists linked to GST invoice creation and dynamic UPI QR generation.",
+        "Notification & AI Service: WhatsApp Business API automated client alerts combined with permission-scoped Ollama AI query resolution.",
+      ],
+      keyComponents: [
+        { name: "Frontend SPA", role: "Responsive CA workspace, real-time audit checklists & billing", tech: "React 18, TypeScript, Tailwind CSS, Redux Toolkit" },
+        { name: "API Gateway", role: "Multi-tenant routing, JWT validation & rate-limiting middleware", tech: "Node.js, Express.js" },
+        { name: "Database Tier", role: "Tenant-isolated client data, audit trails & financial ledgers", tech: "PostgreSQL, Prisma ORM" },
+        { name: "AI Assistant", role: "Zero-data-leak local compliance search & drafting engine", tech: "Ollama (Local LLM), Prompt Engineering" },
+        { name: "Automations", role: "Automated WhatsApp payment alerts & dynamic UPI QR generator", tech: "WhatsApp API, UPI Protocol" },
+      ],
+      metrics: [
+        { label: "Statutory Filing Coverage", value: "AY 26–27" },
+        { label: "Tax Audit Workflows", value: "Sec 44AB" },
+        { label: "Client Isolation", value: "100% RBAC" },
+        { label: "Fee Collection", value: "Instant UPI" },
+      ],
+      tradeoffs:
+        "Adopted PostgreSQL with Prisma ORM for ACID compliance and structured relational integrity across tax returns, client KYC, and invoices rather than NoSQL. Leveraged a locally-hosted Ollama AI engine instead of public cloud LLMs to strictly preserve client financial confidentiality and comply with ICAI data protection standards.",
+    },
+  },
+  {
+    id: "kyt-compliance",
     title: "U.S. Bank – KYT (Know Your Transaction) Compliance Platform",
     image: "",
     architectureImage: "",
@@ -104,15 +160,39 @@ export const projects: Project[] = [
       "Jest",
       "React Testing Library",
     ],
-    category: "enterprise",
+    category: "Enterprise BFSI",
     highlights: [
       "Built core parts of a real-time transactional monitoring dashboard serving 500+ users, developing scalable React.js component patterns and state management for live compliance data streams.",
       "Designed prompt templates instructing GPT to return structured JSON (risk level, rule references, recommended actions), consumed directly by React components with zero post-processing.",
       "Wrote unit and component tests with Jest and React Testing Library for core dashboard components, improving reliability of critical compliance workflows.",
     ],
+    architectureDetails: {
+      overview:
+        "High-throughput transactional risk intelligence engine built for BFSI compliance analysts. Features real-time rule evaluation, OpenAI GPT risk classification, and MongoDB Atlas Vector Search for semantic policy retrieval.",
+      systemFlow: [
+        "Transaction Ingestion: Streaming live financial transactions through Express.js API gateway.",
+        "Vector Retrieval: HNSW vector search against historical compliance precedents in MongoDB Atlas.",
+        "AI Risk Scoring: OpenAI GPT prompt-engineered evaluation generating structured risk JSON.",
+        "Analyst Dashboard: React UI with memoized selectors and real-time review queues.",
+      ],
+      keyComponents: [
+        { name: "Client UI", role: "Real-time compliance review dashboard", tech: "React.js, TypeScript, MUI, Redux Toolkit" },
+        { name: "API Gateway", role: "Secure microservices routing & analyst RBAC", tech: "Node.js, Express.js, JWT" },
+        { name: "Vector Index", role: "Semantic policy and precedent retrieval", tech: "MongoDB Atlas Vector Search (HNSW)" },
+        { name: "AI Inference", role: "Automated risk narrative generation", tech: "OpenAI GPT API" },
+      ],
+      metrics: [
+        { label: "Daily Active Users", value: "500+" },
+        { label: "Page Load Speedup", value: "50%" },
+        { label: "Vector Search Speedup", value: "40%" },
+        { label: "Write-up Reduction", value: "35%" },
+      ],
+      tradeoffs:
+        "Implemented client-side memoized selectors and dynamic code splitting to handle high-frequency transaction stream updates without degrading browser UI responsiveness.",
+    },
   },
   {
-    id: "2",
+    id: "governance-dashboard",
     title: "Governance Dashboard Platform",
     image: "",
     architectureImage: "",
@@ -129,13 +209,35 @@ export const projects: Project[] = [
       "Jest",
       "CI/CD",
     ],
-    category: "enterprise",
+    category: "Enterprise System",
     highlights: [
       "Built and maintained React.js user interfaces for the governance dashboard, translating requirements into responsive, reusable components.",
       "Managed application state with Redux and Context API to keep data flow and view synchronization efficient across the dashboard.",
       "Integrated front-end components with REST APIs to fetch and update governance data, using Postman for endpoint testing.",
       "Wrote unit tests for React components with Jest and contributed to GitHub/GitLab CI pipelines to automate build, test, and deployment.",
     ],
+    architectureDetails: {
+      overview:
+        "Consolidated organizational governance dashboard providing real-time KPI metrics, audit trail compliance summaries, and automated reporting pipelines.",
+      systemFlow: [
+        "Data Aggregation: Scheduled ingestion jobs synchronizing governance milestones across departments.",
+        "State Management: Normalized Redux store slices providing consistent multi-view synchronizations.",
+        "Visual Analytics: High-density data grids and KPI progress bars with real-time REST polling.",
+      ],
+      keyComponents: [
+        { name: "Dashboard UI", role: "Executive metrics view & report generator", tech: "React.js, Tailwind CSS, Redux" },
+        { name: "REST Services", role: "Departmental KPI aggregation endpoints", tech: "Node.js, Express.js" },
+        { name: "CI/CD Pipeline", role: "Automated regression testing and zero-downtime releases", tech: "Jest, GitHub Actions" },
+      ],
+      metrics: [
+        { label: "Test Coverage", value: "85%+" },
+        { label: "State Sync", value: "Real-time" },
+        { label: "Component Modularity", value: "100%" },
+        { label: "CI Pipeline Pass", value: "99.8%" },
+      ],
+      tradeoffs:
+        "Decided on normalized Redux slices and granular component boundaries to isolate metric calculations and prevent cascade re-renders across heavy data grids.",
+    },
   },
 ];
 

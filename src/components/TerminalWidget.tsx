@@ -7,6 +7,7 @@ import { Terminal, X } from "lucide-react";
 const COMMANDS: Record<string, string> = {
   help: `Available commands:
   whoami      - Executive summary & identity
+  projects    - Flagship SaaS & enterprise projects
   arch        - System architecture & RAG breakdown
   metrics     - Quantitative engineering benchmarks
   skills      - Full-stack technical matrix
@@ -15,12 +16,33 @@ const COMMANDS: Record<string, string> = {
   clear       - Clear terminal output`,
   whoami: `Arbaz Sayyad — Full Stack Developer (3+ YOE)
 ─────────────────────────────────────────────
-• 3+ Years Experience (Enterprise Web & Microservices)
-• Core Focus: Frontend Architecture, Backend Microservices & AI RAG Systems
-• Key Stack: React.js, TypeScript, Node.js, Express, MongoDB, OpenAI RAG
+• 3+ Years Experience (Enterprise Web, SaaS & Microservices)
+• Core Focus: Frontend Architecture, Backend Microservices, Multi-Tenant SaaS & AI
+• Key Stack: React.js, TypeScript, Node.js, Express, PostgreSQL, Prisma, MongoDB, OpenAI / Ollama
+• Flagship SaaS: TaxFlow (https://taxflow-tc.vercel.app/)
 • Location: Pune, India | Open for Full Stack / Lead roles`,
+  projects: `Featured Flagship & Enterprise Projects:
+─────────────────────────────────────────────
+[1] TaxFlow – Tax & Audit Practice Management Platform (SaaS)
+    • Live: https://taxflow-tc.vercel.app/
+    • Stack: React 18, TypeScript, Tailwind, Redux Toolkit, Node, Express, PostgreSQL, Prisma, Ollama, WhatsApp API
+    • Highlights: AY 2026-27 statutory deadlines, Sec 44AB audits, GST billing with UPI QR, multi-tenant RBAC.
+
+[2] U.S. Bank – KYT Compliance Platform (Enterprise BFSI)
+    • Stack: React, TypeScript, Node.js, OpenAI API, MongoDB Vector Search
+    • Highlights: 500+ daily analysts, sub-200ms query latency, AI risk classification.
+
+[3] Governance Dashboard Platform (Enterprise System)
+    • Stack: React, Redux, Node.js, Tailwind CSS, REST APIs, Jest
+    • Highlights: Consolidated KPI metrics, normalized store slices, automated CI/CD.`,
   arch: `System Architecture Showcase:
 ─────────────────────────────────────────────
+[TaxFlow Practice Automation SaaS]
+Architecture: Multi-tenant isolated workspace (Partner, Manager, Staff, Client)
+Backend: Express.js API Gateway + PostgreSQL + Prisma ORM
+AI / Intent: Ollama local LLM for private, zero-leak compliance retrieval
+Automations: Statutory deadline event loops, WhatsApp API alerts, dynamic UPI QR
+
 [KYT Compliance & AI Risk Platform (U.S. Bank)]
 Client: React 19 + TypeScript SPA (Redux Toolkit, MUI)
 Gateway: Express.js REST API Gateway (JWT, RBAC)
@@ -37,12 +59,13 @@ Throughput: Sub-200ms query latency across 500+ daily users`,
   skills: `Technical Matrix:
 ─────────────────────────────────────────────
 Frontend: React.js, TypeScript, JavaScript, Redux Toolkit, MUI, Tailwind CSS, WCAG 2.1
-Backend:  Node.js, Express.js, REST APIs, MongoDB, SQL, JWT, RBAC, Docker, Microservices, CI/CD
-AI & Data: OpenAI API, RAG Architecture, MongoDB Vector Search, Prompt Engineering`,
+Backend:  Node.js, Express.js, REST APIs, PostgreSQL, Prisma, MongoDB, SQL, JWT, RBAC, Docker, CI/CD
+AI & Data: Ollama, OpenAI API, RAG Architecture, MongoDB Vector Search, Prompt Engineering`,
   experience: `Production Experience & Key Projects:
 ─────────────────────────────────────────────
 [2022 - Present] Senior Associate Technology @ Synechron Technologies
-                 • U.S. Bank – KYT Compliance Platform (React, TS, Node, OpenAI API, Vector Search)
+                 • TaxFlow: Practice Management SaaS (https://taxflow-tc.vercel.app/)
+                 • U.S. Bank: KYT Compliance Platform (React, TS, Node, OpenAI API, Vector Search)
                  • Governance Dashboard Platform (React, Redux, REST API, Tailwind CSS, Jest)
                  • Cut page load time 4s→2s and dev overhead by 25%.`,
   contact: `Direct Contact:
