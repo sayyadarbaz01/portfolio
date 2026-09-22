@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, X } from "lucide-react";
+import { X } from "lucide-react";
 
 const COMMANDS: Record<string, string> = {
   help: `Available commands:
@@ -260,24 +260,25 @@ export function TerminalWidget({ isOpen, onClose }: TerminalWidgetProps) {
   );
 }
 
-// Terminal toggle button — bottom-left pill so it never overlaps scroll-to-top
+/** Quiet ⌘K affordance — bottom-left, never overlaps scroll-to-top */
 export function TerminalButton({ onClick }: { onClick: () => void }) {
   return (
     <motion.button
       onClick={onClick}
-      className="fixed bottom-6 left-6 z-40 flex items-center gap-2 px-4 py-2.5 rounded-full border shadow-lg transition-all text-xs font-mono font-medium"
+      className="fixed bottom-6 left-6 z-40 flex items-center justify-center w-11 h-11 rounded-full border text-[11px] font-mono"
       style={{
         backgroundColor: "var(--card-bg)",
         borderColor: "var(--card-border)",
-        color: "var(--text-secondary)",
+        color: "var(--text-muted)",
         boxShadow: "var(--card-shadow)",
       }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      aria-label="Open CLI Terminal"
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.96 }}
+      aria-label="Open command palette (Control or Command K)"
+      title="⌘K"
     >
-      <Terminal className="w-4 h-4" style={{ color: "var(--accent-teal)" }} />
-      <span className="hidden sm:inline">Try my CLI</span>
+      <span className="sr-only">Open terminal</span>
+      ⌘K
     </motion.button>
   );
 }

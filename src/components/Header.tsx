@@ -2,29 +2,33 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun, Download } from "lucide-react";
+import { Menu, X, Moon, Sun, ArrowRight } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 import { useScrollProgress } from "@/hooks";
-import { cn, scrollToSection, downloadResume } from "@/utils/helpers";
+import { cn, scrollToSection } from "@/utils/helpers";
 import { navigation } from "@/data/portfolio";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [overHero, setOverHero] = useState(true);
   const [activeSection, setActiveSection] = useState("home");
   const { theme, toggleTheme } = useTheme();
   const scrollProgress = useScrollProgress();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 40);
+      setOverHero(y < window.innerHeight * 0.72);
+      // At top of page, Overview is always active — avoids Contact false-positive
+      if (y < 100) setActiveSection("home");
     };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Active-section highlighting via IntersectionObserver
   useEffect(() => {
     const ids = navigation.map((item) => item.href.replace("#", ""));
     const elements = ids
@@ -34,15 +38,17 @@ export function Header() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
+        if (window.scrollY < 100) {
+          setActiveSection("home");
+          return;
         }
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActiveSection(visible[0].target.id);
       },
-      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.1, 0.25, 0.5] }
     );
-
     elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
@@ -54,182 +60,177 @@ export function Header() {
     setIsOpen(false);
   };
 
-  const renderNavButton = (item: { label: string; href: string }, mobile = false) => {
-    const id = item.href.replace("#", "");
-    const isActive = activeSection === id;
-    return (
-      <button
-        key={item.label}
-        onClick={() => handleNavClick(item.href)}
-        aria-current={isActive ? "true" : undefined}
-        className={mobile
-          ? "w-full text-left px-4 py-2 text-sm font-mono rounded-full transition-colors"
-          : "px-4 py-2 text-[13px] font-medium font-mono rounded-full transition-colors"}
-        style={
-          isActive
-            ? { backgroundColor: "rgba(15, 118, 110, 0.12)", color: "var(--accent-teal-deep)" }
-            : { color: "var(--text-secondary)" }
-        }
-        onMouseEnter={(e) => {
-          if (!isActive) e.currentTarget.style.backgroundColor = "var(--bg-muted)";
-        }}
-        onMouseLeave={(e) => {
-          if (!isActive) e.currentTarget.style.backgroundColor = "transparent";
-        }}
-      >
-        {item.label}
-      </button>
-    );
-  };
+  // Dark hero only forces light nav ink; light theme stays ink-on-paper throughout
+  const darkSurface = overHero && theme === "dark";
+  const ink = darkSurface ? "#F7F5F2" : "var(--text-primary)";
+  const mute = darkSurface ? "rgba(247,245,242,0.62)" : "var(--text-secondary)";
+  const active = darkSurface ? "#F7F5F2" : "var(--text-primary)";
 
   return (
-    <>
-      <header
-        className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b")}
-        style={{
-          backgroundColor: scrolled ? "color-mix(in srgb, var(--bg-base) 82%, transparent)" : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
-          borderColor: scrolled ? "var(--card-border)" : "transparent",
-        }}
-      >
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-[76px] gap-3">
-            {/* Brand — ink AS monogram */}
-            <button
-              onClick={() => handleNavClick("home")}
-              className="flex items-center gap-3 group text-left flex-shrink-0"
-              aria-label="Back to top — Arbaz Sayyad"
+    <header
+      className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b")}
+      style={{
+        backgroundColor: scrolled
+          ? darkSurface
+            ? "rgba(12, 10, 9, 0.72)"
+            : "color-mix(in srgb, var(--bg-base) 88%, transparent)"
+          : "transparent",
+        backdropFilter: scrolled ? "blur(12px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
+        borderColor: scrolled
+          ? darkSurface
+            ? "rgba(247,245,242,0.08)"
+            : "var(--card-border)"
+          : "transparent",
+      }}
+    >
+      <nav className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12" aria-label="Primary">
+        <div className="flex items-center justify-between h-[72px] gap-4">
+          {/* Wordmark — premium, not monogram box */}
+          <button
+            onClick={() => handleNavClick("home")}
+            className="text-left flex-shrink-0 min-h-[44px] flex items-center"
+            aria-label="Back to top — Arbaz Sayyad"
+          >
+            <span
+              className="font-sans font-semibold text-[17px] tracking-tight transition-colors duration-300"
+              style={{ color: ink }}
             >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center font-mono font-bold text-[15px]"
-                style={{ backgroundColor: "var(--text-primary)", color: "var(--bg-base)" }}
-              >
-                AS
-              </div>
-              <div className="hidden lg:flex flex-col">
-                <span className="font-bold text-[15px] tracking-tight" style={{ color: "var(--text-primary)" }}>
-                  Arbaz Sayyad
-                </span>
-                <span className="text-[11px] font-mono tracking-wider" style={{ color: "var(--accent-teal)" }}>
-                  FULL-STACK & AI INTEGRATION ENGINEER
-                </span>
-              </div>
-            </button>
+              Arbaz
+            </span>
+          </button>
 
-            {/* Desktop pill navigation — centered */}
-            <div className="hidden md:flex flex-1 justify-center">
-              <div
-                className="flex items-center gap-1 p-1.5 rounded-full border"
-                style={{ backgroundColor: "var(--card-bg)", borderColor: "var(--card-border)", boxShadow: "var(--card-shadow)" }}
-                role="navigation"
-                aria-label="Primary"
-              >
-                {navigation.map((item) => renderNavButton(item))}
-              </div>
-            </div>
-
-            {/* Right Action Items */}
-            <div className="flex items-center space-x-2.5 flex-shrink-0">
-              {/* Availability pill */}
-              <div
-                className="hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-full text-[13px] font-mono border"
-                style={{
-                  backgroundColor: "rgba(4, 120, 87, 0.08)",
-                  color: "var(--accent-emerald)",
-                  borderColor: "rgba(4, 120, 87, 0.22)",
-                }}
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                </span>
-                <span>Available for Sr. Roles</span>
-              </div>
-
-              {/* Ink Resume button */}
-              <button
-                onClick={downloadResume}
-                className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-[13px] font-mono font-semibold transition-transform hover:-translate-y-px"
-                style={{ backgroundColor: "var(--text-primary)", color: "var(--bg-base)" }}
-                aria-label="Download Resume"
-              >
-                <Download className="w-4 h-4" />
-                <span>Resume</span>
-              </button>
-
-              {/* Theme Toggle */}
-              <button
-                onClick={toggleTheme}
-                className="p-2.5 rounded-full border transition-colors"
-                style={{
-                  color: "var(--text-secondary)",
-                  borderColor: "var(--card-border)",
-                  backgroundColor: "var(--card-bg)",
-                }}
-                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              >
-                {theme === "dark" ? (
-                  <Sun className="w-[18px] h-[18px]" style={{ color: "var(--accent-aqua)" }} />
-                ) : (
-                  <Moon className="w-[18px] h-[18px]" />
-                )}
-              </button>
-
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden p-2 rounded-lg transition-colors"
-                style={{ color: "var(--text-secondary)" }}
-                aria-label="Toggle menu"
-                aria-expanded={isOpen}
-              >
-                {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
-            </div>
+          {/* Center links — text only, underline slides in */}
+          <div className="hidden md:flex flex-1 justify-center items-center gap-1">
+            {navigation.map((item) => {
+              const id = item.href.replace("#", "");
+              const isActive = activeSection === id;
+              return (
+                <button
+                  key={item.label}
+                  onClick={() => handleNavClick(item.href)}
+                  aria-current={isActive ? "true" : undefined}
+                  className="group relative px-3.5 py-2 text-[13px] font-medium transition-colors duration-200"
+                  style={{ color: isActive ? active : mute }}
+                >
+                  {item.label}
+                  <span
+                    className={cn(
+                      "absolute left-3.5 right-3.5 bottom-1 h-px origin-left transition-transform duration-300 ease-out",
+                      isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                    )}
+                    style={{ backgroundColor: isActive || darkSurface ? (darkSurface ? "#F7F5F2" : "var(--text-primary)") : "var(--text-primary)" }}
+                  />
+                </button>
+              );
+            })}
           </div>
 
-          {/* Mobile Navigation Dropdown */}
-          <AnimatePresence>
-            {isOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0, y: -8 }}
-                animate={{ opacity: 1, height: "auto", y: 0 }}
-                exit={{ opacity: 0, height: 0, y: -8 }}
-                transition={{ duration: 0.22, ease: "easeOut" }}
-                className="md:hidden border rounded-2xl py-3 space-y-1 px-2 shadow-lg mb-3 overflow-hidden"
-                style={{
-                  borderColor: "var(--card-border)",
-                  backgroundColor: "var(--card-bg)",
-                  color: "var(--text-primary)",
-                }}
-              >
-                {navigation.map((item) => renderNavButton(item, true))}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <button
+              onClick={() => handleNavClick("contact")}
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-medium min-h-[40px] border transition-colors duration-200"
+              style={
+                darkSurface
+                  ? {
+                      borderColor: "rgba(247,245,242,0.28)",
+                      color: "#F7F5F2",
+                      backgroundColor: "rgba(255,255,255,0.04)",
+                    }
+                  : {
+                      borderColor: "var(--card-border)",
+                      color: "var(--text-primary)",
+                      backgroundColor: "transparent",
+                    }
+              }
+            >
+              Let&apos;s connect
+              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </button>
 
-                <div className="pt-2 px-2 mt-2" style={{ borderTop: "1px solid var(--card-border)" }}>
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full min-h-[40px] min-w-[40px] flex items-center justify-center transition-opacity duration-200 hover:opacity-100"
+              style={{ color: mute, opacity: darkSurface ? 0.45 : 0.75 }}
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {theme === "dark" ? (
+                <Sun className="w-4 h-4" />
+              ) : (
+                <Moon className="w-4 h-4" />
+              )}
+            </button>
+
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden p-2 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
+              style={{ color: ink }}
+              aria-label="Toggle menu"
+              aria-expanded={isOpen}
+            >
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="md:hidden border rounded-2xl py-3 space-y-0.5 px-2 mb-3 overflow-hidden"
+              style={{
+                borderColor: "var(--card-border)",
+                backgroundColor: "var(--card-bg)",
+                color: "var(--text-primary)",
+              }}
+            >
+              {navigation.map((item) => {
+                const id = item.href.replace("#", "");
+                const isActive = activeSection === id;
+                return (
                   <button
-                    onClick={() => {
-                      setIsOpen(false);
-                      downloadResume();
+                    key={item.label}
+                    onClick={() => handleNavClick(item.href)}
+                    aria-current={isActive ? "true" : undefined}
+                    className="w-full text-left px-4 py-2.5 text-sm rounded-xl min-h-[44px] transition-colors"
+                    style={{
+                      color: isActive ? "var(--text-primary)" : "var(--text-secondary)",
+                      backgroundColor: isActive ? "var(--bg-muted)" : "transparent",
                     }}
-                    className="w-full py-2.5 px-4 rounded-full text-xs font-mono font-semibold flex items-center justify-center gap-2"
-                    style={{ backgroundColor: "var(--text-primary)", color: "var(--bg-base)" }}
                   >
-                    <Download className="w-4 h-4" />
-                    <span>Download Resume / CV</span>
+                    {item.label}
                   </button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </nav>
+                );
+              })}
+              <div className="px-2 pt-2" style={{ borderTop: "1px solid var(--card-border)" }}>
+                <button
+                  onClick={() => handleNavClick("contact")}
+                  className="w-full py-2.5 px-4 rounded-full text-sm font-medium min-h-[44px]"
+                  style={{ backgroundColor: "var(--text-primary)", color: "var(--bg-base)" }}
+                >
+                  Let&apos;s connect
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
 
-        {/* Scroll Progress Bar — 2px teal at header bottom edge */}
-        <div
-          className="absolute bottom-0 left-0 h-[2px] transition-all duration-100"
-          style={{ width: `${scrollProgress}%`, backgroundColor: "var(--accent-teal)" }}
-        />
-      </header>
-    </>
+      <div
+        className="absolute bottom-0 left-0 h-px transition-[width] duration-100"
+        style={{
+          width: `${scrollProgress}%`,
+          backgroundColor: darkSurface ? "rgba(231,203,168,0.7)" : "var(--accent-teal)",
+        }}
+        role="progressbar"
+        aria-valuenow={Math.round(scrollProgress)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Page scroll progress"
+      />
+    </header>
   );
 }

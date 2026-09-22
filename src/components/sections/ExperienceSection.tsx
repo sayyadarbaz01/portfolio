@@ -11,7 +11,7 @@ export function ExperienceSection() {
   const ref = useRef<HTMLElement>(null);
 
   return (
-    <Section id="experience" eyebrow="04 / Experience" title="Engineering Experience & Impact" ref={ref}>
+    <Section id="experience" eyebrow="Experience" title="Engineering Experience & Impact" ref={ref}>
       <div className="space-y-8">
 
         <Reveal>

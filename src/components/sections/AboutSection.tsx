@@ -32,7 +32,7 @@ export function AboutSection() {
   const ref = useRef<HTMLElement>(null);
 
   return (
-    <Section id="about" eyebrow="01 / About" title="Engineering Overview & Background" ref={ref}>
+    <Section id="about" eyebrow="About" title="Engineering Overview & Background" ref={ref}>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
         {/* Left Column: Narrative */}
@@ -48,15 +48,14 @@ export function AboutSection() {
           </p>
 
           <div
-            className="p-5 rounded-2xl space-y-2 font-mono text-xs"
+            className="p-5 rounded-2xl space-y-2"
             style={{
               backgroundColor: "var(--bg-elevated)",
-              border: "1px solid var(--card-border)",
               color: "var(--text-secondary)",
             }}
           >
-            <p className="font-bold uppercase tracking-wider" style={{ color: "var(--accent-teal)" }}>Engineering Philosophy</p>
-            <p style={{ color: "var(--text-secondary)" }}>
+            <p className="text-xs font-medium" style={{ color: "var(--text-muted)" }}>Philosophy</p>
+            <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
               &quot;Write clean, deterministic code. Optimize for readability, measurable performance metrics (4s→2s load times), and resilient system boundaries.&quot;
             </p>
           </div>

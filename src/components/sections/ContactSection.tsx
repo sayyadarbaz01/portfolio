@@ -124,7 +124,7 @@ export function ContactSection() {
   } as React.CSSProperties;
 
   return (
-    <Section id="contact" eyebrow="06 / Contact" title="Contact & Direct Communication" ref={ref}>
+    <Section id="contact" eyebrow="Contact" title="Contact & Direct Communication" ref={ref}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
 
         {/* Left Column: Direct Info */}

@@ -106,7 +106,7 @@ export function ProjectsSection() {
   const [flagship, ...rest] = projects;
 
   return (
-    <Section id="projects" eyebrow="05 / Projects" title="Featured Projects" ref={ref}>
+    <Section id="projects" eyebrow="Projects" title="Featured Projects" ref={ref}>
       <div className="space-y-8">
         {/* Section Lead */}
         <Reveal>
@@ -138,20 +138,17 @@ export function ProjectsSection() {
                         {flagship.category}
                       </span>
 
-                      {flagship.website_link ? (
+                          {flagship.website_link ? (
                         <span
-                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono font-medium border"
+                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium border"
                           style={{
                             backgroundColor: "rgba(4, 120, 87, 0.08)",
                             borderColor: "rgba(4, 120, 87, 0.25)",
                             color: "var(--accent-emerald)",
                           }}
                         >
-                          <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                          </span>
-                          Live Production
+                          <span className="inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                          Live
                         </span>
                       ) : (
                         <span
@@ -241,18 +238,15 @@ export function ProjectsSection() {
 
                         {hasLiveDemo ? (
                           <span
-                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-mono font-medium border"
+                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-medium border"
                             style={{
                               backgroundColor: "rgba(4, 120, 87, 0.08)",
                               borderColor: "rgba(4, 120, 87, 0.25)",
                               color: "var(--accent-emerald)",
                             }}
                           >
-                            <span className="relative flex h-2 w-2">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                            </span>
-                            Live Production
+                            <span className="inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                            Live
                           </span>
                         ) : (
                           <span

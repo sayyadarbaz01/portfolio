@@ -31,7 +31,7 @@ export function SkillsSection() {
   const isInView = useInView(ref);
 
   return (
-    <Section id="skills" eyebrow="02 / Skills" title="Technical Architecture & Skills Matrix" ref={ref}>
+    <Section id="skills" eyebrow="Skills" title="Technical Architecture & Skills Matrix" ref={ref}>
       <div className="space-y-8">
 
         {/* Section Subhead */}

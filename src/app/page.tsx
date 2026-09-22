@@ -1,6 +1,6 @@
 "use client";
 
-import { lazy, Suspense, useState } from "react";
+import { lazy, useState, useEffect, useCallback } from "react";
 import { LazySection } from "@/components/LazySection";
 import {
   HeroSection,
@@ -9,7 +9,6 @@ import {
 } from "@/components";
 import { useTrackVisit } from "@/hooks";
 
-// Lazy load core sections for optimal performance
 const AboutSection = lazy(() =>
   import("@/components/sections/AboutSection").then((mod) => ({
     default: mod.AboutSection,
@@ -43,51 +42,52 @@ const ContactSection = lazy(() =>
 
 export default function Home() {
   const [terminalOpen, setTerminalOpen] = useState(false);
-  
-  // Track portfolio visit on component mount
   useTrackVisit();
+
+  const openTerminal = useCallback(() => setTerminalOpen(true), []);
+  const closeTerminal = useCallback(() => setTerminalOpen(false), []);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "K")) {
+        e.preventDefault();
+        setTerminalOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   return (
     <>
-      {/* 1. Hero Section */}
-      <HeroSection onOpenTerminal={() => setTerminalOpen(true)} />
-      
-      {/* 2. About Section */}
+      <HeroSection onOpenTerminal={openTerminal} />
+
       <LazySection>
         <AboutSection />
       </LazySection>
 
-      {/* 3. Skills Matrix */}
       <LazySection>
         <SkillsSection />
       </LazySection>
 
-      {/* 4. Performance Engineering Benchmarks */}
       <LazySection>
         <MetricsSection />
       </LazySection>
 
-      {/* 5. Professional Engineering Experience */}
       <LazySection>
         <ExperienceSection />
       </LazySection>
 
-      {/* 6. Featured Resume Projects */}
       <LazySection>
         <ProjectsSection />
       </LazySection>
 
-      {/* 7. Contact & Footer */}
       <LazySection>
         <ContactSection />
       </LazySection>
 
-      {/* Floating CLI Terminal Button */}
-      <TerminalButton onClick={() => setTerminalOpen(true)} />
-
-      {/* Interactive Terminal Modal */}
-      <TerminalWidget isOpen={terminalOpen} onClose={() => setTerminalOpen(false)} />
+      <TerminalButton onClick={openTerminal} />
+      <TerminalWidget isOpen={terminalOpen} onClose={closeTerminal} />
     </>
   );
 }
-

@@ -41,7 +41,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
         {/* Wordmark block */}
         <Reveal className="text-left mb-10">
-          <p className="eyebrow mb-3">FULL-STACK & AI INTEGRATION ENGINEER</p>
+          <p className="text-sm mb-3" style={{ color: "var(--text-muted)" }}>Full-stack &amp; AI integration</p>
           <p className="font-display font-semibold tracking-tight text-wordmark-fluid" style={{ color: "var(--text-primary)" }}>
             Arbaz Sayyad
           </p>

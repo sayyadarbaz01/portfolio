@@ -52,7 +52,7 @@ export function MetricsSection() {
   const isInView = useInView(ref);
 
   return (
-    <Section id="metrics" eyebrow="03 / Metrics" title="Performance Engineering Benchmarks" ref={ref}>
+    <Section id="metrics" eyebrow="Impact" title="Performance Engineering Benchmarks" ref={ref}>
       <div className="space-y-8">
 
         <Reveal>
@@ -68,15 +68,10 @@ export function MetricsSection() {
             return (
               <Reveal key={index} delay={index * 0.06}>
                 <SpotlightCard className="p-5 space-y-3 h-full">
-                  <div className="flex items-center justify-between">
-                    <Icon className="w-5 h-5" style={{ color: "var(--accent-teal)" }} />
-                    <span className="text-[10px] font-mono uppercase tracking-wider font-semibold" style={{ color: "var(--text-muted)" }}>
-                      METRIC #0{index + 1}
-                    </span>
-                  </div>
+                  <Icon className="w-4 h-4" style={{ color: "var(--text-muted)" }} />
 
                   <div>
-                    <p className="font-display font-semibold text-metric-fluid" style={{ color: "var(--text-primary)" }}>
+                    <p className="font-display font-semibold text-metric-fluid tabular-nums" style={{ color: "var(--text-primary)" }}>
                       <AnimatedCounter
                         target={metric.value}
                         suffix={metric.suffix}
@@ -84,10 +79,10 @@ export function MetricsSection() {
                         delay={index * 0.1}
                       />
                     </p>
-                    <p className="font-semibold text-xs sm:text-sm mt-2" style={{ color: "var(--text-primary)" }}>
+                    <p className="font-medium text-sm mt-2" style={{ color: "var(--text-primary)" }}>
                       {metric.label}
                     </p>
-                    <p className="text-[11px] mt-1 leading-snug font-medium" style={{ color: "var(--text-muted)" }}>
+                    <p className="text-[13px] mt-1 leading-snug" style={{ color: "var(--text-muted)" }}>
                       {metric.sublabel}
                     </p>
                   </div>
@@ -100,18 +95,18 @@ export function MetricsSection() {
         {/* Core Technical Deliverables */}
         <Reveal>
           <div className="theme-card p-6 space-y-4">
-            <h3 className="text-sm font-mono uppercase tracking-wider font-semibold" style={{ color: "var(--accent-teal)" }}>
+            <h3 className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
               Verified Technical Accomplishments
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm" style={{ color: "var(--text-secondary)" }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm" style={{ color: "var(--text-secondary)" }}>
               {achievements.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex items-start gap-2.5 p-3 rounded-xl border font-mono text-xs"
-                  style={{ backgroundColor: "var(--bg-elevated)", borderColor: "var(--card-border)" }}
+                  className="flex items-start gap-2.5 p-3 rounded-xl"
+                  style={{ backgroundColor: "var(--bg-elevated)" }}
                 >
-                  <CheckCircle2 className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "var(--accent-emerald)" }} />
-                  <span>{item}</span>
+                  <CheckCircle2 className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "var(--text-muted)" }} />
+                  <span className="leading-relaxed">{item}</span>
                 </div>
               ))}
             </div>
