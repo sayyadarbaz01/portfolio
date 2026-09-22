@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, FileDown, Layers, CheckCircle2, MapPin, Terminal, Cpu } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, FileDown, Layers, CheckCircle2, MapPin, Terminal } from "lucide-react";
 import { downloadResume, scrollToSection } from "@/utils/helpers";
+import { Magnetic, Reveal } from "@/components/ui/Motion";
 
 const metrics = [
   { value: "3+", label: "Years Experience (3+ YOE)" },
@@ -14,154 +15,239 @@ const metrics = [
   { value: "500+", label: "Daily Enterprise Users" },
 ];
 
-export function HeroSection() {
+const skillChips = [
+  "React · TypeScript · Redux · MUI",
+  "Node.js · Express · REST · SQL",
+  "MongoDB · JWT · RBAC · Docker",
+  "OpenAI API · RAG · Vector Search",
+];
+
+interface HeroSectionProps {
+  onOpenTerminal?: () => void;
+}
+
+export function HeroSection({ onOpenTerminal }: HeroSectionProps) {
+  const { scrollY } = useScroll();
+  const portraitY = useTransform(scrollY, [0, 800], [0, 44]);
+
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] flex items-center pt-24 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative flex items-center pt-[calc(76px+1.25rem)] sm:pt-[calc(76px+2rem)] pb-10 sm:pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
       <div className="w-full max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          
-          {/* ── LEFT: Engineering Value Proposition ── */}
-          <div className="lg:col-span-7 space-y-6 text-left">
-            
-            {/* Status & Identity Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-mono bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>FULL STACK DEVELOPER · 3+ YOE</span>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start">
 
-            {/* Name & Title */}
-            <div className="space-y-2">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
-                Arbaz Sayyad
+          {/* ── LEFT: Editorial hierarchy ── */}
+          <div className="lg:col-span-7 text-left">
+            <Reveal>
+              {/* Identity pill */}
+              <div
+                className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 px-3.5 py-1.5 rounded-full text-xs border"
+                style={{
+                  backgroundColor: "var(--card-bg)",
+                  borderColor: "var(--card-border)",
+                  color: "var(--text-secondary)",
+                }}
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <span className="font-semibold" style={{ color: "var(--text-primary)" }}>
+                  Arbaz Sayyad
+                </span>
+                <span style={{ color: "var(--text-faint)" }}>·</span>
+                <span>Available for senior full-stack roles</span>
+                <span style={{ color: "var(--text-faint)" }}>·</span>
+                <span className="inline-flex items-center gap-1">
+                  <MapPin className="w-3 h-3" style={{ color: "var(--accent-teal)" }} />
+                  Pune, India
+                </span>
+              </div>
+            </Reveal>
+
+            {/* Serif statement headline */}
+            <Reveal delay={0.06}>
+              <h1 className="font-display font-semibold text-hero-fluid tracking-tight mt-5" style={{ color: "var(--text-primary)" }}>
+                I craft fast React apps, resilient Node.js services & AI workflows.
               </h1>
-              <p className="text-xl sm:text-2xl font-mono text-sky-600 dark:text-sky-400 font-medium">
-                React.js · TypeScript · Node.js · AI & RAG Systems
+              <p className="text-sm sm:text-[15px] mt-3" style={{ color: "var(--text-muted)" }}>
+                Full Stack Developer · 3+ YOE · React · TypeScript · Node.js · RAG Systems
               </p>
-            </div>
+            </Reveal>
 
-            {/* Concise Bio */}
-            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
-              Full Stack Developer with 3+ YOE architecting high-throughput enterprise applications, resilient microservices, and AI-assisted workflows. Specialized in React.js, TypeScript, Redux, Node.js, Express, MongoDB, Docker, and OpenAI RAG pipelines.
-            </p>
+            {/* Bio */}
+            <Reveal delay={0.12}>
+              <p className="text-base sm:text-lg leading-relaxed max-w-2xl mt-4" style={{ color: "var(--text-secondary)" }}>
+                3+ years building enterprise applications, microservices, and AI-assisted workflows — specializing in React, TypeScript, Redux, Node.js, Express, MongoDB, Docker, and OpenAI RAG pipelines.
+              </p>
+            </Reveal>
 
-            {/* High-Density Highlights */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-mono text-slate-700 dark:text-slate-300">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <span>React.js, TypeScript, Redux & MUI</span>
+            {/* Skill chips */}
+            <Reveal delay={0.18}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-5 max-w-xl">
+                {skillChips.map((chip) => (
+                  <div
+                    key={chip}
+                    className="flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono border"
+                    style={{
+                      backgroundColor: "var(--card-bg)",
+                      borderColor: "var(--card-border)",
+                      color: "var(--text-secondary)",
+                    }}
+                  >
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0" style={{ color: "var(--accent-emerald)" }} />
+                    <span>{chip}</span>
+                  </div>
+                ))}
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-sky-400 flex-shrink-0" />
-                <span>Node.js, Express, REST APIs & SQL</span>
+            </Reveal>
+
+            {/* Actions */}
+            <Reveal delay={0.24}>
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mt-5">
+                <Magnetic>
+                  <button
+                    onClick={() => scrollToSection("projects")}
+                    className="btn-ink px-7 py-3.5 rounded-full text-sm font-semibold transition-transform flex items-center gap-2 shadow-sm font-mono"
+                    style={{ backgroundColor: "var(--text-primary)", color: "var(--bg-base)" }}
+                  >
+                    <Layers className="w-4 h-4 relative z-[2]" />
+                    <span className="relative z-[2]">Explore Architecture & Projects</span>
+                    <ArrowRight className="w-4 h-4 relative z-[2]" />
+                  </button>
+                </Magnetic>
+
+                <button
+                  onClick={downloadResume}
+                  className="text-sm font-mono font-medium underline underline-offset-4 decoration-1 hover:decoration-2 transition-all flex items-center gap-1.5"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  <FileDown className="w-4 h-4" />
+                  <span>Download Resume</span>
+                </button>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-sky-400 flex-shrink-0" />
-                <span>MongoDB, JWT, RBAC & Docker</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <span>OpenAI API, RAG & Vector Search</span>
-              </div>
-            </div>
 
-            {/* Action Buttons */}
-            <div className="pt-2 flex flex-wrap gap-3">
-              <button
-                onClick={() => scrollToSection("projects")}
-                className="px-6 py-3 rounded-lg text-sm font-semibold bg-sky-600 hover:bg-sky-500 text-white transition-all flex items-center gap-2 shadow-sm font-mono"
-              >
-                <Layers className="w-4 h-4" />
-                <span>Explore Architecture & Projects</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-
-              <button
-                onClick={downloadResume}
-                className="px-5 py-3 rounded-lg text-sm font-mono font-medium border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-2"
-              >
-                <FileDown className="w-4 h-4" />
-                <span>Download Resume</span>
-              </button>
-            </div>
-
-            {/* Quantitative Engineering Metrics Strip */}
-            <div className="pt-6 border-t border-slate-200 dark:border-slate-800 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-              {metrics.map((m, idx) => (
-                <div key={idx}>
-                  <p className="text-xl sm:text-2xl font-bold font-mono text-slate-900 dark:text-slate-100">{m.value}</p>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-1 leading-tight">{m.label}</p>
-                </div>
-              ))}
-            </div>
-
+              {onOpenTerminal && (
+                <button
+                  onClick={onOpenTerminal}
+                  className="mt-4 text-xs font-mono transition-colors"
+                  style={{ color: "var(--accent-teal)" }}
+                  aria-label="Open CLI terminal"
+                >
+                  $ explore via terminal →
+                </button>
+              )}
+            </Reveal>
           </div>
 
-          {/* ── RIGHT: Senior Engineering Visual Card ── */}
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-xl text-slate-900 dark:text-slate-100">
-              
-              {/* Card Window Header */}
-              <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-600 dark:text-slate-300">
+          {/* ── RIGHT: Editor-window portrait card ── */}
+          <Reveal className="lg:col-span-5 flex justify-center" delay={0.1}>
+            <div
+              className="relative w-full max-w-[370px] rounded-2xl p-4"
+              style={{
+                backgroundColor: "var(--card-bg)",
+                border: "1px solid var(--card-border)",
+                boxShadow: "var(--card-shadow)",
+                color: "var(--text-primary)",
+              }}
+            >
+              {/* Title bar */}
+              <div
+                className="flex items-center justify-between pb-3 mb-3 text-xs font-mono"
+                style={{ borderBottom: "1px solid var(--card-border)", color: "var(--text-secondary)" }}
+              >
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
                   <span className="ml-2 font-semibold">arbaz_fullstack.ts</span>
                 </div>
-                <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="font-semibold flex items-center gap-1.5" style={{ color: "var(--accent-emerald)" }}>
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
                   ONLINE
                 </span>
               </div>
 
-              {/* Photo Display */}
-              <div className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 mb-4 aspect-[4/5] max-w-[340px] mx-auto shadow-inner">
-                <img
+              {/* Photo with parallax + spec overlay */}
+              <div
+                className="relative rounded-xl overflow-hidden aspect-[4/5] max-w-[340px] mx-auto mb-2"
+                style={{ border: "1px solid var(--card-border)", backgroundColor: "var(--bg-muted)" }}
+              >
+                <motion.img
                   src="/profile.jpeg"
                   alt="Arbaz Sayyad — Full Stack Developer"
-                  className="w-full h-full object-cover object-top transition-transform duration-300 hover:scale-105"
+                  className="w-full h-[112%] object-cover object-top"
+                  style={{ y: portraitY }}
                 />
-                
-                {/* Overlay Tech Spec Tag */}
-                <div className="absolute bottom-3 left-3 right-3 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-3 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-mono space-y-1 shadow-md">
-                  <div className="flex justify-between text-slate-700 dark:text-slate-300">
-                    <span className="text-slate-600 dark:text-slate-300">ROLE:</span>
-                    <span className="font-bold text-sky-600 dark:text-sky-400">Full Stack Developer</span>
+
+                {/* Mono spec sheet overlay */}
+                <div
+                  className="absolute bottom-3 left-3 right-3 backdrop-blur-md p-3 rounded-xl border text-xs font-mono space-y-1.5"
+                  style={{
+                    backgroundColor: "color-mix(in srgb, var(--card-bg) 94%, transparent)",
+                    borderColor: "var(--card-border)",
+                    color: "var(--text-secondary)",
+                  }}
+                >
+                  <div className="flex justify-between">
+                    <span style={{ color: "var(--text-muted)" }}>ROLE:</span>
+                    <span className="font-bold" style={{ color: "var(--accent-teal)" }}>Full Stack Developer</span>
                   </div>
-                  <div className="flex justify-between text-slate-700 dark:text-slate-300">
-                    <span className="text-slate-600 dark:text-slate-300">LOC:</span>
+                  <div className="flex justify-between">
+                    <span style={{ color: "var(--text-muted)" }}>LOC:</span>
                     <span className="flex items-center gap-1 font-medium">
-                      <MapPin className="w-3 h-3 text-sky-600 dark:text-sky-400" />
+                      <MapPin className="w-3 h-3" style={{ color: "var(--accent-teal)" }} />
                       Pune, India
                     </span>
                   </div>
-                  <div className="flex justify-between text-slate-700 dark:text-slate-300">
-                    <span className="text-slate-600 dark:text-slate-300">EXP:</span>
+                  <div className="flex justify-between">
+                    <span style={{ color: "var(--text-muted)" }}>EXP:</span>
                     <span className="font-medium">3+ YOE (Synechron Technologies)</span>
                   </div>
                 </div>
               </div>
 
-              {/* Technical Telemetry Summary */}
-              <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800 font-mono text-xs text-slate-600 dark:text-slate-400 space-y-1.5">
-                <div className="flex items-center gap-2 text-slate-800 dark:text-slate-300 font-semibold">
-                  <Terminal className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
+              {/* Core tech stack panel */}
+              <div
+                className="p-3 rounded-xl border font-mono text-xs space-y-1.5"
+                style={{
+                  backgroundColor: "var(--bg-elevated)",
+                  borderColor: "var(--card-border)",
+                  color: "var(--text-muted)",
+                }}
+              >
+                <div className="flex items-center gap-2 font-semibold" style={{ color: "var(--text-primary)" }}>
+                  <Terminal className="w-3.5 h-3.5" style={{ color: "var(--accent-teal)" }} />
                   <span>CORE TECH STACK</span>
                 </div>
-                <p className="text-slate-700 dark:text-slate-300">
-                  <span className="text-sky-600 dark:text-sky-400">const</span> stack = [<span className="text-emerald-600 dark:text-emerald-300">&quot;React&quot;</span>, <span className="text-emerald-600 dark:text-emerald-300">&quot;Node.js&quot;</span>, <span className="text-emerald-600 dark:text-emerald-300">&quot;OpenAI RAG&quot;</span>];
+                <p style={{ color: "var(--text-secondary)" }}>
+                  <span style={{ color: "var(--accent-teal)" }}>const</span> stack = [<span style={{ color: "var(--accent-emerald)" }}>&quot;React&quot;</span>, <span style={{ color: "var(--accent-emerald)" }}>&quot;Node.js&quot;</span>, <span style={{ color: "var(--accent-emerald)" }}>&quot;OpenAI RAG&quot;</span>];
                 </p>
               </div>
-
             </div>
-          </div>
-
+          </Reveal>
         </div>
+
+        {/* ── Proof band — full width, hairline separated ── */}
+        <Reveal delay={0.1}>
+          <div
+            className="mt-10 sm:mt-12 pt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6"
+            style={{ borderTop: "1px solid var(--card-border)" }}
+          >
+            {metrics.map((m, idx) => (
+              <div key={idx}>
+                <p className="font-display font-semibold text-proof-fluid" style={{ color: "var(--text-primary)" }}>{m.value}</p>
+                <p className="text-[11px] mt-2 leading-tight" style={{ color: "var(--text-muted)" }}>{m.label}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );
 }
-

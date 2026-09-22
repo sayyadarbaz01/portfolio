@@ -260,18 +260,24 @@ export function TerminalWidget({ isOpen, onClose }: TerminalWidgetProps) {
   );
 }
 
-// Terminal toggle button
+// Terminal toggle button — bottom-left pill so it never overlaps scroll-to-top
 export function TerminalButton({ onClick }: { onClick: () => void }) {
   return (
     <motion.button
       onClick={onClick}
-      className="fixed bottom-6 right-6 z-40 flex items-center gap-2 px-3.5 py-2 rounded-lg bg-slate-900 text-slate-200 border border-slate-800 shadow-xl hover:border-sky-500 transition-all text-xs font-mono"
+      className="fixed bottom-6 left-6 z-40 flex items-center gap-2 px-4 py-2.5 rounded-full border shadow-lg transition-all text-xs font-mono font-medium"
+      style={{
+        backgroundColor: "var(--card-bg)",
+        borderColor: "var(--card-border)",
+        color: "var(--text-secondary)",
+        boxShadow: "var(--card-shadow)",
+      }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       aria-label="Open CLI Terminal"
     >
-      <Terminal className="w-4 h-4 text-sky-400" />
-      <span className="hidden sm:inline">CLI Terminal</span>
+      <Terminal className="w-4 h-4" style={{ color: "var(--accent-teal)" }} />
+      <span className="hidden sm:inline">Try my CLI</span>
     </motion.button>
   );
 }

@@ -6,6 +6,7 @@ import { navigation, socialLinks } from "@/data/portfolio";
 import { Mail, ArrowUp } from "lucide-react";
 import { AnalyticsDisplay } from "@/components/AnalyticsDisplay";
 import { useInView } from "@/hooks";
+import { Reveal } from "@/components/ui/Motion";
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -29,54 +30,39 @@ export function Footer() {
   };
 
   return (
-    <footer className="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 py-12 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <footer
+      className="transition-colors"
+      style={{
+        borderTop: "1px solid var(--card-border)",
+        backgroundColor: "var(--bg-elevated)",
+        color: "var(--text-primary)",
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+        {/* Wordmark block */}
+        <Reveal className="text-left mb-10">
+          <p className="eyebrow mb-3">FULL-STACK & AI INTEGRATION ENGINEER</p>
+          <p className="font-display font-semibold tracking-tight text-wordmark-fluid" style={{ color: "var(--text-primary)" }}>
+            Arbaz Sayyad
+          </p>
+          <p className="text-sm sm:text-base leading-relaxed max-w-xl mt-4" style={{ color: "var(--text-secondary)" }}>
+            Full Stack Engineer specializing in React.js, TypeScript, Node.js microservices, and AI/RAG platform architecture.
+          </p>
+        </Reveal>
 
-          {/* Brand */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded bg-slate-900 dark:bg-slate-100 text-slate-100 dark:text-slate-900 font-mono font-bold flex items-center justify-center text-xs shadow-sm">
-                AS
-              </div>
-              <span className="font-bold text-base font-mono tracking-tight text-slate-900 dark:text-slate-100">
-                Arbaz Sayyad
-              </span>
-            </div>
-            <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed max-w-sm font-sans">
-              Full Stack Engineer specializing in React.js, TypeScript, Node.js microservices, and AI/RAG platform architecture.
-            </p>
-          </div>
-
-          {/* Quick Navigation */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+          {/* Socials */}
           <div>
-            <h4 className="font-mono text-xs text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-3 font-semibold">
-              Navigation
-            </h4>
-            <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-              {navigation.map((item) => (
-                <button
-                  key={item.label}
-                  onClick={() => scrollToSection(item.href.replace("#", ""))}
-                  className="text-left text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors font-medium"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Channels */}
-          <div>
-            <h4 className="font-mono text-xs text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-3 font-semibold">
+            <h4 className="font-mono text-xs uppercase tracking-wider mb-4 font-semibold" style={{ color: "var(--accent-teal)" }}>
               Connect
             </h4>
-            <div className="flex gap-2">
+            <div className="flex gap-2.5">
               <a
                 href={socialLinks.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-500 transition-colors shadow-sm"
+                className="p-3 rounded-full border transition-all hover:-translate-y-0.5"
+                style={{ backgroundColor: "var(--card-bg)", borderColor: "var(--card-border)", color: "var(--text-secondary)" }}
                 aria-label="GitHub"
               >
                 <GithubIcon className="w-4 h-4" />
@@ -85,14 +71,16 @@ export function Footer() {
                 href={socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-500 transition-colors shadow-sm"
+                className="p-3 rounded-full border transition-all hover:-translate-y-0.5"
+                style={{ backgroundColor: "var(--card-bg)", borderColor: "var(--card-border)", color: "var(--text-secondary)" }}
                 aria-label="LinkedIn"
               >
                 <LinkedinIcon className="w-4 h-4" />
               </a>
               <a
                 href={`mailto:${socialLinks.email}`}
-                className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-500 transition-colors shadow-sm"
+                className="p-3 rounded-full border transition-all hover:-translate-y-0.5"
+                style={{ backgroundColor: "var(--card-bg)", borderColor: "var(--card-border)", color: "var(--text-secondary)" }}
                 aria-label="Email"
               >
                 <Mail className="w-4 h-4" />
@@ -100,30 +88,66 @@ export function Footer() {
             </div>
           </div>
 
+          {/* Sitemap */}
+          <div>
+            <h4 className="font-mono text-xs uppercase tracking-wider mb-4 font-semibold" style={{ color: "var(--accent-teal)" }}>
+              Navigation
+            </h4>
+            <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+              {navigation.map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => scrollToSection(item.href.replace("#", ""))}
+                  className="text-left font-medium transition-colors"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Email note */}
+          <div>
+            <h4 className="font-mono text-xs uppercase tracking-wider mb-4 font-semibold" style={{ color: "var(--accent-teal)" }}>
+              Direct Line
+            </h4>
+            <a
+              href={`mailto:${socialLinks.email}`}
+              className="text-sm font-mono transition-colors break-all"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {socialLinks.email}
+            </a>
+            <p className="text-xs mt-2" style={{ color: "var(--text-muted)" }}>
+              {socialLinks.phone}
+            </p>
+          </div>
         </div>
 
         {/* Analytics Display */}
-        <div ref={ref} className="pt-6 border-t border-slate-200 dark:border-slate-800/80 mb-6">
+        <div ref={ref} className="py-6 mb-2" style={{ borderTop: "1px solid var(--card-border)" }}>
           <AnalyticsDisplay isInView={isInView} />
         </div>
 
-        {/* Copyright & Scroll Top */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-600 dark:text-slate-400 pt-4 border-t border-slate-200 dark:border-slate-800/50">
+        {/* Copyright row + Back to top pill */}
+        <div
+          className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono pt-6"
+          style={{ borderTop: "1px solid var(--card-border)", color: "var(--text-muted)" }}
+        >
           <p>© {currentYear} Arbaz Sayyad. Built with React 19, Next.js & Tailwind CSS.</p>
 
           <button
             onClick={handleScrollToTop}
-            className="p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 hover:border-sky-500 transition-colors flex items-center gap-1.5 shadow-sm font-semibold"
-            aria-label="Scroll to top"
+            className="px-5 py-2.5 rounded-full font-semibold flex items-center gap-2 transition-transform hover:-translate-y-px"
+            style={{ backgroundColor: "var(--text-primary)", color: "var(--bg-base)" }}
+            aria-label="Back to top"
           >
-            <span>TOP</span>
+            <span>Back to top</span>
             <ArrowUp className="w-3.5 h-3.5" />
           </button>
         </div>
-
       </div>
     </footer>
   );
 }
-
-

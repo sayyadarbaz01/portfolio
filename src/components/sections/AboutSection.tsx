@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useRef } from "react";
-import { useInView } from "@/hooks";
 import { Section } from "@/components/ui";
-import { Cpu, Zap, Shield, Layers, Users } from "lucide-react";
+import { Reveal, SpotlightCard } from "@/components/ui/Motion";
+import { Cpu, Zap, Shield, Layers } from "lucide-react";
 
 const principles = [
   {
@@ -30,51 +30,63 @@ const principles = [
 
 export function AboutSection() {
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref);
 
   return (
-    <Section id="about" title="Engineering Overview & Background" ref={ref}>
+    <Section id="about" eyebrow="01 / About" title="Engineering Overview & Background" ref={ref}>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
+
         {/* Left Column: Narrative */}
-        <div className="lg:col-span-6 space-y-5 text-left">
-          <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+        <Reveal className="lg:col-span-6 space-y-5 text-left">
+          <h3 className="font-display text-2xl sm:text-3xl font-semibold" style={{ color: "var(--text-primary)" }}>
             Full Stack Developer · 3+ YOE
           </h3>
-          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+          <p className="text-sm sm:text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
             I specialize in building production-grade web applications, microservices, and intelligent AI workflows. Over 3+ YOE at Synechron Technologies, I have led technical implementations for high-concurrency compliance platforms supporting 500+ daily financial analysts.
           </p>
-          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+          <p className="text-sm sm:text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
             My technical expertise spans frontend architecture (React.js, TypeScript, Redux, MUI, Tailwind, WCAG 2.1), backend microservices (Node.js, Express, REST APIs, MongoDB, SQL, JWT, RBAC, Docker, CI/CD), and generative AI integration (OpenAI API, RAG, Vector Search, Prompt Engineering).
           </p>
 
-          <div className="p-4 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl space-y-2 font-mono text-xs text-slate-700 dark:text-slate-300">
-            <p className="text-sky-600 dark:text-sky-400 font-bold uppercase tracking-wider">Engineering Philosophy</p>
-            <p className="text-slate-700 dark:text-slate-300">
+          <div
+            className="p-5 rounded-2xl space-y-2 font-mono text-xs"
+            style={{
+              backgroundColor: "var(--bg-elevated)",
+              border: "1px solid var(--card-border)",
+              color: "var(--text-secondary)",
+            }}
+          >
+            <p className="font-bold uppercase tracking-wider" style={{ color: "var(--accent-teal)" }}>Engineering Philosophy</p>
+            <p style={{ color: "var(--text-secondary)" }}>
               &quot;Write clean, deterministic code. Optimize for readability, measurable performance metrics (4s→2s load times), and resilient system boundaries.&quot;
             </p>
           </div>
-        </div>
+        </Reveal>
 
         {/* Right Column: Principles Grid */}
         <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
           {principles.map((p, idx) => {
             const Icon = p.icon;
             return (
-              <div
-                key={idx}
-                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 space-y-2 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors"
-              >
-                <div className="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center">
-                  <Icon className="w-4 h-4" />
-                </div>
-                <h4 className="font-mono font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100">
-                  {p.title}
-                </h4>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
-                  {p.description}
-                </p>
-              </div>
+              <Reveal key={idx} delay={idx * 0.06}>
+                <SpotlightCard className="p-5 space-y-2.5 h-full">
+                  <div
+                    className="w-9 h-9 rounded-xl flex items-center justify-center"
+                    style={{
+                      backgroundColor: "rgba(15, 118, 110, 0.1)",
+                      border: "1px solid rgba(15, 118, 110, 0.22)",
+                      color: "var(--accent-teal)",
+                    }}
+                  >
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <h4 className="font-mono font-bold text-xs sm:text-sm" style={{ color: "var(--text-primary)" }}>
+                    {p.title}
+                  </h4>
+                  <p className="text-xs leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                    {p.description}
+                  </p>
+                </SpotlightCard>
+              </Reveal>
             );
           })}
         </div>
@@ -83,5 +95,3 @@ export function AboutSection() {
     </Section>
   );
 }
-
-

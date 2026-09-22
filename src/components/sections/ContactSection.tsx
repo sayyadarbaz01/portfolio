@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import emailjs from "@emailjs/browser";
 import React, { useRef, useState } from "react";
 import { Section } from "@/components/ui";
+import { Reveal } from "@/components/ui/Motion";
 import { socialLinks } from "@/data/portfolio";
 import { saveContact } from "@/actions/feedback";
 import { Mail, Phone, MapPin, Send, MessageSquare, Loader2 } from "lucide-react";
@@ -91,7 +92,7 @@ export function ContactSection() {
           if (result.status === 200 || result.text === "OK") {
             emailOk = true;
           }
-        } catch (emailErr: any) {
+        } catch (emailErr: unknown) {
           console.error("EmailJS Client Error:", emailErr);
         }
       }
@@ -116,166 +117,177 @@ export function ContactSection() {
     }
   };
 
+  const inputStyle = {
+    backgroundColor: "var(--bg-elevated)",
+    border: "1px solid var(--input-border)",
+    color: "var(--text-primary)",
+  } as React.CSSProperties;
+
   return (
-    <Section id="contact" title="Contact & Direct Communication" ref={ref}>
+    <Section id="contact" eyebrow="06 / Contact" title="Contact & Direct Communication" ref={ref}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
 
         {/* Left Column: Direct Info */}
-        <div className="space-y-6 text-slate-900 dark:text-slate-100">
+        <Reveal className="space-y-6">
           <div>
-            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">
+            <h3 className="font-display text-2xl sm:text-3xl font-semibold mb-2" style={{ color: "var(--text-primary)" }}>
               Let&apos;s Build Systems Together
             </h3>
-            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
               Open to full stack development and architecture consulting. Reach out directly via email or the form.
             </p>
           </div>
 
-          <div className="space-y-3 font-mono text-xs text-slate-700 dark:text-slate-300">
+          <div className="space-y-3 font-mono text-xs" style={{ color: "var(--text-secondary)" }}>
             <a
               href={`mailto:${socialLinks.email}`}
-              className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none hover:border-sky-500 transition-colors"
+              className="theme-card lift-hover flex items-center gap-3 p-3.5"
             >
-              <div className="p-2 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+              <div className="p-2 rounded-xl" style={{ backgroundColor: "rgba(15, 118, 110, 0.1)", color: "var(--accent-teal)" }}>
                 <Mail className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-slate-600 dark:text-slate-300 text-[10px] font-medium">EMAIL</p>
-                <p className="font-semibold text-slate-900 dark:text-slate-100">{socialLinks.email}</p>
+                <p className="text-[10px] font-medium" style={{ color: "var(--text-muted)" }}>EMAIL</p>
+                <p className="font-semibold" style={{ color: "var(--text-primary)" }}>{socialLinks.email}</p>
               </div>
             </a>
 
             <a
               href={`tel:${socialLinks.phone}`}
-              className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none hover:border-emerald-500 transition-colors"
+              className="theme-card lift-hover flex items-center gap-3 p-3.5"
             >
-              <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+              <div className="p-2 rounded-xl" style={{ backgroundColor: "rgba(4, 120, 87, 0.1)", color: "var(--accent-emerald)" }}>
                 <Phone className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-slate-600 dark:text-slate-300 text-[10px] font-medium">PHONE / WHATSAPP</p>
-                <p className="font-semibold text-slate-900 dark:text-slate-100">{socialLinks.phone}</p>
+                <p className="text-[10px] font-medium" style={{ color: "var(--text-muted)" }}>PHONE / WHATSAPP</p>
+                <p className="font-semibold" style={{ color: "var(--text-primary)" }}>{socialLinks.phone}</p>
               </div>
             </a>
 
-            <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none">
-              <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+            <div className="theme-card flex items-center gap-3 p-3.5">
+              <div className="p-2 rounded-xl" style={{ backgroundColor: "var(--bg-muted)", color: "var(--text-muted)" }}>
                 <MapPin className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-slate-600 dark:text-slate-300 text-[10px] font-medium">LOCATION</p>
-                <p className="font-semibold text-slate-900 dark:text-slate-100">Pune, India (Open to Remote)</p>
+                <p className="text-[10px] font-medium" style={{ color: "var(--text-muted)" }}>LOCATION</p>
+                <p className="font-semibold" style={{ color: "var(--text-primary)" }}>Pune, India (Open to Remote)</p>
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
 
         {/* Right Column: Contact Form */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 text-slate-900 dark:text-slate-100 shadow-sm dark:shadow-none">
-          <h4 className="font-mono text-xs text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-2 flex items-center gap-2 font-semibold">
-            <MessageSquare className="w-4 h-4" /> Direct Message Form
-          </h4>
+        <Reveal delay={0.08}>
+          <div className="theme-card p-6 space-y-4" style={{ color: "var(--text-primary)" }}>
+            <h4 className="font-mono text-xs uppercase tracking-wider mb-2 flex items-center gap-2 font-semibold" style={{ color: "var(--accent-teal)" }}>
+              <MessageSquare className="w-4 h-4" /> Direct Message Form
+            </h4>
 
-          <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
-            <div>
-              <label htmlFor="contact-name" className="block text-slate-700 dark:text-slate-300 mb-1 font-medium">
-                FULL NAME *
-              </label>
-              <input
-                id="contact-name"
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
+            <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
+              <div>
+                <label htmlFor="contact-name" className="block mb-1 font-medium" style={{ color: "var(--text-secondary)" }}>
+                  FULL NAME *
+                </label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  required
+                  autoComplete="name"
+                  autoCapitalize="words"
+                  className="w-full px-3.5 py-2.5 rounded-xl placeholder:opacity-60 disabled:opacity-60 disabled:cursor-not-allowed"
+                  style={inputStyle}
+                  placeholder="e.g. Sarah Jenkins"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="contact-email" className="block mb-1 font-medium" style={{ color: "var(--text-secondary)" }}>
+                  EMAIL ADDRESS *
+                </label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  required
+                  inputMode="email"
+                  autoComplete="email"
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  className="w-full px-3.5 py-2.5 rounded-xl placeholder:opacity-60 disabled:opacity-60 disabled:cursor-not-allowed"
+                  style={inputStyle}
+                  placeholder="e.g. sarah@company.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="contact-subject" className="block mb-1 font-medium" style={{ color: "var(--text-secondary)" }}>
+                  SUBJECT / ROLE *
+                </label>
+                <input
+                  id="contact-subject"
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  required
+                  autoComplete="off"
+                  className="w-full px-3.5 py-2.5 rounded-xl placeholder:opacity-60 disabled:opacity-60 disabled:cursor-not-allowed"
+                  style={inputStyle}
+                  placeholder="e.g. Full Stack Engineer Role"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="contact-message" className="block mb-1 font-medium" style={{ color: "var(--text-secondary)" }}>
+                  MESSAGE DETAILS *
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  required
+                  rows={4}
+                  autoComplete="off"
+                  className="w-full px-3.5 py-2.5 rounded-xl placeholder:opacity-60 resize-none disabled:opacity-60 disabled:cursor-not-allowed"
+                  style={inputStyle}
+                  placeholder="Details about project, tech stack, or open role..."
+                />
+              </div>
+
+              <button
+                type="submit"
                 disabled={isSubmitting}
-                required
-                autoComplete="name"
-                autoCapitalize="words"
-                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 disabled:opacity-60 disabled:cursor-not-allowed"
-                placeholder="e.g. Sarah Jenkins"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="contact-email" className="block text-slate-700 dark:text-slate-300 mb-1 font-medium">
-                EMAIL ADDRESS *
-              </label>
-              <input
-                id="contact-email"
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                disabled={isSubmitting}
-                required
-                inputMode="email"
-                autoComplete="email"
-                autoCapitalize="none"
-                autoCorrect="off"
-                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 disabled:opacity-60 disabled:cursor-not-allowed"
-                placeholder="e.g. sarah@company.com"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="contact-subject" className="block text-slate-700 dark:text-slate-300 mb-1 font-medium">
-                SUBJECT / ROLE *
-              </label>
-              <input
-                id="contact-subject"
-                type="text"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                disabled={isSubmitting}
-                required
-                autoComplete="off"
-                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 disabled:opacity-60 disabled:cursor-not-allowed"
-                placeholder="e.g. Full Stack Engineer Role"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="contact-message" className="block text-slate-700 dark:text-slate-300 mb-1 font-medium">
-                MESSAGE DETAILS *
-              </label>
-              <textarea
-                id="contact-message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                disabled={isSubmitting}
-                required
-                rows={4}
-                autoComplete="off"
-                className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 resize-none disabled:opacity-60 disabled:cursor-not-allowed"
-                placeholder="Details about project, tech stack, or open role..."
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full py-3 rounded-lg font-semibold bg-sky-600 hover:bg-sky-500 disabled:opacity-50 disabled:cursor-not-allowed text-white transition-colors flex items-center justify-center gap-2"
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Sending Message...</span>
-                </>
-              ) : (
-                <>
-                  <Send className="w-4 h-4" />
-                  <span>Message</span>
-                </>
-              )}
-            </button>
-          </form>
-        </div>
+                className="btn-ink w-full py-3 rounded-full font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+                style={{ backgroundColor: "var(--accent-teal)" }}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin relative z-[2]" />
+                    <span className="relative z-[2]">Sending Message...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4 relative z-[2]" />
+                    <span className="relative z-[2]">Message</span>
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
+        </Reveal>
 
       </div>
     </Section>
   );
 }
-
-

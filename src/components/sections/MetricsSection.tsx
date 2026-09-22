@@ -4,7 +4,8 @@ import React, { useRef } from "react";
 import { useInView } from "@/hooks";
 import { Section } from "@/components/ui";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { Cpu, Zap, Users, Gauge, Layers, CheckCircle2 } from "lucide-react";
+import { Reveal, SpotlightCard } from "@/components/ui/Motion";
+import { Cpu, Zap, Gauge, Layers, CheckCircle2 } from "lucide-react";
 
 const metrics = [
   {
@@ -51,68 +52,73 @@ export function MetricsSection() {
   const isInView = useInView(ref);
 
   return (
-    <Section id="metrics" title="Performance Engineering Benchmarks" ref={ref}>
+    <Section id="metrics" eyebrow="03 / Metrics" title="Performance Engineering Benchmarks" ref={ref}>
       <div className="space-y-8">
-        
-        <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl text-left">
-          Empirical production metrics resulting from architectural refactoring, vector retrieval optimization, and AI workflow integration.
-        </p>
+
+        <Reveal>
+          <p className="text-sm sm:text-base max-w-2xl text-left" style={{ color: "var(--text-secondary)" }}>
+            Empirical production metrics resulting from architectural refactoring, vector retrieval optimization, and AI workflow integration.
+          </p>
+        </Reveal>
 
         {/* Metrics Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {metrics.map((metric, index) => {
             const Icon = metric.icon;
             return (
-              <div
-                key={index}
-                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3 shadow-sm dark:shadow-none hover:border-slate-400 dark:hover:border-slate-700 transition-colors"
-              >
-                <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
-                  <Icon className="w-5 h-5 text-sky-600 dark:text-sky-400" />
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-slate-600 dark:text-slate-300 font-semibold">
-                    METRIC #0{index + 1}
-                  </span>
-                </div>
+              <Reveal key={index} delay={index * 0.06}>
+                <SpotlightCard className="p-5 space-y-3 h-full">
+                  <div className="flex items-center justify-between">
+                    <Icon className="w-5 h-5" style={{ color: "var(--accent-teal)" }} />
+                    <span className="text-[10px] font-mono uppercase tracking-wider font-semibold" style={{ color: "var(--text-muted)" }}>
+                      METRIC #0{index + 1}
+                    </span>
+                  </div>
 
-                <div>
-                  <p className="text-3xl sm:text-4xl font-bold font-mono text-slate-900 dark:text-slate-100">
-                    <AnimatedCounter
-                      target={metric.value}
-                      suffix={metric.suffix}
-                      isInView={isInView}
-                      delay={index * 0.1}
-                    />
-                  </p>
-                  <p className="font-semibold text-xs sm:text-sm text-slate-800 dark:text-slate-200 mt-1">
-                    {metric.label}
-                  </p>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-1 leading-snug font-medium">
-                    {metric.sublabel}
-                  </p>
-                </div>
-              </div>
+                  <div>
+                    <p className="font-display font-semibold text-metric-fluid" style={{ color: "var(--text-primary)" }}>
+                      <AnimatedCounter
+                        target={metric.value}
+                        suffix={metric.suffix}
+                        isInView={isInView}
+                        delay={index * 0.1}
+                      />
+                    </p>
+                    <p className="font-semibold text-xs sm:text-sm mt-2" style={{ color: "var(--text-primary)" }}>
+                      {metric.label}
+                    </p>
+                    <p className="text-[11px] mt-1 leading-snug font-medium" style={{ color: "var(--text-muted)" }}>
+                      {metric.sublabel}
+                    </p>
+                  </div>
+                </SpotlightCard>
+              </Reveal>
             );
           })}
         </div>
 
         {/* Core Technical Deliverables */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-sm dark:shadow-none">
-          <h3 className="text-sm font-mono text-sky-600 dark:text-sky-400 uppercase tracking-wider font-semibold">
-            Verified Technical Accomplishments
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
-            {achievements.map((item, idx) => (
-              <div key={idx} className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800/80 font-mono text-xs">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0" />
-                <span>{item}</span>
-              </div>
-            ))}
+        <Reveal>
+          <div className="theme-card p-6 space-y-4">
+            <h3 className="text-sm font-mono uppercase tracking-wider font-semibold" style={{ color: "var(--accent-teal)" }}>
+              Verified Technical Accomplishments
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm" style={{ color: "var(--text-secondary)" }}>
+              {achievements.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-start gap-2.5 p-3 rounded-xl border font-mono text-xs"
+                  style={{ backgroundColor: "var(--bg-elevated)", borderColor: "var(--card-border)" }}
+                >
+                  <CheckCircle2 className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "var(--accent-emerald)" }} />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </Reveal>
 
       </div>
     </Section>
   );
 }
-
-

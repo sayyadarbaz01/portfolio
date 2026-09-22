@@ -52,22 +52,22 @@ export function AnalyticsDisplay({ isInView }: AnalyticsDisplayProps) {
   const { visitors, downloads, isLoading } = useAnalytics();
 
   return (
-    <div className="flex gap-6 justify-center items-center flex-wrap my-4 font-mono">
+    <div className="flex gap-4 justify-start items-center flex-wrap my-4 font-mono">
       {/* Visitors */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={isInView && !isLoading ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.3 }}
-        className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none"
+        className="theme-card flex items-center gap-3 px-5 py-3"
       >
-        <div className="p-2 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+        <div className="p-2 rounded-xl" style={{ backgroundColor: "rgba(15, 118, 110, 0.1)", color: "var(--accent-teal)" }}>
           <Eye className="w-4 h-4" />
         </div>
         <div className="flex flex-col">
-          <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">
+          <span className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>
             PORTFOLIO VISITORS
           </span>
-          <span className="text-xl font-bold text-slate-900 dark:text-slate-100">
+          <span className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>
             {isLoading ? "..." : <AnimatedCounter target={visitors} isInView={isInView && !isLoading} />}
           </span>
         </div>
@@ -78,16 +78,16 @@ export function AnalyticsDisplay({ isInView }: AnalyticsDisplayProps) {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={isInView && !isLoading ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.3, delay: 0.1 }}
-        className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none"
+        className="theme-card flex items-center gap-3 px-5 py-3"
       >
-        <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+        <div className="p-2 rounded-xl" style={{ backgroundColor: "rgba(4, 120, 87, 0.1)", color: "var(--accent-emerald)" }}>
           <Download className="w-4 h-4" />
         </div>
         <div className="flex flex-col">
-          <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">
+          <span className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>
             RESUME DOWNLOADS
           </span>
-          <span className="text-xl font-bold text-slate-900 dark:text-slate-100">
+          <span className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>
             {isLoading ? "..." : <AnimatedCounter target={downloads} isInView={isInView && !isLoading} />}
           </span>
         </div>

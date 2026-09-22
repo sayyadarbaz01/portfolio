@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext } from "react";
+import { MotionConfig } from "framer-motion";
 import { useTheme as useThemeHook } from "@/hooks";
 
 interface ThemeContextType {
@@ -17,7 +18,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   // Always provide context (even before mounted) so useTheme never throws.
   // Components can check `mounted` themselves to avoid hydration mismatches.
   return (
-    <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={theme}>
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
+    </ThemeContext.Provider>
   );
 }
 

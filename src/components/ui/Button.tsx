@@ -17,17 +17,13 @@ export function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    "inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer";
+    "inline-flex items-center justify-center font-medium rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer";
 
   const variants = {
-    primary:
-      "bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:shadow-lg hover:shadow-blue-500/50 focus:ring-blue-500",
-    secondary:
-      "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg hover:shadow-purple-500/50 focus:ring-purple-500",
-    outline:
-      "border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 focus:ring-sky-500 dark:focus:ring-offset-slate-950",
-    ghost:
-      "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 focus:ring-sky-500 dark:focus:ring-offset-slate-950",
+    primary: "text-white",
+    secondary: "text-white",
+    outline: "border",
+    ghost: "",
   };
 
   const sizes = {
@@ -36,9 +32,21 @@ export function Button({
     lg: "px-8 py-3 text-lg",
   };
 
+  const variantStyles: React.CSSProperties =
+    variant === "primary" || variant === "secondary"
+      ? { backgroundColor: "var(--text-primary)", color: "var(--bg-base)" }
+      : variant === "outline"
+        ? {
+            backgroundColor: "transparent",
+            borderColor: "var(--card-border)",
+            color: "var(--text-primary)",
+          }
+        : { backgroundColor: "transparent", color: "var(--text-secondary)" };
+
   return (
     <button
       className={cn(baseStyles, variants[variant], sizes[size], className)}
+      style={variantStyles}
       {...props}
     >
       {children}

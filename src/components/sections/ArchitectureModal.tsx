@@ -53,7 +53,7 @@ export function ArchitectureModal({ project, onClose }: ArchitectureModalProps) 
             {/* Header */}
             <div className="flex items-start sm:items-center justify-between px-4 py-3.5 sm:px-6 sm:py-4 border-b border-slate-800 bg-slate-900/95 backdrop-blur-sm sticky top-0 z-20 gap-3">
               <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-                <div className="p-2 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400 flex-shrink-0">
+                <div className="p-2 rounded-lg bg-teal-500/10 border border-teal-500/20 text-teal-400 flex-shrink-0">
                   <Cpu className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="min-w-0">
@@ -81,7 +81,7 @@ export function ArchitectureModal({ project, onClose }: ArchitectureModalProps) 
             {project.architectureImage && (
               <div className="rounded-xl overflow-hidden border border-slate-800 bg-slate-950 p-2">
                 <div className="flex items-center gap-2 px-3 py-1.5 border-b border-slate-800 text-xs font-mono text-slate-400 mb-2">
-                  <Layers className="w-3.5 h-3.5 text-sky-400" />
+                  <Layers className="w-3.5 h-3.5 text-teal-400" />
                   <span>High-Performance Blueprint & Data Tier Pipeline</span>
                 </div>
                 <img
@@ -97,7 +97,7 @@ export function ArchitectureModal({ project, onClose }: ArchitectureModalProps) 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {metrics.map((m, i) => (
                   <div key={i} className="bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-center">
-                    <p className="text-xl sm:text-2xl font-mono font-bold text-sky-400">{m.value}</p>
+                    <p className="text-xl sm:text-2xl font-mono font-bold text-teal-400">{m.value}</p>
                     <p className="text-xs text-slate-400 mt-1">{m.label}</p>
                   </div>
                 ))}
@@ -106,7 +106,7 @@ export function ArchitectureModal({ project, onClose }: ArchitectureModalProps) 
 
             {/* Overview */}
             <div>
-              <h4 className="text-sm font-mono text-sky-400 tracking-wider uppercase mb-2 flex items-center gap-2">
+              <h4 className="text-sm font-mono text-teal-400 tracking-wider uppercase mb-2 flex items-center gap-2">
                 <Gauge className="w-4 h-4" /> Architectural Overview
               </h4>
               <p className="text-slate-300 text-sm leading-relaxed bg-slate-950/40 p-4 rounded-xl border border-slate-800">
@@ -117,7 +117,7 @@ export function ArchitectureModal({ project, onClose }: ArchitectureModalProps) 
             {/* System Execution Flow */}
             {systemFlow && systemFlow.length > 0 && (
               <div>
-                <h4 className="text-sm font-mono text-sky-400 tracking-wider uppercase mb-3 flex items-center gap-2">
+                <h4 className="text-sm font-mono text-teal-400 tracking-wider uppercase mb-3 flex items-center gap-2">
                   <GitBranch className="w-4 h-4" /> End-to-End Data Execution Flow
                 </h4>
                 <div className="space-y-2">
@@ -126,7 +126,7 @@ export function ArchitectureModal({ project, onClose }: ArchitectureModalProps) 
                       key={idx}
                       className="flex items-start gap-3 p-3 rounded-lg bg-slate-950/60 border border-slate-800/80 text-xs text-slate-300 font-mono"
                     >
-                      <span className="flex-shrink-0 w-5 h-5 rounded bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold">
+                      <span className="flex-shrink-0 w-5 h-5 rounded bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold">
                         {idx + 1}
                       </span>
                       <span className="mt-0.5">{step}</span>
@@ -139,7 +139,7 @@ export function ArchitectureModal({ project, onClose }: ArchitectureModalProps) 
             {/* Key Microservices & Components */}
             {keyComponents && keyComponents.length > 0 && (
               <div>
-                <h4 className="text-sm font-mono text-sky-400 tracking-wider uppercase mb-3 flex items-center gap-2">
+                <h4 className="text-sm font-mono text-teal-400 tracking-wider uppercase mb-3 flex items-center gap-2">
                   <Layers className="w-4 h-4" /> Core System Components
                 </h4>
                 <div className="overflow-x-auto rounded-xl border border-slate-800">
@@ -156,7 +156,7 @@ export function ArchitectureModal({ project, onClose }: ArchitectureModalProps) 
                         <tr key={idx} className="hover:bg-slate-800/30">
                           <td className="p-3 font-semibold text-slate-100 font-mono">{comp.name}</td>
                           <td className="p-3">{comp.role}</td>
-                          <td className="p-3 font-mono text-sky-300">{comp.tech}</td>
+                          <td className="p-3 font-mono text-teal-300">{comp.tech}</td>
                         </tr>
                       ))}
                     </tbody>

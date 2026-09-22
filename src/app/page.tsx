@@ -50,7 +50,7 @@ export default function Home() {
   return (
     <>
       {/* 1. Hero Section */}
-      <HeroSection />
+      <HeroSection onOpenTerminal={() => setTerminalOpen(true)} />
       
       {/* 2. About Section */}
       <LazySection>
