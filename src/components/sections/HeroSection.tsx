@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { ArrowRight, FileDown, Layers, CheckCircle2, MapPin, Terminal } from "lucide-react";
 import { downloadResume, scrollToSection } from "@/utils/helpers";
 import { Magnetic, Reveal } from "@/components/ui/Motion";
@@ -27,19 +27,16 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ onOpenTerminal }: HeroSectionProps) {
-  const { scrollY } = useScroll();
-  const portraitY = useTransform(scrollY, [0, 800], [0, 44]);
-
   return (
     <section
       id="home"
-      className="relative flex items-center pt-[calc(76px+1.25rem)] sm:pt-[calc(76px+2rem)] pb-10 sm:pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative flex items-center pt-[calc(76px+1.25rem)] sm:pt-[calc(76px+2rem)] pb-10 sm:pb-12 px-4 sm:px-6 lg:px-8 overflow-x-clip"
     >
-      <div className="w-full max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start">
+      <div className="w-full max-w-7xl 2xl:max-w-[90rem] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-10 items-start">
 
           {/* ── LEFT: Editorial hierarchy ── */}
-          <div className="lg:col-span-7 text-left">
+          <div className="lg:col-span-7 text-left min-w-0">
             <Reveal>
               {/* Identity pill */}
               <div
@@ -143,9 +140,9 @@ export function HeroSection({ onOpenTerminal }: HeroSectionProps) {
           </div>
 
           {/* ── RIGHT: Editor-window portrait card ── */}
-          <Reveal className="lg:col-span-5 flex justify-center" delay={0.1}>
+          <Reveal className="lg:col-span-5 flex justify-center lg:justify-end w-full min-w-0" delay={0.1}>
             <div
-              className="relative w-full max-w-[370px] rounded-2xl p-4"
+              className="relative w-full max-w-[min(100%,22rem)] sm:max-w-[24rem] lg:max-w-[26rem] xl:max-w-[28rem] 2xl:max-w-[32rem] rounded-2xl p-3 sm:p-4"
               style={{
                 backgroundColor: "var(--card-bg)",
                 border: "1px solid var(--card-border)",
@@ -155,66 +152,68 @@ export function HeroSection({ onOpenTerminal }: HeroSectionProps) {
             >
               {/* Title bar */}
               <div
-                className="flex items-center justify-between pb-3 mb-3 text-xs font-mono"
+                className="flex items-center justify-between gap-2 pb-3 mb-3 text-[10px] sm:text-xs font-mono min-w-0"
                 style={{ borderBottom: "1px solid var(--card-border)", color: "var(--text-secondary)" }}
               >
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="ml-2 font-semibold">arbaz_fullstack.ts</span>
+                <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80 flex-shrink-0" />
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80 flex-shrink-0" />
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500/80 flex-shrink-0" />
+                  <span className="ml-1 sm:ml-2 font-semibold truncate">arbaz_fullstack.ts</span>
                 </div>
-                <span className="font-semibold flex items-center gap-1.5" style={{ color: "var(--accent-emerald)" }}>
+                <span className="font-semibold flex items-center gap-1.5 flex-shrink-0" style={{ color: "var(--accent-emerald)" }}>
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                   </span>
-                  ONLINE
+                  <span className="hidden sm:inline">ONLINE</span>
                 </span>
               </div>
 
-              {/* Photo with parallax + spec overlay */}
+              {/* Photo — fixed aspect, responsive width, zoom on hover */}
               <div
-                className="relative rounded-xl overflow-hidden aspect-[4/5] max-w-[340px] mx-auto mb-2"
+                className="group relative w-full rounded-xl overflow-hidden aspect-[4/5] mx-auto mb-2"
                 style={{ border: "1px solid var(--card-border)", backgroundColor: "var(--bg-muted)" }}
               >
-                <motion.img
+                <Image
                   src="/profile.jpeg"
                   alt="Arbaz Sayyad — Full Stack Developer"
-                  className="w-full h-[112%] object-cover object-top"
-                  style={{ y: portraitY }}
+                  fill
+                  priority
+                  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 24rem, (max-width: 1536px) 28rem, 32rem"
+                  className="object-cover object-top will-change-transform transition-transform duration-500 ease-out motion-reduce:transition-none group-hover:scale-110 motion-reduce:group-hover:scale-100 [@media(hover:none)]:group-hover:scale-100"
                 />
 
                 {/* Mono spec sheet overlay */}
                 <div
-                  className="absolute bottom-3 left-3 right-3 backdrop-blur-md p-3 rounded-xl border text-xs font-mono space-y-1.5"
+                  className="absolute bottom-2 left-2 right-2 sm:bottom-3 sm:left-3 sm:right-3 backdrop-blur-md p-2.5 sm:p-3 rounded-xl border text-[10px] sm:text-xs font-mono space-y-1 sm:space-y-1.5 z-[1]"
                   style={{
                     backgroundColor: "color-mix(in srgb, var(--card-bg) 94%, transparent)",
                     borderColor: "var(--card-border)",
                     color: "var(--text-secondary)",
                   }}
                 >
-                  <div className="flex justify-between">
-                    <span style={{ color: "var(--text-muted)" }}>ROLE:</span>
-                    <span className="font-bold" style={{ color: "var(--accent-teal)" }}>Full Stack Developer</span>
+                  <div className="flex justify-between gap-2 min-w-0">
+                    <span className="flex-shrink-0" style={{ color: "var(--text-muted)" }}>ROLE:</span>
+                    <span className="font-bold text-right truncate" style={{ color: "var(--accent-teal)" }}>Full Stack Developer</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span style={{ color: "var(--text-muted)" }}>LOC:</span>
-                    <span className="flex items-center gap-1 font-medium">
-                      <MapPin className="w-3 h-3" style={{ color: "var(--accent-teal)" }} />
+                  <div className="flex justify-between gap-2 min-w-0">
+                    <span className="flex-shrink-0" style={{ color: "var(--text-muted)" }}>LOC:</span>
+                    <span className="flex items-center gap-1 font-medium text-right truncate">
+                      <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: "var(--accent-teal)" }} />
                       Pune, India
                     </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span style={{ color: "var(--text-muted)" }}>EXP:</span>
-                    <span className="font-medium">3+ YOE (Synechron Technologies)</span>
+                  <div className="flex justify-between gap-2 min-w-0">
+                    <span className="flex-shrink-0" style={{ color: "var(--text-muted)" }}>EXP:</span>
+                    <span className="font-medium text-right truncate">3+ YOE (Synechron Technologies)</span>
                   </div>
                 </div>
               </div>
 
               {/* Core tech stack panel */}
               <div
-                className="p-3 rounded-xl border font-mono text-xs space-y-1.5"
+                className="p-2.5 sm:p-3 rounded-xl border font-mono text-[10px] sm:text-xs space-y-1.5 overflow-x-auto"
                 style={{
                   backgroundColor: "var(--bg-elevated)",
                   borderColor: "var(--card-border)",
@@ -222,10 +221,10 @@ export function HeroSection({ onOpenTerminal }: HeroSectionProps) {
                 }}
               >
                 <div className="flex items-center gap-2 font-semibold" style={{ color: "var(--text-primary)" }}>
-                  <Terminal className="w-3.5 h-3.5" style={{ color: "var(--accent-teal)" }} />
+                  <Terminal className="w-3.5 h-3.5 flex-shrink-0" style={{ color: "var(--accent-teal)" }} />
                   <span>CORE TECH STACK</span>
                 </div>
-                <p style={{ color: "var(--text-secondary)" }}>
+                <p className="whitespace-nowrap sm:whitespace-normal" style={{ color: "var(--text-secondary)" }}>
                   <span style={{ color: "var(--accent-teal)" }}>const</span> stack = [<span style={{ color: "var(--accent-emerald)" }}>&quot;React&quot;</span>, <span style={{ color: "var(--accent-emerald)" }}>&quot;Node.js&quot;</span>, <span style={{ color: "var(--accent-emerald)" }}>&quot;OpenAI RAG&quot;</span>];
                 </p>
               </div>
@@ -236,7 +235,7 @@ export function HeroSection({ onOpenTerminal }: HeroSectionProps) {
         {/* ── Proof band — full width, hairline separated ── */}
         <Reveal delay={0.1}>
           <div
-            className="mt-10 sm:mt-12 pt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6"
+            className="mt-10 sm:mt-12 pt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6"
             style={{ borderTop: "1px solid var(--card-border)" }}
           >
             {metrics.map((m, idx) => (
