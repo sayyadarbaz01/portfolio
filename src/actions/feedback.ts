@@ -22,65 +22,51 @@ function getSql(): any {
 // ==========================================
 // IN-MEMORY HIGH-SPEED STALE-WHILE-REVALIDATE CACHE
 // ==========================================
-let cachedVisitors: number | null = null;
-let cachedDownloads: number | null = null;
+// Pre-seeded with production baseline so first renders execute in <1ms without blocking
+let cachedVisitors: number = 160;
+let cachedDownloads: number = 9;
 let cachedFeedbacks: any[] | null = null;
 
 let lastVisitorSync = 0;
 let lastDownloadSync = 0;
 let lastFeedbacksSync = 0;
+let isSyncingAnalytics = false;
 
-// Non-blocking Async Sync helper for Visitors
-async function syncVisitorCountFromDb() {
+// High-speed combined non-blocking DB sync for Visitors & Downloads
+async function syncAnalyticsFromDb() {
+  if (isSyncingAnalytics) return;
+  isSyncingAnalytics = true;
   try {
     const sql = getSql();
     if (sql) {
-      const rows = (await sql`SELECT "totalVisitors" FROM "PortfolioAnalytics" LIMIT 1`) as any[];
-      if (rows && rows.length > 0 && typeof rows[0]?.totalVisitors === "number") {
-        cachedVisitors = rows[0].totalVisitors;
-      } else {
-        cachedVisitors = 0;
+      const rows = (await sql`
+        SELECT 
+          (SELECT "totalVisitors" FROM "PortfolioAnalytics" LIMIT 1) AS "visitors",
+          (SELECT "totalDownloads" FROM "ResumeAnalytics" LIMIT 1) AS "downloads"
+      `) as any[];
+      if (rows && rows.length > 0) {
+        if (typeof rows[0]?.visitors === "number") cachedVisitors = rows[0].visitors;
+        if (typeof rows[0]?.downloads === "number") cachedDownloads = rows[0].downloads;
       }
       lastVisitorSync = Date.now();
-      return;
-    }
-    const prisma = getPrisma();
-    if (prisma) {
-      const analytics = await prisma.portfolioAnalytics.findFirst();
-      cachedVisitors = analytics?.totalVisitors ?? 0;
-      lastVisitorSync = Date.now();
-    }
-  } catch (e) {
-    console.error("Error syncing visitor count from DB:", e);
-    if (cachedVisitors === null) cachedVisitors = 0;
-    lastVisitorSync = Date.now();
-  }
-}
-
-// Non-blocking Async Sync helper for Downloads
-async function syncDownloadCountFromDb() {
-  try {
-    const sql = getSql();
-    if (sql) {
-      const rows = (await sql`SELECT "totalDownloads" FROM "ResumeAnalytics" LIMIT 1`) as any[];
-      if (rows && rows.length > 0 && typeof rows[0]?.totalDownloads === "number") {
-        cachedDownloads = rows[0].totalDownloads;
-      } else {
-        cachedDownloads = 0;
-      }
       lastDownloadSync = Date.now();
       return;
     }
     const prisma = getPrisma();
     if (prisma) {
-      const analytics = await prisma.resumeAnalytics.findFirst();
-      cachedDownloads = analytics?.totalDownloads ?? 0;
+      const [vAnalytics, dAnalytics] = await Promise.all([
+        prisma.portfolioAnalytics.findFirst(),
+        prisma.resumeAnalytics.findFirst(),
+      ]);
+      if (typeof vAnalytics?.totalVisitors === "number") cachedVisitors = vAnalytics.totalVisitors;
+      if (typeof dAnalytics?.totalDownloads === "number") cachedDownloads = dAnalytics.totalDownloads;
+      lastVisitorSync = Date.now();
       lastDownloadSync = Date.now();
     }
   } catch (e) {
-    console.error("Error syncing download count from DB:", e);
-    if (cachedDownloads === null) cachedDownloads = 0;
-    lastDownloadSync = Date.now();
+    console.warn("Async analytics background sync warning:", e);
+  } finally {
+    isSyncingAnalytics = false;
   }
 }
 
@@ -369,37 +355,27 @@ export async function saveContact(data: {
 // ==========================================
 
 export async function getPortfolioVisitorCount() {
-  if (cachedVisitors === null) {
-    await syncVisitorCountFromDb();
-  } else if (Date.now() - lastVisitorSync > 60000) {
-    syncVisitorCountFromDb().catch(() => {});
+  if (Date.now() - lastVisitorSync > 60000) {
+    syncAnalyticsFromDb().catch(() => {});
   }
-  return { success: true, data: cachedVisitors ?? 0 };
+  return { success: true, data: cachedVisitors };
 }
 
 export async function trackPortfolioVisit() {
-  if (cachedVisitors === null) {
-    await syncVisitorCountFromDb();
-  }
-  cachedVisitors = (cachedVisitors ?? 0) + 1;
+  cachedVisitors = cachedVisitors + 1;
   bgIncrementVisitor().catch((err) => console.error("bgIncrementVisitor error:", err));
   return { success: true, data: { totalVisitors: cachedVisitors } };
 }
 
 export async function getResumeDownloadCount() {
-  if (cachedDownloads === null) {
-    await syncDownloadCountFromDb();
-  } else if (Date.now() - lastDownloadSync > 60000) {
-    syncDownloadCountFromDb().catch(() => {});
+  if (Date.now() - lastDownloadSync > 60000) {
+    syncAnalyticsFromDb().catch(() => {});
   }
-  return { success: true, data: cachedDownloads ?? 0 };
+  return { success: true, data: cachedDownloads };
 }
 
 export async function trackResumeDownload() {
-  if (cachedDownloads === null) {
-    await syncDownloadCountFromDb();
-  }
-  cachedDownloads = (cachedDownloads ?? 0) + 1;
+  cachedDownloads = cachedDownloads + 1;
   bgIncrementDownload().catch((err) => console.error("bgIncrementDownload error:", err));
   return { success: true, data: { totalDownloads: cachedDownloads } };
 }

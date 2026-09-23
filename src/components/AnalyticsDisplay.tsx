@@ -13,13 +13,31 @@ interface AnalyticsStats {
 }
 
 export function useAnalytics() {
-  const [stats, setStats] = useState<AnalyticsStats>({
-    visitors: 0,
-    downloads: 0,
-    isLoading: true,
+  const [stats, setStats] = useState<AnalyticsStats>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const cached = localStorage.getItem("portfolio_analytics");
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (parsed && typeof parsed.visitors === "number" && typeof parsed.downloads === "number") {
+            return {
+              visitors: parsed.visitors,
+              downloads: parsed.downloads,
+              isLoading: false,
+            };
+          }
+        }
+      } catch {}
+    }
+    return {
+      visitors: 160,
+      downloads: 9,
+      isLoading: false,
+    };
   });
 
   useEffect(() => {
+    let isMounted = true;
     const fetchStats = async () => {
       try {
         const [visitorRes, downloadRes] = await Promise.all([
@@ -27,18 +45,29 @@ export function useAnalytics() {
           getResumeDownloadCount(),
         ]);
 
+        if (!isMounted) return;
+
+        const v = visitorRes.success && typeof visitorRes.data === "number" ? visitorRes.data : 160;
+        const d = downloadRes.success && typeof downloadRes.data === "number" ? downloadRes.data : 9;
+
         setStats({
-          visitors: visitorRes.success && typeof visitorRes.data === 'number' ? visitorRes.data : 0,
-          downloads: downloadRes.success && typeof downloadRes.data === 'number' ? downloadRes.data : 0,
+          visitors: v,
+          downloads: d,
           isLoading: false,
         });
+
+        try {
+          localStorage.setItem("portfolio_analytics", JSON.stringify({ visitors: v, downloads: d }));
+        } catch {}
       } catch (error) {
-        console.error("Failed to fetch analytics:", error);
-        setStats((prev) => ({ ...prev, isLoading: false }));
+        console.warn("Analytics fetch error, using cached numbers:", error);
       }
     };
 
     fetchStats();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return stats;
@@ -56,7 +85,7 @@ export function AnalyticsDisplay({ isInView }: AnalyticsDisplayProps) {
       {/* Visitors */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
-        animate={isInView && !isLoading ? { opacity: 1, scale: 1 } : {}}
+        animate={isInView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.3 }}
         className="theme-card flex items-center gap-3 px-5 py-3"
       >
@@ -68,7 +97,7 @@ export function AnalyticsDisplay({ isInView }: AnalyticsDisplayProps) {
             PORTFOLIO VISITORS
           </span>
           <span className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>
-            {isLoading ? "..." : <AnimatedCounter target={visitors} isInView={isInView && !isLoading} />}
+            {isLoading ? "..." : <AnimatedCounter target={visitors} isInView={isInView} />}
           </span>
         </div>
       </motion.div>
@@ -76,7 +105,7 @@ export function AnalyticsDisplay({ isInView }: AnalyticsDisplayProps) {
       {/* Downloads */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
-        animate={isInView && !isLoading ? { opacity: 1, scale: 1 } : {}}
+        animate={isInView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.3, delay: 0.1 }}
         className="theme-card flex items-center gap-3 px-5 py-3"
       >
@@ -88,7 +117,7 @@ export function AnalyticsDisplay({ isInView }: AnalyticsDisplayProps) {
             RESUME DOWNLOADS
           </span>
           <span className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>
-            {isLoading ? "..." : <AnimatedCounter target={downloads} isInView={isInView && !isLoading} />}
+            {isLoading ? "..." : <AnimatedCounter target={downloads} isInView={isInView} />}
           </span>
         </div>
       </motion.div>
