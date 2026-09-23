@@ -22,7 +22,7 @@ const siteUrl = "https://arbazsayyad.vercel.app";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#faf8f5",
+  themeColor: "#0c0a09",
 };
 
 export const metadata: Metadata = {
@@ -93,7 +93,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${fraunces.variable} light h-full antialiased scroll-smooth`}
+      className={`${geistSans.variable} ${fraunces.variable} dark h-full antialiased scroll-smooth`}
       suppressHydrationWarning
     >
       <head>
@@ -101,13 +101,17 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                var t = localStorage.getItem('theme');
-                if (t !== 'dark' && t !== 'light') { t = 'light'; localStorage.setItem('theme', t); }
+                var t = localStorage.getItem('portfolio_theme') || localStorage.getItem('theme');
+                if (t !== 'light') { t = 'dark'; }
+                try {
+                  localStorage.setItem('portfolio_theme', t);
+                  localStorage.setItem('theme', t);
+                } catch (err) {}
                 document.documentElement.classList.toggle('dark', t === 'dark');
-                document.documentElement.classList.toggle('light', t !== 'dark');
+                document.documentElement.classList.toggle('light', t === 'light');
               } catch (e) {
-                document.documentElement.classList.remove('dark');
-                document.documentElement.classList.add('light');
+                document.documentElement.classList.add('dark');
+                document.documentElement.classList.remove('light');
               }
             `,
           }}

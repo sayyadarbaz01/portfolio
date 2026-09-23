@@ -86,18 +86,39 @@ export function Header() {
     >
       <nav className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12" aria-label="Primary">
         <div className="flex items-center justify-between h-[72px] gap-4">
-          {/* Wordmark — premium, not monogram box */}
+          {/* Brand Mark — Full Name + Live Availability Beacon */}
           <button
             onClick={() => handleNavClick("home")}
-            className="text-left flex-shrink-0 min-h-[44px] flex items-center"
-            aria-label="Back to top — Arbaz Sayyad"
+            className="group text-left flex-shrink-0 min-h-[44px] flex items-center gap-2.5 sm:gap-3 transition-opacity duration-200 hover:opacity-90 cursor-pointer"
+            aria-label="Back to top — Arbaz Sayyad (Available for work)"
           >
-            <span
-              className="font-sans font-semibold text-[17px] tracking-tight transition-colors duration-300"
-              style={{ color: ink }}
-            >
-              Arbaz
-            </span>
+            <div className="flex items-center gap-2 sm:gap-2.5">
+              <span
+                className="font-sans font-bold text-[16px] sm:text-[17px] tracking-tight transition-colors duration-300"
+                style={{ color: ink }}
+              >
+                Arbaz Sayyad
+              </span>
+
+              {/* Live Availability Beacon */}
+              <span
+                className={cn(
+                  "inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium tracking-wide transition-all duration-200 select-none",
+                  darkSurface || theme === "dark"
+                    ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 shadow-[0_0_12px_rgba(16,185,129,0.15)]"
+                    : "bg-emerald-600/10 text-emerald-700 border border-emerald-600/25 shadow-[0_1px_4px_rgba(16,185,129,0.10)]"
+                )}
+                title="Available for new opportunities"
+              >
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                </span>
+                <span className="hidden xs:inline font-sans text-[10.5px] uppercase tracking-wider font-semibold">
+                  Available
+                </span>
+              </span>
+            </div>
           </button>
 
           {/* Center links — text only, underline slides in */}

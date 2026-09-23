@@ -26,23 +26,23 @@ export function useScrollProgress() {
 }
 
 export function useTheme() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     try {
-      const stored = localStorage.getItem("theme");
-      const initial: "light" | "dark" =
-        stored === "dark" || stored === "light" ? stored : "light";
+      const stored = localStorage.getItem("portfolio_theme") || localStorage.getItem("theme");
+      const initial: "light" | "dark" = stored === "light" ? "light" : "dark";
+      localStorage.setItem("portfolio_theme", initial);
       localStorage.setItem("theme", initial);
       setTheme(initial);
       document.documentElement.classList.toggle("dark", initial === "dark");
-      document.documentElement.classList.toggle("light", initial !== "dark");
+      document.documentElement.classList.toggle("light", initial === "light");
     } catch {
-      setTheme("light");
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
+      setTheme("dark");
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
     }
   }, []);
 
@@ -50,12 +50,13 @@ export function useTheme() {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
     try {
+      localStorage.setItem("portfolio_theme", newTheme);
       localStorage.setItem("theme", newTheme);
     } catch {
       /* storage unavailable — theme still applies for session */
     }
     document.documentElement.classList.toggle("dark", newTheme === "dark");
-    document.documentElement.classList.toggle("light", newTheme !== "dark");
+    document.documentElement.classList.toggle("light", newTheme === "light");
   };
 
   return { theme, toggleTheme, mounted };

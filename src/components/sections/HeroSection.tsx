@@ -55,63 +55,59 @@ export function HeroSection({ onOpenTerminal }: HeroSectionProps) {
 
   const palette = isDark
     ? {
-        bg: "#0C0A09",
-        headline: "#F7F5F2",
-        body: "#B4AFA8",
-        secondaryBorder: "rgba(247,245,242,0.22)",
-        secondaryText: "#F7F5F2",
-        secondaryHover: "rgba(255,255,255,0.06)",
-        cmd: "#A8A29E",
-        glow: "rgba(231,203,168,0.09)",
-        plate:
-          "linear-gradient(145deg, rgba(231,203,168,0.12), rgba(255,255,255,0.03) 40%, transparent 70%)",
-        plateBorder: "rgba(247,245,242,0.06)",
-        frameBg: "#1a1816",
-        frameBorder: "rgba(247,245,242,0.14)",
-        frameShadow:
-          "0 1px 0 rgba(255,255,255,0.08) inset, 0 24px 64px -20px rgba(0,0,0,0.65), 0 8px 24px -8px rgba(0,0,0,0.4)",
-        rail: "rgba(231,203,168,0.55)",
-        vignette:
-          "radial-gradient(ellipse at 50% 35%, transparent 42%, rgba(12,10,9,0.28) 100%), linear-gradient(to top, rgba(12,10,9,0.55) 0%, transparent 38%)",
-        captionBorder: "rgba(247,245,242,0.08)",
-        captionBg: "linear-gradient(to bottom, rgba(18,16,14,0.92), rgba(12,10,9,0.98))",
-        captionName: "#F7F5F2",
-        captionMeta: "#A8A29E",
-        badgeColor: "#E7CBA8",
-        badgeBorder: "rgba(231,203,168,0.28)",
-        badgeBg: "rgba(231,203,168,0.06)",
-        primaryBg: "#E7CBA8",
-        primaryText: "#1C1917",
-      }
+      bg: "#0C0A09",
+      headline: "#F7F5F2",
+      body: "#B4AFA8",
+      secondaryBorder: "rgba(247,245,242,0.22)",
+      secondaryText: "#F7F5F2",
+      secondaryHover: "rgba(255,255,255,0.06)",
+      cmd: "#A8A29E",
+      glow: "rgba(231,203,168,0.09)",
+      plate:
+        "linear-gradient(145deg, rgba(231,203,168,0.12), rgba(255,255,255,0.03) 40%, transparent 70%)",
+      plateBorder: "rgba(247,245,242,0.06)",
+      frameBg: "transparent",
+      frameBorder: "transparent",
+      frameShadow: "none",
+      rail: "rgba(231,203,168,0.55)",
+      vignette: "none",
+      captionBorder: "rgba(247,245,242,0.08)",
+      captionBg: "linear-gradient(to bottom, rgba(18,16,14,0.92), rgba(12,10,9,0.98))",
+      captionName: "#F7F5F2",
+      captionMeta: "#A8A29E",
+      badgeColor: "#E7CBA8",
+      badgeBorder: "rgba(231,203,168,0.28)",
+      badgeBg: "rgba(231,203,168,0.06)",
+      primaryBg: "#E7CBA8",
+      primaryText: "#1C1917",
+    }
     : {
-        bg: "#FAF8F5",
-        headline: "#1C1917",
-        body: "#57534E",
-        secondaryBorder: "rgba(28,25,23,0.18)",
-        secondaryText: "#1C1917",
-        secondaryHover: "rgba(28,25,23,0.04)",
-        cmd: "#78716C",
-        glow: "rgba(15,118,110,0.06)",
-        plate:
-          "linear-gradient(145deg, rgba(15,118,110,0.06), rgba(28,25,23,0.02) 45%, transparent 75%)",
-        plateBorder: "rgba(28,25,23,0.06)",
-        frameBg: "#FFFFFF",
-        frameBorder: "#E7E0D3",
-        frameShadow:
-          "0 1px 0 rgba(255,255,255,0.9) inset, 0 20px 50px -24px rgba(28,25,23,0.22), 0 4px 16px -6px rgba(28,25,23,0.1)",
-        rail: "rgba(15,118,110,0.45)",
-        vignette:
-          "radial-gradient(ellipse at 50% 35%, transparent 48%, rgba(28,25,23,0.06) 100%), linear-gradient(to top, rgba(250,248,245,0.35) 0%, transparent 40%)",
-        captionBorder: "#E7E0D3",
-        captionBg: "#FFFFFF",
-        captionName: "#1C1917",
-        captionMeta: "#78716C",
-        badgeColor: "#0F766E",
-        badgeBorder: "rgba(15,118,110,0.22)",
-        badgeBg: "rgba(15,118,110,0.06)",
-        primaryBg: "#1C1917",
-        primaryText: "#FAF8F5",
-      };
+      bg: "#FAF8F5",
+      headline: "#1C1917",
+      body: "#57534E",
+      secondaryBorder: "rgba(28,25,23,0.18)",
+      secondaryText: "#1C1917",
+      secondaryHover: "rgba(28,25,23,0.04)",
+      cmd: "#78716C",
+      glow: "rgba(15,118,110,0.06)",
+      plate:
+        "linear-gradient(145deg, rgba(15,118,110,0.06), rgba(28,25,23,0.02) 45%, transparent 75%)",
+      plateBorder: "rgba(28,25,23,0.06)",
+      frameBg: "transparent",
+      frameBorder: "transparent",
+      frameShadow: "none",
+      rail: "rgba(15,118,110,0.45)",
+      vignette: "none",
+      captionBorder: "#E7E0D3",
+      captionBg: "#FFFFFF",
+      captionName: "#1C1917",
+      captionMeta: "#78716C",
+      badgeColor: "#0F766E",
+      badgeBorder: "rgba(15,118,110,0.22)",
+      badgeBg: "rgba(15,118,110,0.06)",
+      primaryBg: "#1C1917",
+      primaryText: "#FAF8F5",
+    };
 
   return (
     <section
@@ -164,11 +160,11 @@ export function HeroSection({ onOpenTerminal }: HeroSectionProps) {
                   reduceMotion
                     ? undefined
                     : {
-                        scale: 1.03,
-                        boxShadow: isDark
-                          ? "0 14px 36px -10px rgba(231,203,168,0.4)"
-                          : "0 14px 36px -10px rgba(28,25,23,0.28)",
-                      }
+                      scale: 1.03,
+                      boxShadow: isDark
+                        ? "0 14px 36px -10px rgba(231,203,168,0.4)"
+                        : "0 14px 36px -10px rgba(28,25,23,0.28)",
+                    }
                 }
                 whileTap={reduceMotion ? undefined : { scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 340, damping: 22 }}
@@ -211,88 +207,91 @@ export function HeroSection({ onOpenTerminal }: HeroSectionProps) {
           </div>
 
           <motion.div
-            className="lg:col-span-6 xl:col-span-6 flex justify-center lg:justify-end"
+            className="lg:col-span-6 xl:col-span-6 flex justify-center"
             {...fadeUp(0.2, reduceMotion)}
           >
             <figure
-              className="relative w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[400px] xl:max-w-[440px]"
+              className="relative w-full max-w-[280px] xs:max-w-[320px] sm:max-w-[360px] md:max-w-[380px] lg:max-w-[400px] xl:max-w-[440px]"
               onMouseMove={onMove}
               onMouseLeave={() => {
                 mx.set(0);
                 my.set(0);
               }}
             >
+              {/* High-Impact Depth Typography: "DEVELOPER" Positioned Behind Subject (Forehead/Eye/Ear Level) */}
               <div
                 aria-hidden="true"
-                className="absolute -inset-x-3 -inset-y-3 sm:-inset-x-4 sm:-inset-y-4 rounded-[28px] sm:rounded-[32px] -z-10"
+                className="pointer-events-none absolute top-[15%] sm:top-[16%] md:top-[17%] left-1/2 -translate-x-1/2 w-[130%] xs:w-[135%] sm:w-[145%] md:w-[155%] lg:w-[155%] xl:w-[168%] 2xl:w-[172%] flex justify-center select-none -z-10"
+              >
+                <svg
+                  viewBox="0 0 1150 200"
+                  className="w-full overflow-visible"
+                  aria-hidden="true"
+                >
+                  <text
+                    x="50%"
+                    y="52%"
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    className="font-sans font-black uppercase select-none"
+                    fontSize="180"
+                    fill={isDark ? "#F7F5F2" : "#1C1917"}
+                    style={{
+                      fontFamily: "var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                      fontWeight: 900,
+                      letterSpacing: "-0.035em",
+                    }}
+                  >
+                    DEVELOPER
+                  </text>
+                </svg>
+              </div>
+
+              {/* Subtle back ambient glow */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 -z-10 rounded-full blur-3xl opacity-70 scale-105"
                 style={{
-                  background: palette.plate,
-                  border: `1px solid ${palette.plateBorder}`,
+                  background: isDark
+                    ? "radial-gradient(circle at 50% 40%, rgba(231,203,168,0.14), transparent 65%)"
+                    : "radial-gradient(circle at 50% 40%, rgba(15,118,110,0.08), transparent 65%)",
                 }}
               />
 
-              <div
-                className="group relative overflow-hidden rounded-[22px] sm:rounded-[26px]"
-                style={{
-                  border: `1px solid ${palette.frameBorder}`,
-                  boxShadow: palette.frameShadow,
-                  backgroundColor: palette.frameBg,
-                }}
-              >
+              <div className="group relative">
                 <div
-                  aria-hidden="true"
-                  className="absolute left-0 top-8 bottom-8 w-px z-20"
-                  style={{ backgroundColor: palette.rail }}
-                />
-
-                <div className="relative aspect-[4/5] overflow-hidden">
+                  className="relative aspect-[992/1087] w-full overflow-hidden"
+                  style={{
+                    maskImage:
+                      "linear-gradient(to bottom, black 0%, black 60%, rgba(0,0,0,0.92) 72%, rgba(0,0,0,0.58) 82%, rgba(0,0,0,0.18) 92%, transparent 98%)",
+                    WebkitMaskImage:
+                      "linear-gradient(to bottom, black 0%, black 60%, rgba(0,0,0,0.92) 72%, rgba(0,0,0,0.58) 82%, rgba(0,0,0,0.18) 92%, transparent 98%)",
+                  }}
+                >
                   <motion.div
                     className="absolute inset-0"
                     style={{ x: reduceMotion ? 0 : x, y: reduceMotion ? 0 : y }}
                   >
                     <Image
-                      src="/profile.jpeg"
+                      src="/profile-nobg.png"
                       alt="Arbaz Sayyad — Full Stack Developer"
                       fill
                       priority
-                      sizes="(max-width: 640px) 90vw, (max-width: 1024px) 380px, 440px"
-                      className="object-cover object-[center_12%] scale-105 transition-transform duration-700 ease-out will-change-transform motion-reduce:transition-none group-hover:scale-110 motion-reduce:group-hover:scale-105 [@media(hover:none)]:group-hover:scale-105"
+                      unoptimized
+                      sizes="(max-width: 640px) 280px, (max-width: 1024px) 390px, 460px"
+                      className="object-contain object-bottom transition-transform duration-500 ease-out motion-reduce:transition-none group-hover:scale-[1.03] [@media(hover:none)]:group-hover:scale-100"
                     />
                   </motion.div>
 
+                  {/* Soft studio mist/fog overlay at the bottom */}
                   <div
                     aria-hidden="true"
-                    className="absolute inset-0 pointer-events-none z-[1]"
-                    style={{ background: palette.vignette }}
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-24 sm:h-32 z-10"
+                    style={{
+                      background: `linear-gradient(to top, ${palette.bg} 0%, color-mix(in srgb, ${palette.bg} 80%, transparent) 35%, transparent 100%)`,
+                    }}
                   />
                 </div>
-
-                <figcaption
-                  className="relative z-10 flex items-center justify-between gap-3 px-4 sm:px-5 py-3.5"
-                  style={{
-                    borderTop: `1px solid ${palette.captionBorder}`,
-                    background: palette.captionBg,
-                  }}
-                >
-                  <div className="min-w-0">
-                    <p className="text-[13px] font-medium truncate" style={{ color: palette.captionName }}>
-                      Arbaz Sayyad
-                    </p>
-                    <p className="text-[11px] mt-0.5 truncate" style={{ color: palette.captionMeta }}>
-                      Full Stack · Pune
-                    </p>
-                  </div>
-                  <span
-                    className="flex-shrink-0 text-[10px] tracking-wide font-medium px-2.5 py-1 rounded-full"
-                    style={{
-                      color: palette.badgeColor,
-                      border: `1px solid ${palette.badgeBorder}`,
-                      backgroundColor: palette.badgeBg,
-                    }}
-                  >
-                    Open to roles
-                  </span>
-                </figcaption>
               </div>
             </figure>
           </motion.div>
