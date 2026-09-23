@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun, ArrowRight } from "lucide-react";
+import { Menu, X, Moon, Sun, ArrowRight, Download } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 import { useScrollProgress } from "@/hooks";
-import { cn, scrollToSection } from "@/utils/helpers";
+import { cn, scrollToSection, downloadResume } from "@/utils/helpers";
 import { navigation } from "@/data/portfolio";
 
 export function Header() {
@@ -149,24 +149,25 @@ export function Header() {
 
           <div className="flex items-center gap-2 flex-shrink-0">
             <button
-              onClick={() => handleNavClick("contact")}
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-medium min-h-[40px] border transition-colors duration-200"
+              onClick={downloadResume}
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-semibold min-h-[40px] border transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-sm cursor-pointer"
               style={
-                darkSurface
+                darkSurface || theme === "dark"
                   ? {
-                      borderColor: "rgba(247,245,242,0.28)",
+                      borderColor: "rgba(247,245,242,0.24)",
                       color: "#F7F5F2",
-                      backgroundColor: "rgba(255,255,255,0.04)",
+                      backgroundColor: "rgba(255,255,255,0.06)",
                     }
                   : {
                       borderColor: "var(--card-border)",
                       color: "var(--text-primary)",
-                      backgroundColor: "transparent",
+                      backgroundColor: "var(--card-bg)",
                     }
               }
+              aria-label="Download CV"
             >
-              Let&apos;s connect
-              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+              <Download className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>Download CV</span>
             </button>
 
             <button
@@ -226,7 +227,22 @@ export function Header() {
                   </button>
                 );
               })}
-              <div className="px-2 pt-2" style={{ borderTop: "1px solid var(--card-border)" }}>
+              <div className="px-2 pt-2 space-y-2" style={{ borderTop: "1px solid var(--card-border)" }}>
+                <button
+                  onClick={() => {
+                    downloadResume();
+                    setIsOpen(false);
+                  }}
+                  className="w-full py-2.5 px-4 rounded-full text-sm font-semibold min-h-[44px] flex items-center justify-center gap-2 border transition-colors"
+                  style={{
+                    borderColor: "var(--card-border)",
+                    color: "var(--text-primary)",
+                    backgroundColor: "var(--card-bg)",
+                  }}
+                >
+                  <Download className="w-4 h-4" aria-hidden="true" />
+                  <span>Download CV</span>
+                </button>
                 <button
                   onClick={() => handleNavClick("contact")}
                   className="w-full py-2.5 px-4 rounded-full text-sm font-medium min-h-[44px]"
